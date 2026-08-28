@@ -6,6 +6,13 @@
 #
 # The site rebuilds itself on every push to main, so updating the wiki is a
 # single push of the `content/` directory — no local build step required.
+#
+# IMPORTANT: Quartz is cloned and built in RUNNER_TEMP, *outside* this
+# repository's working tree. Do not move it back inside. Quartz's file discovery
+# honours the enclosing repository's .gitignore, and this repo ignores build
+# output, so a Quartz checkout inside the work tree makes every staged content
+# file invisible: the build reports "Found 0 input files" and silently emits a
+# 51-file shell of a site. That cost two failed runs to find.
 
 name: pages
 
@@ -30,6 +37,10 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    # Job scope, not workflow scope: the `runner` context is not available in
+    # workflow-level env.
+    env:
+      QUARTZ: ${{ runner.temp }}/quartz
     steps:
       - uses: actions/checkout@v4
 
@@ -37,39 +48,19 @@ jobs:
         with:
           node-version: "22"
 
-      - name: Fetch Quartz
+      - name: Fetch Quartz outside the work tree
         run: |
-          git clone --depth 1 https://github.com/jackyzha0/quartz .quartz
-          rm -rf .quartz/.git
+          git clone --depth 1 https://github.com/jackyzha0/quartz "$QUARTZ"
+          rm -rf "$QUARTZ/.git"
 
       - name: Install Quartz dependencies
-        working-directory: .quartz
+        working-directory: ${{ runner.temp }}/quartz
         run: npm ci --no-audit --no-fund
-
-      - name: Stage content and configuration
-        run: |
-          set -x
-          echo "checkout contains:"
-          ls -la
-          echo "content/ at repo root: $(find content -type f 2>/dev/null | wc -l) files"
-          rm -rf .quartz/content
-          cp -R content .quartz/content
-          cp quartz.config.yaml .quartz/quartz.config.yaml
-          staged=$(find .quartz/content -type f | wc -l)
-          echo "staged into .quartz/content: $staged files"
-          ls -la .quartz/content | head -12
-          # Assert staging worked. Without this the build silently produces a
-          # 51-file shell of a site and the failure only surfaces two steps later
-          # with nothing in the log explaining why.
-          if [ "$staged" -lt 200 ]; then
-            echo "::error::staged only $staged files, expected 280+"
-            exit 1
-          fi
 
       # A published tree must never reference the private source layer. The
       # publish filter already guarantees this and audits its own output, but the
-      # guarantee is cheap to re-assert here and this is the last point before
-      # the bytes are served to the public.
+      # guarantee is cheap to re-assert and this is the last point before the
+      # bytes are served to the public.
       - name: Refuse to deploy if content references private local state
         run: |
           if grep -rEl '(^|[^a-z])(raw|assets)/' content/ ; then
@@ -82,14 +73,29 @@ jobs:
           fi
           echo "content audit clean"
 
+      - name: Stage content and configuration
+        run: |
+          rm -rf "$QUARTZ/content"
+          cp -R content "$QUARTZ/content"
+          cp quartz.config.yaml "$QUARTZ/quartz.config.yaml"
+          staged=$(find "$QUARTZ/content" -type f | wc -l)
+          echo "staged $staged files into $QUARTZ/content"
+          # Assert staging worked. Without this the build produces a shell of a
+          # site and the failure surfaces two steps later with nothing in the log
+          # explaining why.
+          if [ "$staged" -lt 200 ]; then
+            echo "::error::staged only $staged files, expected 280+"
+            exit 1
+          fi
+
       - name: Build
-        working-directory: .quartz
+        working-directory: ${{ runner.temp }}/quartz
         run: npx quartz build
 
-      - name: Verify the build produced a site
+      - name: Verify the build produced a real site
         run: |
-          test -f .quartz/public/index.html || { echo "::error::no index.html"; exit 1; }
-          pages=$(find .quartz/public -name '*.html' | wc -l)
+          test -f "$QUARTZ/public/index.html" || { echo "::error::no index.html"; exit 1; }
+          pages=$(find "$QUARTZ/public" -name '*.html' | wc -l)
           echo "built $pages HTML pages"
           if [ "$pages" -lt 200 ]; then
             echo "::error::only $pages pages built, expected 200+ — build likely broken"
@@ -98,7 +104,7 @@ jobs:
 
       - name: Re-scan the rendered HTML
         run: |
-          if grep -rEl '/Users/[A-Za-z0-9._/-]' .quartz/public --include='*.html' ; then
+          if grep -rEl '/Users/[A-Za-z0-9._/-]' "$QUARTZ/public" --include='*.html' ; then
             echo "::error::rendered HTML contains a local path"
             exit 1
           fi
@@ -106,7 +112,7 @@ jobs:
 
       - uses: actions/upload-pages-artifact@v3
         with:
-          path: .quartz/public
+          path: ${{ runner.temp }}/quartz/public
 
   deploy:
     needs: build
