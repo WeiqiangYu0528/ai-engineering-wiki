@@ -48,9 +48,23 @@ jobs:
 
       - name: Stage content and configuration
         run: |
+          set -x
+          echo "checkout contains:"
+          ls -la
+          echo "content/ at repo root: $(find content -type f 2>/dev/null | wc -l) files"
           rm -rf .quartz/content
           cp -R content .quartz/content
           cp quartz.config.yaml .quartz/quartz.config.yaml
+          staged=$(find .quartz/content -type f | wc -l)
+          echo "staged into .quartz/content: $staged files"
+          ls -la .quartz/content | head -12
+          # Assert staging worked. Without this the build silently produces a
+          # 51-file shell of a site and the failure only surfaces two steps later
+          # with nothing in the log explaining why.
+          if [ "$staged" -lt 200 ]; then
+            echo "::error::staged only $staged files, expected 280+"
+            exit 1
+          fi
 
       # A published tree must never reference the private source layer. The
       # publish filter already guarantees this and audits its own output, but the
