@@ -1,0 +1,105 @@
+# Build the wiki with Quartz and deploy it to GitHub Pages.
+#
+# This repository holds only the *published* markdown. It is generated from a
+# private vault by a publish filter that withholds private and unverified pages
+# and strips local filesystem state. Nothing here is edited by hand.
+#
+# The site rebuilds itself on every push to main, so updating the wiki is a
+# single push of the `content/` directory — no local build step required.
+
+name: pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# Least privilege: read the repo, write Pages, and mint the OIDC token
+# actions/deploy-pages needs. No contents: write anywhere in this workflow.
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# One deploy at a time. Two concurrent builds would race for the Pages
+# deployment and the loser's artifact silently wins or fails.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Fetch Quartz
+        run: |
+          git clone --depth 1 https://github.com/jackyzha0/quartz .quartz
+          rm -rf .quartz/.git
+
+      - name: Install Quartz dependencies
+        working-directory: .quartz
+        run: npm ci --no-audit --no-fund
+
+      - name: Stage content and configuration
+        run: |
+          rm -rf .quartz/content
+          cp -R content .quartz/content
+          cp quartz.config.yaml .quartz/quartz.config.yaml
+
+      # A published tree must never reference the private source layer. The
+      # publish filter already guarantees this and audits its own output, but the
+      # guarantee is cheap to re-assert here and this is the last point before
+      # the bytes are served to the public.
+      - name: Refuse to deploy if content references private local state
+        run: |
+          if grep -rEl '(^|[^a-z])(raw|assets)/' content/ ; then
+            echo "::error::content references the private source layer"
+            exit 1
+          fi
+          if grep -rEl '/Users/[A-Za-z0-9._/-]|~/[A-Za-z0-9._/-]' content/ ; then
+            echo "::error::content contains a local filesystem path"
+            exit 1
+          fi
+          echo "content audit clean"
+
+      - name: Build
+        working-directory: .quartz
+        run: npx quartz build
+
+      - name: Verify the build produced a site
+        run: |
+          test -f .quartz/public/index.html || { echo "::error::no index.html"; exit 1; }
+          pages=$(find .quartz/public -name '*.html' | wc -l)
+          echo "built $pages HTML pages"
+          if [ "$pages" -lt 200 ]; then
+            echo "::error::only $pages pages built, expected 200+ — build likely broken"
+            exit 1
+          fi
+
+      - name: Re-scan the rendered HTML
+        run: |
+          if grep -rEl '/Users/[A-Za-z0-9._/-]' .quartz/public --include='*.html' ; then
+            echo "::error::rendered HTML contains a local path"
+            exit 1
+          fi
+          echo "rendered output clean"
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .quartz/public
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

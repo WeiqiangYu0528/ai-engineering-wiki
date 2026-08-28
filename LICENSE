@@ -1,0 +1,37 @@
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+
+Copyright (c) 2026 Weiqiang Yu
+
+WHAT THIS COVERS
+----------------
+
+This license applies to the original content of this repository: the wiki pages under
+`content/`, the generated indexes and maps, the site configuration, and the
+documentation at the repository root.
+
+You are free to share and adapt this material for any purpose, including commercially,
+provided you give appropriate credit, link to this license, indicate if changes were
+made, and distribute your contributions under the same license.
+
+Full legal code: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by-sa/4.0/
+
+WHAT THIS DOES NOT COVER
+------------------------
+
+The pages here summarize, analyze and cite third-party work: papers, lecture slides,
+book chapters, articles and documentation. Those source documents are NOT part of this
+repository and are not published; they are held privately and remain under the rights
+of their respective owners.
+
+Summaries and analysis are original text and are covered by this license. Quoted
+excerpts remain the property of their authors and are reproduced briefly, with
+attribution, for commentary and criticism. Every source summary records its author,
+title, and canonical URL; `content/NOTICE.md` lists all of them.
+
+A NOTE ON AUTHORSHIP
+--------------------
+
+Every page in this repository was written by a language model under human direction.
+`content/trust.md` states what has been checked mechanically, what has not been checked
+by a human, and what that checking does not establish.

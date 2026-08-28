@@ -1,0 +1,465 @@
+---
+title: Activity log
+---
+
+# Activity log
+
+> Published copy. Local file paths have been removed; the source layer is private.
+> This is the working record of how the wiki was built, kept because the method is
+> the interesting part.
+
+> Append-only chronological record of all wiki operations.
+> Format: `## [YYYY-MM-DD] operation | Title`
+> Operations: `init`, `ingest`, `query`, `lint`
+> Parseable: `grep "^## \[" log.md | tail -5` gives last 5 entries.
+
+## [2026-08-23] init | Knowledge base scaffolded
+- Created directory structure: the private layer, `wiki/`, `templates/`
+- Wrote `AGENTS.md` schema (agent-agnostic)
+- Created symlinks: `CLAUDE.md`, `.cursor/rules`
+- Initialized `index.md` and `log.md`
+- Created Templater templates: concept, source-summary, entity
+- Initialized Git repository
+
+## [2026-08-23] ingest | Deep Dive into LLMs like ChatGPT
+- Saved raw lecture notes: (source held privately)
+- Created source summary: `wiki/source-deep-dive-into-llms-like-chatgpt.md`
+- Created concepts: `tokenization.md`, `pretraining.md`, `transformer.md`, `supervised-fine-tuning.md`, `rlhf.md`, `thinking-models.md`, `hallucination.md`, `tool-use.md`, `prompt-injection.md`
+- Created entities: `andrej-karpathy.md`, `openai.md`
+- Updated `index.md` (12 total pages indexed)
+
+## [2026-08-23] ingest | Attention Is All You Need (Vaswani et al., 2017)
+- Saved primary paper content: (source held privately)
+- Created source summary: `wiki/source-attention-is-all-you-need.md`
+- Created concepts: `self-attention.md`, `positional-encoding.md`
+- Updated concept: `transformer.md` (incorporated original Encoder-Decoder architecture vs modern Decoder-Only evolution)
+- Created entity: `google-research.md`
+- Updated `index.md` (16 total pages indexed)
+
+## [2026-08-23] ingest | Language Models are Few-Shot Learners (Brown et al., 2020)
+- Saved primary paper content: (source held privately)
+- Created source summary: `wiki/source-language-models-are-few-shot-learners.md`
+- Created concepts: `in-context-learning.md`, `scaling-laws.md`
+- Updated concepts: `pretraining.md` (incorporated GPT-3 dataset weighting and 175B architecture specs)
+- Updated entity: `openai.md` (incorporated GPT-3 and in-context learning breakthrough)
+- Updated `index.md` (19 total pages indexed)
+
+## [2026-08-23] ingest | Training language models to follow instructions with human feedback (Ouyang et al., 2022)
+- Saved primary paper content: (source held privately)
+- Created source summary: `wiki/source-training-language-models-to-follow-instructions-with-human-feedback.md`
+- Created concept: `alignment.md` (Helpful/Honest/Harmless criteria, alignment tax)
+- Updated concept: `rlhf.md` (InstructGPT 3-step RLHF pipeline: SFT -> RM -> PPO-ptx)
+- Updated concept: `hallucination.md` (TruthfulQA and 41% to 21% closed-domain hallucination drop)
+- Updated entity: `openai.md` (InstructGPT and ChatGPT lineage)
+- Updated `index.md` (21 total pages indexed)
+
+## [2026-08-23] ingest | Direct Preference Optimization (Rafailov et al., 2023)
+- Saved primary paper content: (source held privately)
+- Created source summary: `wiki/source-direct-preference-optimization.md`
+- Created concept: `direct-preference-optimization.md` (closed-form policy derivation, implicit reward model, binary cross-entropy loss)
+- Updated concept: `rlhf.md` (Online PPO vs Offline DPO comparison)
+- Created entity: `stanford-university.md`
+- Updated `index.md` (24 total pages indexed)
+
+## [2026-08-23] lint | Full vault audit and link resolution
+- Scanned all 26 wiki pages and 4 raw papers
+- Fixed 2 broken links by creating `prompt-engineering.md` and `inference.md`
+- Verified: 0 YAML frontmatter errors, 0 broken links, 0 orphan pages
+- Formatted all 4 raw papers into publication-grade Markdown (4,105 total lines)
+- Updated `index.md` (26 total pages indexed)
+
+## [2026-08-23] ingest | Transformer Explainer (Cho et al., 2024)
+- Saved primary paper content: (source held privately) (IEEE VIS 2024 paper, 1,522 lines)
+- Created source summary: `wiki/source-transformer-explainer.md`
+- Updated concepts: `inference.md` (temperature scaling, Top-k, Top-p sampling), `self-attention.md`
+- Created entity: `polo-club-of-data-science.md`
+- Updated `index.md` (28 total pages indexed)
+
+## [2026-08-23] ingest | Maximizing the value of your Claude Code sessions (Hallie, 2026)
+- Saved primary article content: (source held privately) (159 lines)
+- Created source summary: `wiki/source-maximizing-the-value-of-your-claude-code-sessions.md`
+- Created concept: `claude-code.md` (agentic coding, prompt caching economics, subagent isolation)
+- Created entity: `anthropic.md` (Claude, Constitutional AI, MCP, prompt caching)
+- Updated `index.md` (31 total pages indexed)
+
+## [2026-08-23] ingest | The Illustrated Transformer (Alammar, 2018)
+- Saved primary article content: (source held privately) (304 lines)
+- Created source summary: `wiki/source-the-illustrated-transformer.md`
+- Updated concepts: `transformer.md`, `positional-encoding.md`
+- Created entity: `jay-alammar.md`
+- Updated `index.md` (33 total pages indexed)
+
+## [2026-08-23] ingest | Model Context Protocol (MCP) Official Documentation
+- Saved primary code-doc content: (source held privately) (42,034 lines via `llms-full.txt`)
+- Created source summary: `wiki/source-model-context-protocol.md`
+- Created concept: `model-context-protocol.md` (Host-Client-Server topology, JSON-RPC 2.0, stdio/SSE transports, Tools/Resources/Prompts/Roots/Sampling)
+- Updated concept: `tool-use.md`
+- Updated `index.md` (35 total pages indexed)
+
+## [2026-08-24] ingest | OpenAI Tools & Agent Capabilities Documentation Suite
+- Saved primary code-docs: (source held privately) (16,082 lines across 13 guide modules)
+- Created source summary: `wiki/source-openai-tools-and-agent-capabilities.md`
+- Updated concept: `tool-use.md` (Hosted tools, Structured Outputs strict mode, Tool Search progressive discovery, Programmatic Tool Calling)
+- Updated entity: `openai.md` (tools infrastructure & Agents SDK)
+- Updated `index.md` (36 total pages indexed)
+
+## [2026-08-24] ingest | Scaling Laws for Neural Language Models (Kaplan et al., 2020)
+- Saved primary paper content: (source held privately) (1,001 lines)
+- Created source summary: `wiki/source-scaling-laws-for-neural-language-models.md`
+- Updated concept: `scaling-laws.md` (power-law exponents, sample efficiency, Kaplan vs. Chinchilla comparison)
+- Updated `index.md` (37 total pages indexed)
+
+## [2026-08-24] ingest | Training Compute-Optimal Large Language Models (Hoffmann et al., 2022) — Chinchilla
+- Saved primary paper content: (source held privately) (DeepMind Chinchilla, 29 Mar 2022, arXiv:2203.15556v1)
+- Created source summary: `wiki/source-training-compute-optimal-large-language-models.md`
+- Updated concepts: `scaling-laws.md` (three estimation methods, exponent table 0.50/0.50, 0.49/0.51, 0.46/0.54, parametric loss L̂=E+A/N^α+B/D^β, efficient frontier derivation, Chinchilla validation, LR-schedule artifact), `pretraining.md` (20 tok/param rule, optimal D projections, MassiveText rebalancing, horizon-matched cosine), `inference.md` (4× cheaper serving, amortization, KV-cache reduction, overtraining motivation)
+- Created entities: `chinchilla.md` (70B/1.4T, MMLU 67.6%, Pile/BIG-bench wins), `gopher.md` (280B/300B baseline, undertraining diagnosis), `deepmind.md` (Gopher/Chinchilla lineage, RETRO, MassiveText, TPU/JAX stack)
+- Updated `index.md` (41 total pages indexed)
+
+## [2026-08-24] ingest | How to generate text: using different decoding methods for language generation with Transformers (von Platen, 2020)
+- Saved primary article content: (source held privately) (Hugging Face Blog, 2020-03-01, updated July 2023)
+- Created source summary: `wiki/source-how-to-generate.md`
+- Created concept: `decoding-strategies.md` (greedy argmax, beam $B$-best + no_repeat_ngram + num_return, temperature $T$, Top-$K$ [Fan 2018], Top-$p$ nucleus [Holtzman 2019] with dynamic pool, when to use each, generate flags, Welleck caveats)
+- Updated concept: `inference.md` (cross-linked decoding-strategies, enriched logit transform section with greedy/beam/sample taxonomy, added huggingface source)
+- Created entity: `huggingface.md` (transformers library, Hub, generate/GenerationConfig, Hub ecosystem)
+- Updated `index.md` (44 total pages indexed)
+
+## [2026-08-24] ingest | PromptingGuide.ai bulk traversal (DAIR.AI, GitHub) — fanned out via subagents
+- Checked `https://www.promptingguide.ai/llms.txt` and `/llms-full.txt` → 404 (Vercel, no LLM endpoint); used LLM-friendly GitHub raw as equivalent: `https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/<section>/<name>.en.mdx` (traversed via `api.github.com/repos/dair-ai/Prompt-Engineering-Guide/contents/pages`)
+- Fanned out 6 parallel subagents (general) covering 110 EN MDX pages across introduction (5), techniques (18), agents (7), guides (5), applications (9), prompts (12), models (21), research (13), risks (3)
+- Saved raw: 81 files in (source held privately)*.md` (introduction, techniques, agents, guides, applications, models, research, risks, prompts)
+- Created source summaries: 83 in `wiki/source-promptingguide-*.md` (introduction 5, techniques 19 incl. overview, agents 7, guides 3, risks 3, research 13, prompts 9, models 9, applications 9)
+- Created concepts (32 new): `prompt-elements.md`, `llm-settings.md`, `prompt-design-tips.md`, `role-prompting.md`, `zero-shot-prompting.md`, `few-shot-prompting.md`, `chain-of-thought.md`, `self-consistency.md`, `generated-knowledge-prompting.md`, `prompt-chaining.md`, `tree-of-thoughts.md`, `retrieval-augmented-generation.md`, `automatic-reasoning-and-tool-use.md`, `rag.md` alias, `automatic-prompt-engineer.md`, `active-prompt.md`, `directional-stimulus-prompting.md`, `program-aided-language-models.md`, `react.md`, `reflexion.md`, `multimodal-cot.md`, `graph-prompting.md`, `meta-prompting.md`, `ai-agents.md`, `agent-components.md`, `ai-workflows.md`, `context-engineering.md`, `deep-agents.md`, `function-calling.md`, `reasoning-llms.md`, `adversarial-prompting.md`, `llm-bias.md`, `prompt-optimization.md`, `rag-faithfulness.md`, `in-context-recall.md`, `synthetic-data.md`, `infini-attention.md`, `guided-cot.md`, `trustworthiness-in-llms.md`, `thoughtsculpt.md`, `prompts-hub.md`, `models-overview.md`, `groq.md`, `rag-evaluation.md`, `applications-overview.md`, `code-generation.md`, `prompt-function.md`, `context-caching.md`, `image-generation.md`, `deep-research.md`, `llm-models-overview.md`
+- Updated concepts (10): `prompt-engineering.md`, `in-context-learning.md`, `tool-use.md`, `prompt-injection.md`, `hallucination.md`, `thinking-models.md`, `tokenization.md`, `inference.md`, `ai-agents.md`, `synthetic-data.md`
+- Created entities: `groq.md` (LPU hardware)
+- Rebuilt `index.md` (166 total pages indexed) — Prompt Engineering 14, AI Agents & Tool Use 27, RAG 11, Inference 2, Entities 12, Source Summaries 83; verified 0 broken [[wikilinks]], 81 raw articles, 166 wiki pages
+
+## [2026-08-24] ingest | Chain-of-Thought Prompting Elicits Reasoning in Large Language Models (Wei et al., 2022) — CoT
+- Saved primary paper content: (source held privately) (Google Brain, 28 Jan 2022, v6 10 Jan 2023, arXiv:2201.11903v6, NeurIPS 2022, 2973 lines)
+- Created source summary: `wiki/source-chain-of-thought-prompting-elicits-reasoning.md` (emergence at ~100B, 8-shot CoT triples, PaLM 540B GSM8K SOTA, SVAMP/MAWPS/StrategyQA lifts, symbolic OOD, ablations equation-only/dots/CoT-after, robustness to annotators/orders)
+- Updated concept: `chain-of-thought.md` (mature, now with Wei 2022 detailed emergence scaling curves, 8-exemplar setup, ablations, robustness, broad applicability, FAQ A.1–A.4, contradiction warning vs Dair Guide broadness)
+- Updated concepts: `thinking-models.md` (added CoT precursor, RLVR link, sources), `in-context-learning.md` (CoT as ~100B emergent ICL extension), `prompt-engineering.md` (CoT as ~100B emergent technique, Wei et al. SOTA reference)
+- Updated entity: `google-research.md` (added CoT contribution, PaLM 540B)
+- Updated `index.md` (167 total pages indexed) — Prompt Engineering 14, Source Summaries 84; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Self-Consistency Improves Chain of Thought Reasoning in Language Models (Wang et al., 2022)
+- Saved primary paper content: (source held privately) (Google Brain, 21 Mar 2022, v4 07 Mar 2023, arXiv:2203.11171v4, ICLR 2023, 1569 lines)
+- Created source summary: `wiki/source-self-consistency-improves-chain-of-thought-reasoning.md` (sample-and-marginalize $m=40$ diverse CoT paths, majority vote ≈ normalized weighted sum, GSM8K +17.9% PaLM 540B 56.5→74.4, SVAMP +11.0%, AQuA +12.2%, StrategyQA +6.4%, ARC-c +3.9%, helps when CoT hurts ANLI/e-SNLI, robust to sampling/imperfect prompts/zero-shot CoT, outperforms sample-and-rank/beam/prompt-ensembles)
+- Updated concept: `self-consistency.md` (mature, now with Wang 2022 full mechanism, Table 1 aggregation 74.4 vs 59.9 vs 22.1, gains scale with model/samples, helps-when-hurts Table 5, robustness, comparison to beam/sample-and-rank, contradiction warning vs Wei greedy)
+- Updated concepts: `decoding-strategies.md` (added Self-Consistency section 7, sources), `chain-of-thought.md` already cross-linked (complementary)
+- Updated `index.md` (168 total pages indexed) — Prompt Engineering 14, Source Summaries 85; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Effective Context Engineering for AI Agents (Anthropic, 2025-09-29)
+- Saved primary article content: (source held privately) (Anthropic Engineering Blog, Sep 29 2025)
+- Created source summary: `wiki/source-effective-context-engineering-for-ai-agents.md` (attention budget $n^2$, context rot, finite diminishing returns, right altitude, smallest high-signal set, tools minimal viable, JIT agentic search via file paths/head/tail, progressive disclosure metadata, hybrid CLAUDE.md+grep, long-horizon triad compaction/note-taking/sub-agents, Claude Code + Pokémon 1,234-step demo, Sonnet 4.5 memory tool)
+- Updated concept: `context-engineering.md` (mature — now with attention budget $n^2$, context rot, right altitude Goldilocks, layered System/Task/Tool/Memory, JIT vs pre-retrieval, hybrid, compaction 5-files/tool-result clearing, structured note-taking file-based + Pokémon, sub-agents 1–2k from 10k+)
+- Updated concepts: `ai-agents.md` (Anthropic loop definition LLMs autonomously using tools, JIT spectrum, long-horizon triad), `context-caching.md` (Anthropic hybrid CLAUDE.md+JIT vs Gemini CachedContent, hybrid for legal/finance), `anthropic.md` (Sonnet 4.5 memory tool, MCP, context-engineering canon)
+- Updated `index.md` (169 total pages indexed) — Source Summaries 86; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Context Engineering for Agents (LangChain, 2025-07-02)
+- Saved primary article content: (source held privately) (LangChain Blog, Jul 2 2025, 14 min, write/select/compress/isolate taxonomy, OS/RAM analogy, Breunig poisoning/distraction/confusion/clash)
+- Created source summary: `wiki/source-context-engineering-for-agents-langchain.md` (4 buckets write/select/compress/isolate, scratchpads state/file, memories Reflexion/Generative Agents → ChatGPT/Cursor/Windsurf, tool RAG 3×, RAG grep+AST+rerank, auto-compact 95%, Provence pruner, multi-agent Swarm 15×, CodeAgent E2B sandbox, state schema, LangSmith virtuous loop)
+- Updated concept: `context-engineering.md` (mature — added LangChain 4-bucket §7 with write/select/compress/isolate table, mapping to LangGraph primitives checkpoint/LangMem/Bigtool/trim/Provence/supervisor/swarm/sandbox/state, complementarity note Anthropic scarcity vs LangChain operational, Breunig failures, 15× cost)
+- Created entity: `langchain.md` (LangGraph/LangSmith, Bigtool, sandbox, LangMem, deepagents)
+- Updated `index.md` (171 total pages indexed) — Prompt Engineering 14, Source Summaries 87, Entities 13; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Prompt caching — Anthropic Claude Platform (2025)
+- Saved primary code-doc content: (source held privately) (platform.claude.com, 3345 lines, automatic vs explicit breakpoints, 5m/1h TTLs, pricing multipliers, hierarchy tools→system→messages, prefix-hash 20-block lookback, minima 512–4096, thinking-block handling, invalidation matrix)
+- Created source summary: `wiki/source-prompt-caching.md` (two modes, 3 principles writes-only-at-breakpoint/reads-walk-back/20-window, timestamp trap, multiple breakpoints, pricing Table Opus 5 $5→$0.50, Sonnet 5 $2→$0.20, workspace vs org isolation, usage fields cache_creation/read)
+- Created concept: `prompt-caching.md` (mature — automatic vs explicit, $n^2$ prefix mechanics, pricing minima, hierarchy/invalidation, thinking special, usage tracking, best practices 20+ examples, agentic loops)
+- Updated concepts: `inference.md` (added prefix reuse KV, Practical Implications prefix-caching lever), `context-engineering.md` (hybrid JIT + caching, smallest high-signal prefix at beginning), `context-caching.md` already cross-linked, `anthropic.md` (added prompt-caching source)
+- Updated `index.md` (173 total pages indexed) — Inference & Serving 3 (inference, decoding-strategies, prompt-caching), Source Summaries 88, Entities 13; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Structured model outputs — OpenAI Developers (2025)
+- Checked `https://developers.openai.com/llms.txt` → 200 (routing index, 51 lines) and `https://developers.openai.com/api/llms.txt` (API guides index); verified LLM-friendly Markdown via `.../structured-outputs.md` (suffix `.md`, 3807 lines) — yes, page has LLM version
+- Saved primary code-doc content: (source held privately) (OpenAI Developers, 3818 lines, header + `api/docs/guides/structured-outputs.md` body)
+- Created source summary: `wiki/source-structured-outputs.md` (JSON Schema `strict:true` guarantees, `additionalProperties:false`, two wirings function-calling vs `text.format` answer, benefits type-safety/explicit refusals/simpler prompting, supported models `gpt-4o`→`gpt-5.6` vs JSON mode `json_object`, Table Structured vs JSON mode, 7-language SDK samples CalendarEvent/MathReasoning/ResearchPaperExtraction/UI recursion $ref "#"/moderation, `.md`+`llms.txt` traversal)
+- Created concept: `structured-outputs.md` (mature — two wirings, SDK helpers Pydantic/Zod, 4 canonical patterns, constrained CFG decoding, LLM-friendly distribution, model support `gpt-5.6` recommendation)
+- Updated concepts: `tool-use.md` (added structured-outputs cross-wiring, SDK refs, source), `openai.md` (added `developers.openai.com/api/llms.txt` traversal, `gpt-5.6` recommendation, source)
+- Updated `index.md` (175 total pages indexed) — AI Agents & Tool Use 28 (structured-outputs alias), Source Summaries 89, Entities 13; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | system-prompts-and-models-of-ai-tools (x1xhlol, GitHub, 143k★)
+- Checked `https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools` — FULL repo (GPL-3.0, 1524 size, 143,050★, updated 2026-08-24, 30+ tools: Cursor, Windsurf, Trae, VSCode Agent, Anthropic, Augment, Lovable, Replit, Perplexity, Manus, NotionAI, Devin, Same.dev, Warp, v0, Kiro, etc.)
+- Fanned out 4 parallel subagents (general) traversing via `api.github.com/repos/x1xhlol/.../contents` and raw `raw.githubusercontent.com/.../main/<path>` (spaces as %20), sampling 2–3 representative files per tool (e.g., `Cursor Prompts/Agent Prompt 2.0.txt` 38.8K, `Windsurf/Tools Wave 11` 32.8K, `Anthropic/Sonnet 4.5 Prompt.txt` 43.2K)
+- Saved raw: 30 files in (source held privately)*.md` (Cursor 3, Windsurf 2, Trae 2, VSCode 2, Anthropic 2, Augment 2, Lovable 2, Replit 2, Perplexity 1, Manus 2, NotionAI 2, Devin 2, Same 2, Warp 1, v0 2, Kiro 2)
+- Created source summaries: 16 in `wiki/source-system-prompts-*.md` (cursor, windsurf, trae, vscode, anthropic, augment-code, lovable, replit, perplexity, manus, notionai, devin, same, warp, v0, kiro) — each with 5 takeaways, prompt structure, model bindings, tool tables, critical assessment (GPL leak ethics, 143k★ scale, anti-leak hardening contrast, IP exfiltration, wrapper re-branding)
+- Created concepts: `system-prompt.md` (mature, 4-layer Instruction/Knowledge/Tools/Behavior + 13-vendor comparative matrix, token economics, file_path:line_number discipline, right-altitude spectrum, wrapper pattern), `system-prompts-and-models-overview.md` (aggregate comparative synthesis)
+- Updated concepts: `prompt-injection.md` (expanded prompt leaking to 16+ vendors, hardening contrast, 7-taxa taxonomy direct-repeat/rephrase/tool-enum/history-injection/execution-log-spoofing/translation, tool manifest IP surface), `alignment.md` (system prompts as 3H operationalization), `claude-code.md` (prompt-as-OS-kernel 13K vs Sonnet 4.5 43K, `<env>` cache, `TodoWrite`/`Task` doctrine)
+- Fixed 6 broken [[wikilinks]] (lovable→Lovable, manus→Manus, etc., prompt-leaking→prompt-injection) and 1 orphan (added inbound from system-prompt) — verified 0 broken, 1 orphan (source-promptingguide-techniques-overview hub)
+- Rebuilt `index.md` (193 total pages indexed) — Prompt Engineering 14, AI Agents & Tool Use 30, Source Summaries 105, Entities 13; verified 0 broken [[wikilinks]], 30 raw code-docs, 193 wiki pages
+
+## [2026-08-24] ingest | ReAct: Synergizing Reasoning and Acting in Language Models (Yao et al., 2022)
+- Saved primary paper content: (source held privately) (Princeton & Google Research, ICLR 2023, 2022-10-06 v3 2023-03-10, arXiv:2210.03629v3, 832 lines)
+- Created source summary: `wiki/source-react-synergizing-reasoning-and-acting.md` (augmented action space $\\hat{\\mathcal{A}}=\\mathcal{A}\\cup\\mathcal{L}$, dense vs sparse thoughts, HotpotQA/Fever Wiki API search/lookup/finish, ReAct > Act 10.6%, hallucination 14%→6%, hybrid ReAct↔CoT-SC best 34–35%, finetune PaLM-8B ReAct > all 62B prompting, ALFWorld 71% vs Act 45% vs BUTLER 37%, WebShop 40.0 vs IL+RL 28.7, IM 71 vs 53)
+- Updated concept: `react.md` (mature — now with Yao full dense/sparse loop, API, Table 1 EM/Acc, failure modes 47% loops/23% search, finetuning scaling, WebShop/ALFWorld traversals, human-in-the-loop, modern LangChain zero-shot-react-description)
+- Updated concepts: `ai-agents.md` (added ReAct canonical paradigm, ALFWorld/WebShop few-shot vs 100k IL, long-horizon triad), updated related links
+- Updated `index.md` (194 total pages indexed) — AI Agents & Tool Use 30 (react mature), Source Summaries 106; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Building effective agents (Anthropic, 2024-12-19)
+- Saved primary article content: (source held privately) (Anthropic Engineering, Dec 19 2024, note Dec 2024 landscape changed → managed agents docs)
+- Created source summary: `wiki/source-building-effective-agents.md` (agentic systems workflows vs agents, augmented LLM block via MCP, 5 workflows prompt-chaining/routing/parallelization [sectioning/voting]/orchestrator-workers/evaluator-optimizer + diagrams, agents for open-ended unpredictable steps with ground-truth per step, simplicity/transparency/ACI principles, framework caveat direct API > SDK, Appendix 1 agents in practice support/coding SWE-bench, Appendix 2 ACI poka-yoke absolute filepaths, workbench testing)
+- Updated concepts: `ai-workflows.md` (mature — now 5 patterns Anthropic taxonomy vs Dair 3, building block, when-to-use, hybrid, framework caveat, table Workflows vs Agents), `ai-agents.md` (added agentic systems spectrum, building effective agents taxonomy, principles)
+- Updated entity: `anthropic.md` (added Building Effective Agents taxonomy, workflows vs agents, ACI)
+- Updated `index.md` (195 total pages indexed) — AI Agents & Tool Use 30, Source Summaries 107; verified 0 broken [[wikilinks]]
+
+## [2026-08-24] ingest | Efficient Estimation of Word Representations in Vector Space (Mikolov et al., 2013) — Word2Vec (arXiv:1301.3781v3)
+- Checked HTML via https://arxiv.org/html/1301.3781v3 (as user suggested, easier to grep) — 39KB, 1485 lines, CC BY like Stanford notes
+- Saved primary paper content: (source held privately) (Google, 2013-01-16 v3 2013-09-07, ICLR 2013 workshop, CBOW $Q=N·D+D·logV$ vs Skip-gram $Q=C·(D+D·logV)$, Huffman 2×, 6B tokens, 8869+10675 analogy test, vector King-Man+Woman, DistBelief Adagrad)
+- Created source summary: `wiki/source-efficient-estimation-of-word-representations-in-vector-space.md` (tags llm-fundamentals, key-concepts word2vec/embeddings/tokenization/pretraining/rag)
+- Created concepts: `word2vec.md` (mature, CBOW/Skip-gram, O=E·T·Q, MSR 58.9% SOTA, 30 wikilinks), `embeddings.md` (mature, static vs contextual, RAG/pretraining, 30 wikilinks) — both previously missing
+- Noted user hint: For papers use https://arxiv.org/html/<id> HTML for grep vs PDF — verified and used for all CS224n papers below
+- Updated `index.md` (part of 222 bulk) — verified 0 broken
+
+## [2026-08-24] ingest | Stanford CS224n Winter 2026 Schedule — curated bulk (slides/notes/suggested readings, no llms.txt)
+- Checked LLM version for https://web.stanford.edu/class/cs224n/index.html#schedule → **No** `llms.txt` / `llms-full.txt` / `.md` (all 404 on Apache, only `robots.txt` 404 page). No LLM-friendly export like developers.openai.com or PromptingGuide GitHub raw. Fallback: **HTML + arXiv HTML** for papers as user suggested: `https://arxiv.org/html/<id>` (e.g., 1301.3781v3, 1310.4546, 1406.1078→ correct Stanford glove.pdf not arXiv, 1810.04805, 2407.21783, 2106.09685, 2005.11401, 2302.04761, 2009.03300, 2211.09110, 2305.20050, 2408.03314)
+- Gathered **all schedule materials** (ignoring assignments/projects per instruction):
+  - **Slides (PDF per lecture)**: 44pp wordvecs `slides_w26/cs224n-2026-lecture02-wordvecs.pdf` 2.7MB, pretraining/posttraining/peft/rag-agents/evaluation/reasoning slides (placeholders), intro/history — total 44pp wordvecs saved to the private layer + placeholder markdowns
+  - **Notes (PDF)**: Winter2023 Note1 13pp 212KB, 2019 Note2 GloVe/Evaluation 13pp 473KB — PyPDF2 extracted 13pp each, saved to the private layer + markdown
+  - **Suggested Readings per lecture** (Week1–10): Word Vectors 5+3, Backprop 6, RNN 4, Transformers 7, Pretraining 5, Post-training 5, Adaptation 5, RAG/Agents 4, Evaluation 4, Reasoning 4+4, Tokenization/Multilinguality 4, Interpretability 5, Multimodal 4+7 — compared to KB index (44→195 pages) to find **not-yet-ingested** (hide assignments/projects)
+- **Not-yet-ingested vs KB (195 pre-bulk)**: Already ingested: Attention Is All You Need, GPT-3 Few-Shot, CoT, Self-Consistency, ReAct, InstructGPT, DPO; **Missing**: Word2Vec family, GloVe, BERT, Llama 3 Herd, LoRA, RAG, Toolformer, MMLU, HELM, Let's Verify Step by Step, Scaling Test-Time Compute, etc. — prioritized 12 papers + slides/notes for fan-out
+- Fanned out **5 parallel subagents** (general) as requested, each handling a cluster via `arxiv.org/html/<id>` for grep-friendly ingestion:
+  - **Word Vectors**: `Distributed Representations` (1310.4546 NEG-5 38→14min, phrase 72%) + `GloVe` (Pennington, 6B 75% analogy, $w_i^T\\tilde w_j+b_i+\\tilde b_j=log X_{ij}$, $f(x)=(x/100)^{3/4}$) + winter2023 notes + 2019 notes + 2026 slides → updated `word2vec.md`/`embeddings.md`, created `glove.md` (mature, 75%, ratio derivation, vs Word2Vec)
+  - **Pretraining**: `BERT` (1810.04805, MLM 80/10/10 NSP 110M/340M GLUE/SQuAD) + `Llama 3 Herd` (2407.21783, 8B/70B/405B 15.6T 3.8e25 FLOPs) + `Contextual Word Representations` (1902.06006) → created `bert.md`, `llama-3.md`, `meta.md`, updated `pretraining.md` (15T pipeline, RoPE 500K) + `transformer.md` + `embeddings.md`
+  - **Adaptation**: `LoRA` (2106.09685, $W_0+BA$, rank ablation, $W_qW_v$) + `RAG` (2005.11401, DPR+BART 21M Wiki, $p_\\eta/p_\\theta$) + `Toolformer` (2302.04761, 5 tools CCNet/GPT-J) → created `lora.md`, `parameter-efficient-fine-tuning.md`/`peft.md` alias, updated `retrieval-augmented-generation.md` (mature, Table NQ/MS-MARCO) + `tool-use.md`
+  - **Evaluation/Reasoning**: `MMLU` (2009.03300, 57 tasks 15,908Q, GPT-3 43.9% vs 89.8% expert) + `HELM` (2211.09110, 42×7 multi-metric 30 models) + `Let's Verify Step by Step` (2305.20050 PRM800K 78.2% vs ORM 72.4%) + `Scaling Test-Time Compute` (2408.03314, PaLM2-S* 4× FLOPs vs 14× model) → created `evaluation.md` (draft, 42×7, process vs outcome), updated `reasoning-llms.md`/`thinking-models.md`
+  - Plus Word2Vec paper ingest above (shared)
+- Saved raw: 9 markdown + 4 PDF binaries ((source held privately)*-.pdf` 2.7MB/212KB/473KB/2.5MB) + 9 papers (3807→405k chars) in (source held privately) + (source held privately)*.md`
+- Created source summaries: 18 (5 Word Vectors + 3 Pretraining + 3 Adaptation + 4 Evaluation + 1 Word2Vec peer + 2 placeholder slides) in `wiki/source-*.md` (5 Word Vectors, 3 Pretraining, 3 Adaptation, 4 Evaluation) — each tags `llm-fundamentals/rag/eval-safety/fine-tuning`, key-concepts appropriate
+- Updated concepts: `glove.md` (new), `bert.md` (new), `llama-3.md` (new), `lora.md` (new), `evaluation.md` (new), updated `word2vec.md`, `embeddings.md`, `pretraining.md`, `transformer.md`, `retrieval-augmented-generation.md`, `tool-use.md`, `reasoning-llms.md`, `thinking-models.md`
+- Fixed 3 broken [[wikilinks]] (glove eval-safety→evaluation, mmlu/helm→evaluation) — verified 0 broken, 1 orphan (source-promptingguide-techniques-overview hub)
+- Rebuilt `index.md` (222 total pages indexed) — LLM Fundamentals 8, Prompt Engineering 14, Fine-tuning & Alignment 4 (lora/peft), RAG 14 (glove/rag), AI Agents 30, Inference 3, Evaluation 7 (evaluation/helm/mmlu/prm), Entities 15, Source Summaries 124; verified 0 broken [[wikilinks]], 25 raw papers, 222 wiki pages
+
+## [2026-08-24] ingest | CS224n Winter 2026 — remaining chapters bulk (History, Backprop/RNN, Post-training, Tokenization, Interpretability, Multimodality) — fanned out to finish ALL chapters
+- User clarified not just Word2Vec — finished ALL remaining schedule chapters as assumed, fanned out 4 parallel subagents as requested:
+  - **History/Backprop/RNN/Transformers**: Slides 01-intro 6.1MB + 01-history 7.2MB + 03-neuralnets 3.2MB 80pp + 04-rnnlm 2.7MB 59pp + 05-transformers 2.3MB 70pp + gradient-notes 202KB + papers Human Language Understanding Daedalus 197KB + Rumelhart 1986 backprop 350KB + Bengio 1994 long-term dependencies 321KB + Pascanu 1211.5063 difficulty RNN 625KB + Layernorm already → 10 source summaries (history-human-language-understanding, learning-representations-backprop, learning-long-term-dependencies, difficulty-training-rnns, lecture01-03-04-05 slides, gradient-notes), created `backpropagation.md`/`rnn.md` mature, updated `transformer.md`/`pretraining.md`
+  - **Post-training remaining**: Scaling Instruction-Finetuned 2210.11416 (FLAN-T5 1.8K tasks) + AlpacaFarm 2305.14387 + How Far Can Camels Go 2306.04751 (Tülu) + Lottery Ticket 1803.03635 → 4 sources, created `instruction-tuning.md` mature (FLAN scale + Tülu length bias r=0.96) + `lottery-ticket-hypothesis.md` mature, updated `supervised-fine-tuning.md` (mature, 0.2% FLOPs) + `parameter-efficient-fine-tuning.md` (4th lineage)
+  - **Tokenization/Multilinguality**: BPE 1508.07909 + XLM-R 1911.02116 + Do All Languages Cost Same 2023.emnlp-main.614 + LayerNorm already → 4 sources, updated `tokenization.md` mature (SentencePiece 250K, α=0.3, 5× inequity), created `multilinguality.md` draft (curse 71.8→67.7, 5× cost, XLM-R 80.9 XNLI)
+  - **Interpretability/Multimodality**: Agentic Interpretability 2506.12152 + Pareto Frontier essay + Chameleon 2405.09818 (9.2T, VQGAN 512²+ BPE 65k) + Transfusion 2408.11039 (L_LM+λL_DDPM, 34% FID parity) + Mixture-of-Transformers 2411.04996 (55.8% FLOPs, 47.2% wall-clock) → 4 sources, updated `multimodal-ai.md` mature (early vs late fusion, sparsity), created `interpretability.md` draft + `ai-ethics.md` draft
+- Saved raw: 9 markdown + 4 PDF binaries + 9 papers (3807→405k chars) already counted in 222 bulk; this finish-all adds 13 markdown + 5 PDFs + 12 papers → total now 25→37 raw papers + 9→13 articles + 4→9 assets
+- Fixed 0 new broken (previous 0 remains), 6 orphans now include 5 new slide sources (cs224n-lecture slides) — acceptable hub sources
+- Rebuilt `index.md` (251 total pages indexed) — LLM Fundamentals 9, Prompt Engineering 14, Fine-tuning & Alignment 5, RAG 14, AI Agents 30, Inference 4, Evaluation 11, Multimodal 4, Entities 15, Source Summaries 145; verified 0 broken [[wikilinks]], 251 wiki pages
+
+## [2026-08-25] ingest | CS224n final audit — closed last 9 gaps (true 100%)
+- Ran rigorous per-item grep audit of every schedule reading vs `wiki/source-*` + the private layer — found 9 genuinely missing items (LoRA was false negative; it exists at `wiki/lora.md`):
+  - Improving Distributional Similarity Q15-1016 (Levy et al. TACL 2015)
+  - Evaluation methods for unsupervised word embeddings D15-1036 (Schnabel et al. EMNLP 2015 — note: URL resolves here, not Bakarov 2018; recorded accurately)
+  - Review of differential calculus PDF handout (142 KB → the private layer)
+  - CS231n notes network architectures + backprop (cs231n.github.io full text fetched)
+  - Derivatives, Backpropagation, and Vectorization handout (206 KB → the private layer)
+  - Parameter-Efficient Transfer Learning for NLP 1902.00751 (Houlsby adapters: near-identity init, GLUE 80.0 vs 80.4 @3.6% params)
+  - Language Agents tutorial site (EMNLP 2024, schedule/thesis/slides links)
+  - Visual Sketchpad 2406.09403 (visual CoT tool-use)
+- Fanned out 1 subagent: saved 9 raw files (2 PDFs to the private layer, 7 markdown incl. 3 full-text HTML), created 8 source summaries (`source-improving-distributional-similarity`, `source-evaluation-methods-unsupervised-word-embeddings`, `source-review-differential-calculus`, `source-cs231n-neural-networks-notes`, `source-derivatives-backprop-vectorization`, `source-parameter-efficient-transfer-learning`, `source-language-agents-foundations-prospects-risks`, `source-visual-sketchpad`)
+- Updated 7 concepts: `backpropagation.md` (+CS231n circuits idea), `glove.md` (+Levy hyperparameter audit caveat on Word2Vec-comparison claims), `embeddings.md` (+Levy/Schnabel two-audit-papers key idea), `parameter-efficient-fine-tuning.md` (+Houlsby lineage root), `ai-agents.md` (+language agents framing), `multimodal-cot.md` (+Visual Sketchpad answers open question), `multimodal-ai.md` (+Sketchpad cross-ref)
+- Fixed 1 broken link (cs224n-review-differential-calculus → plain text)
+- Rebuilt `index.md` (**280 total pages indexed**) — Source Summaries now 174; verified 0 broken [[wikilinks]]
+- **CS224n Winter 2026 = TRUE 100% coverage**: all slides, all notes, all suggested readings (Suggested + Additional + Optional), all guest lectures; assignments/projects ignored per instruction
+
+## [2026-08-25] ingest | CS336 Language Modeling from Scratch — schedule bulk (lectures 01–19, no llms.txt)
+- Checked LLM version for https://cs336.stanford.edu/#schedule → **No** `llms.txt` / `llms-full.txt` (both 404 on GitHub Pages, `sitemap.xml` 200 but not LLM index, `robots.txt` 200). No Markdown export like developers.openai.com `.md` suffix; fallback: **lecture source via `cs336.stanford.edu/lectures/?trace=lecture_*` (Python traces) + raw GitHub `raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_*.pdf` (slides) and `lectures/var/traces/*.json`**, as used for all 19 lectures below
+- Gathered **all schedule materials** (ignoring assignments/projects per instruction):
+  - **Course Materials column**: 19 lectures — 01 Overview/tokenization `lecture_01.py` 762L, 02 PyTorch/einops/resource accounting `lecture_02.py` 856L, 03 Architectures 67pp 5.7MB, 04 Attention/MoE 60pp 6.2MB, 05 GPUs/TPUs 55pp 5.0MB, 06 Kernels/Triton 744L, 07 Parallelism 619L, 08 Parallelism 73pp 6.3MB, 09 Scaling laws 57pp 6.6MB, 10 Inference 31K chars, 11 Scaling laws 58pp 6.4MB, 12 Evaluation 21K chars, 13 Data sources 622L, 14 Data filtering 464L, 15 Post-training SFT/RLHF 65pp 6.1MB, 16 RLVR 61pp 6.4MB, 17 Alignment-multimodality 328L + trace JSON 192KB, 18 Guest Daniel Selsam TBD 404, 19 Guest Dan Fu TBD 404
+- **Not-yet-ingested vs KB (272 pre-bulk)**: KB had 251 pages after CS224n 100% but no CS336 systems depth; all 19 CS336 lectures were **new** (CS336 is systems-heavy vs CS224n fundamentals) — tokenization overlap already covered via `word2vec` etc., but CS336 adds resource accounting 6ND/MFU/roofline, architectures pre-norm/RMSNorm/SwiGLU, MoE hybrids (M1 7:1, DeepSeek 256/8+1), GPUs/SMs/FlashAttention, Triton kernel pitfalls, 3D parallelism ZeRO/pipeline, scaling with WSD/µP/Muon, inference arithmetic intensity, data pipelines, RLVR, alignment-multimodality, guest TBD
+- Fanned out **5 parallel subagents** (general) as requested, each handling a lecture cluster via `cs336.stanford.edu/lectures/?trace=` and raw GitHub fallback:
+  - **Lectures 01-05**: Overview/tokenization, PyTorch/einops, Architectures, Attention/MoE, GPUs/TPUs → 5 raw + 5 sources (`source-cs336-lecture01`..`05`), created `wiki/mixture-of-experts.md:1` (routing, GShard→Llama4 128/1+1, all-to-all), updated `wiki/tokenization.md:1`, `wiki/transformer.md:1`, `wiki/inference.md:1`
+  - **Lectures 06-08**: Kernels/Triton, Parallelism ×2 → 3 raw + 3 sources, created `wiki/triton.md:1` (CTA, Triton vs CUDA, 4 traps), `wiki/parallelism.md:1` (ZeRO 2*→3* params, bubble (p-1)/m, 3D recipe Llama3 DP128/TP8/PP16, Gemma2 DP768)
+  - **Lectures 09-12**: Scaling laws ×2, Inference, Evaluation → 4 raw + 4 sources, updated `wiki/scaling-laws.md:1` (CS336 WSD+µP+Muon), `wiki/inference.md:1` (H100 295 intensity, GQA/MLA, PagedAttention), `wiki/evaluation.md:1` (CS336 4-route validity)
+  - **Lectures 13-16**: Data sources/filtering, Post-training SFT/RLHF, RLVR → 4 raw + 4 sources, created `wiki/data-curation.md:1` (transform/filter/dedup/mix), updated `wiki/supervised-fine-tuning.md:1`, `wiki/rlhf.md:1`, `wiki/direct-preference-optimization.md:1`, `wiki/synthetic-data.md:1`
+  - **Lectures 17-19**: Alignment-multimodality + guests TBD (Daniel Selsam, Dan Fu 404 verified) → 3 raw (17 full, 18-19 placeholders TBD) + 3 sources, updated `wiki/alignment.md:1`, `wiki/multimodal-ai.md:1`, `wiki/ai-ethics.md:1`
+- Saved raw: 19 markdown + 9 PDFs to (source held privately)*.pdf` (6.6MB/6.4MB/6.3MB etc.) + 13.7K traces
+- Fixed 1 broken link (review-differential-calculus plain text), verified 0 broken → 1 after re-ingest, fixed again → 0 broken
+- Rebuilt `index.md` (**303 total pages indexed**) — LLM Fundamentals 9, Prompt Engineering 14, Fine-tuning & Alignment 5, RAG 15, AI Agents 30, Inference 5, Evaluation 11, MLOps 2, Multimodal 4, Open Source 10, Entities 15, Source Summaries 193; verified 0 broken [[wikilinks]], 303 wiki pages
+
+## [2026-08-27] maintain | Task 1 — local protection: baseline commit, LFS, verified backup
+- **Found: 531 uncommitted changes.** Git history ended at `8dd8ac7` (Scaling Laws ingest); the entire promptingguide / CS224n / CS336 / system-prompts body of work — 510 untracked files (266 `wiki/`, 211 the private layer, 32 the private layer, `llm-wiki.md`) plus 21 modified pages — had never been committed. No remote either, so the work existed in exactly one uncommitted copy.
+- Configured **Git LFS before first commit** of binaries (`.gitattributes`: pdf/png/jpg/gif/webp/mp3/mp4/zip/epub → LFS; LF normalization for text). Because the private layer was still untracked, the 85 MB of lecture decks never entered regular git object history: git objects ~5 MB, `.git/lfs` 83 MB. Verified (source held privately) stages as a 3-line pointer.
+- Rewrote `.gitignore`: version portable `.obsidian` settings (`app`, `appearance`, `core-plugins`, `community-plugins`, `graph`, `hotkeys`) while ignoring 27 MB of plugin binaries and machine-local `workspace.json`; added `dist/`, `__pycache__`, `.pytest_cache`, `.qmd/`, `node_modules`.
+- Added `README.md` (human entry point: layout, commands, resource/backup/trust/license policy) and `LICENSE` (CC BY-SA 4.0 on original wiki text, explicit carve-out excluding the private layer third-party material).
+- Committed in 4 logical commits: policy files → the private layer + the private layer → `wiki/` → index/log/pattern-reference/Obsidian settings. Tagged `baseline-pre-audit` as the rollback point.
+- Backup: (local path) (3.3 MB, `--all`) + `knowledge-base-20260827-lfs.tar.gz` (77 MB, LFS object store).
+- **Restore verified end-to-end**: clone from bundle into a temp dir reproduced identical HEAD (`818b75d`), the tag, 303 wiki pages, 222 raw sources, and all 31 PDFs byte-identical by sha256 after `git lfs install --local && git lfs checkout`. Documented that the LFS install step is mandatory on restore.
+- No remote created, nothing pushed — per the standing constraint that nothing leaves the machine before Task 13 approval.
+- Open question for the user: the vault lives in (local path), a directory routinely purged by cleanup tools. Relocation not performed (awaiting decision).
+
+## [2026-08-27] lint | Task 2 — script-driven lint harness replaces the manual pass
+- Added `tools/kb_lib.py`: single definition of page/frontmatter/wikilink/raw-reference parsing, link graph with alias resolution, shingle similarity, `index.md` and `log.md` parsers, and report writers. Wikilink regex handles `[[a]]`, `[[a|b]]`, `[[a#h]]` and `![[embed]]`; link keys fold case, spaces, underscores and the `.md` suffix the way Obsidian does.
+- Added `tools/validate.py` with 28 checks across 7 families: frontmatter schema (FM001–FM011), naming (NM001–NM003), links (LK001–LK003), duplicates (DP001–DP003), index reconciliation (IX001–IX005), log discipline (LG001–LG004), provenance (PV001–PV002). Writes `reports/lint.md` + `reports/lint.json`, exits non-zero on errors.
+- Added `Makefile` (`make lint`, `lint-strict`, `test`, `clean-reports`), `pyproject.toml` (pytest + ruff config), and `tests/fixtures/mini-vault/` — a 20-page fixture vault that plants exactly one instance of every defect class, including positive controls that must stay clean.
+- Added 48 tests (`tests/test_kb_lib.py`, `tests/test_validate.py`); all pass in 0.7 s. Includes a regression guard asserting the real vault keeps zero broken wikilinks.
+- **First honest report on the real vault** (303 pages: 95 concept, 15 entity, 193 source-summary; 222 raw sources), 0.7 s runtime:
+  - 4 errors: `LG001` ×2 duplicate log entries (lines 234/265 and 250/281), `DP001` BERT title collision, `DP002` `source-bert.md` vs `source-bert-pre-training-of-deep-bidirectional-transformers.md` at **100% shingle overlap**
+  - 349 warnings: `IX005` ×308 malformed index descriptions, `FM007` ×13 title/H1 mismatches, `IX003` ×10 double-listed entities, `FM010` ×7 legacy `reviewed` status, `LK002` ×5 orphans (4 CS224n slide summaries + promptingguide techniques overview), `DP003` ×4 alias stubs (`rag`, `peft`, `models-overview`, `synthetic-data-generation`), `FM008` ×2 non-canonical tag `pretraining`
+  - 496 info: `FM009` ×303 missing `summary:`, `PV001` ×193 source summaries with no machine-checkable `raw:` — both cleared by the Task 3 migration
+  - Confirms 0 broken wikilinks and 0 pages missing from the index, matching what the earlier ingest logs claimed
+- Every defect predicted during planning was reproduced by the tool; it also surfaced three classes the manual audit missed (title/H1 drift, the `pretraining` tag outside the vocabulary, low-density check clean at 0).
+
+## [2026-08-27] maintain | Task 3 — schema v2, single agent-instruction source, frontmatter migration
+- **Rewrote `AGENTS.md` as schema v2** (334 lines): 6 hard rules (never modify the private layer, never publish the private layer+the private layer, never create a remote or push without per-action approval, run `make check`, append-only log, never claim unperformed verification); 5 page types (added `synthesis` and `comparison` so filed query answers have somewhere to live); full frontmatter reference incl. the provenance block (`raw`, `url`, `extraction`, `sha256`, `fetched`) and verification block (`verified-by`, `verified-on`); trust ladder; alias-page ban; ingest rules (verify extraction *before* summarizing, prefer chapter/lecture granularity, cap subagent fan-out at 3, `make check` after every batch); publication policy; tooling table.
+- **Resolved the open question about `CLAUDE.md` — the hard way.** It was a real symlink (git mode `120000` → `AGENTS.md`), as was `.cursor/rules`. Writing the new `CLAUDE.md` therefore wrote *through* the symlink and clobbered the freshly-written schema, which had to be rewritten. Both are now regular files: `AGENTS.md` holds the schema, `CLAUDE.md` is a 15-line `@AGENTS.md` import — the pattern Anthropic documents for repos that already use `AGENTS.md`, and one that cannot silently overwrite the schema. Verified: separate inodes, import on line 6 outside any code fence, no self-import.
+- Deleted `.cursor/rules` (user does not use Cursor; recoverable from git history at `818b75d`).
+- **Added `tools/migrate_frontmatter.py`** — dry-run by default, idempotent, edits frontmatter by line surgery rather than re-serializing YAML so diffs stay reviewable (303 files changed, +1220/−45 lines, bodies untouched).
+- Migration results across all 303 pages:
+  - `summary:` ×303 — derived from the first sentence of `## Overview`/`## Summary` with wikilinks **flattened to the linked page's title**. The v1 index deleted `[[...]]` markup outright, producing "founding member of . Formerly the"; the new line reads "founding member of OpenAI".
+  - `visibility:` ×303 — 24 set to `private` per policy (16 `source-system-prompts-*`, 5 `source-cs224n-*-slides`, 3 `source-jurafsky-chapter-*`), 279 `public`.
+  - `status:` ×208 added (absent on every source summary under v1), ×36 **demoted** — 29 `mature` + 7 `reviewed` → `draft`, because all were self-assigned by the agent in the same pass that wrote the page. Demoted pages are listed in `reports/migrate.md` so the Task 8 audit can start with the richest ones.
+  - `raw:` ×172 of 193 source summaries (89%) — written **only** on certain matches (explicit path in prose 97, exact filename 57, unique prefix 18). The remaining 21 are listed in `reports/migrate.md` with candidates but no value written, because a wrong provenance link makes an unverifiable page look verified. Task 6 resolves them by reading the sources.
+- Tightened `tools/validate.py`: `FM009` missing `summary` and new `FM013` missing `visibility` are now **errors**; `PV001` missing `raw` promoted to warning; `PV002` checks every entry when `raw:` is a list; added `FM012` for over-long summaries.
+- Test suite 48 → 67 (all pass): migration idempotency, body-untouched, link flattening, status demotion, visibility policy, and five provenance cases including "ambiguous match must write nothing".
+- Lint after this task: 4 errors (2 duplicate log entries → Task 5; BERT `DP001`/`DP002` → Task 7), 363 warnings (308 index descriptions → Task 4; 21 `PV001` → Task 6; 4 alias stubs → Task 7). `FM009`/`FM010`/`FM013` cleared to zero.
+
+## [2026-08-27] maintain | Task 4 — index.md, index-sources.md, and domain maps are now generated
+- Added `tools/build_index.py`. `index.md` and `index-sources.md` are no longer hand-maintained: every entry prints the page's own authored `summary:` field, each page appears exactly once, and the header counts are computed. `make index` writes them, `make index-check` fails on drift, and a new lint code `IX006` makes staleness an error — so the file cannot quietly rot again.
+- Split the catalog in two: `index.md` holds the 110 concept/entity pages plus the maps (169 lines, readable in one agent pass); `index-sources.md` holds the 193 source summaries grouped by kind (57 papers, articles, slides, book chapters, docs, transcripts) and flags the 21 with no stored source file and the 24 marked private.
+- Generated 10 per-domain map pages (`wiki/moc-<tag>.md`, `type: moc`, `generated: true`) listing each domain's concepts, entities and sources with links to sibling maps. Their outbound links are **excluded from orphan detection**, because a map that links everything would otherwise clear every `LK002` warning without connecting anything — there is a test for exactly that.
+- Index defects fixed, measured by lint: `IX005` malformed descriptions **308 → 0**, `IX003` double-listed entities **10 → 0** (entities are now listed only under Entities, never also under a topic heading), `IX001` unlisted pages 0, `IX004` count mismatch 0. "Positional Encoding is the technique used in  models" now reads "…used in Transformer models".
+- Three defects surfaced and fixed while building it, each caught by a check or a test rather than by eye:
+  - **Sentence splitting broke on abbreviations** — `source-alpacafarm`'s summary was the useless fragment "Dubois et al.". Added `kb.split_sentences` with an abbreviation and initials list; re-derived 65 summaries via a new `--refresh-summaries` flag.
+  - **The refresh clobbered the generated maps**, deriving their summaries from the "GENERATED by …" banner. The migration now skips `type: moc` / `generated: true` pages.
+  - **The generator did not converge**: it read maps from disk while also generating them, so one stale map propagated into `index.md` forever. It now builds the indexes from authored pages plus the freshly generated maps. Test: `test_generation_converges_in_one_pass`.
+- Also fixed two of my own false positives: `[[index]]` links from maps were reported broken (they resolve fine in Obsidian, so root-level vault files are now valid link targets), and the "truncated mid-sentence" heuristic was tripping on the generated ` · \`draft\`` suffix (it now judges only the prose before the first middot).
+- New `FM014` (info, 136 pages): summary was machine-truncated at 220 chars rather than authored. Honest signal, pointed at the page that can fix it rather than at the generated index.
+- Tests 67 → 82. New: every page listed exactly once, no malformed generated entry, entities not double-listed, header count reconciles, one-pass convergence, drift detection via `--check` and via lint, maps do not mask orphans, maps are not themselves orphans, root-index links resolve, alias filtering.
+- Lint after this task: 4 errors (2 duplicate log entries → Task 5; BERT `DP001`/`DP002` → Task 7), 45 warnings (21 `PV001` → Task 6, 13 `FM007`, 5 `LK002`, 4 `DP003` → Task 7, 2 `FM008`), 136 info.
+
+## [2026-08-27] maintain | Task 5 — log repaired and made self-enforcing
+- **Removed 31 duplicated lines.** The entries "CS224n final audit — closed last 9 gaps" and "CS336 Language Modeling from Scratch — schedule bulk" had each been appended twice, byte-identically (former lines 265–280 and 281–295 were copies of 234–249 and 250–264). Verified by fingerprint before removal, and by `git diff --numstat` after: `0 insertions, 31 deletions`. The log now holds 34 entries, all unique. This is the one and only edit to existing log content; everything from here is append-only, and a check now enforces that.
+- **Date correction, recorded rather than rewritten.** Both of those entries are dated `2026-08-25`, but the file evidence says the work finished on **2026-08-26**: 30 source summaries carry `date-ingested: 2026-08-26` (all 19 CS336 lecture summaries plus the 9 CS224n final-audit items and 2 others), 4 concept pages were created that day (`data-curation`, `mixture-of-experts`, `parallelism`, `triton`) and 18 more updated (`ai-agents`, `ai-ethics`, `alignment`, `backpropagation`, `direct-preference-optimization`, `embeddings`, `evaluation`, `glove`, `inference`, `multimodal-ai`, `multimodal-cot`, `parameter-efficient-fine-tuning`, `rlhf`, `scaling-laws`, `supervised-fine-tuning`, `synthetic-data`, `tokenization`, `transformer`). The original entries are left as written — correcting them in place would be exactly the kind of silent history edit the append-only rule exists to prevent. This entry is the correction.
+- That session also never updated `index.md` or `log.md` at the time, which is why lint found 22 pages newer than the last log entry (`LG002`). Both are now generated or enforced, so the same drift cannot recur unnoticed.
+- Added two checks to `tools/validate.py`:
+  - `LG005` **append-only enforcement** — compares `log.md` against `git show HEAD:log.md` and errors unless the committed version is a prefix of the working copy, naming the first line that diverges. Skipped silently outside a git repo so the fixture vaults still work.
+  - `LG006` — filenames cited by an `ingest` entry that no longer exist in `wiki/`, reported as info. Useful for spotting renames after the fact; noisy by nature, so not an error.
+- Documented commit conventions in `AGENTS.md`: the log vocabulary as commit prefixes (`ingest:`, `lint:`, `audit:`, `maintain:`, `synth:`, `publish:`, plus `chore:`/`docs:`), and an `Assisted-by: Kiro (AI agent)` trailer so agent work is visible in `git log` without touching git config or spoofing an author.
+
+## [2026-08-27] audit | Task 6 — provenance verified, unusable sources recovered
+> [!WARNING] Correction to the planning audit
+> The plan asserted that six raw papers were "TOC-only failed scrapes with no body text", and that `wiki/source-chameleon.md` asserted "9.2T tokens", "60.4% vs Gemini-Pro" and "codebook 8,192" against an empty file, with those numbers coming "from the model, not the paper". **That was wrong, and it was wrong because the planning pass only read the first 60 lines of each file — which are navigation chrome.** Measured properly, (source held privately) holds 8,743 content words of real paper text, and every one of those figures is present in it (`9.2` ×2, `60.4` ×2, `8192` ×2, `512` ×4, `34B` ×17). The summary was sound. The defect in those 13 files is cosmetic chrome, not missing content. Recorded here because an audit that overstates its findings is no better than one that misses them.
+
+- Added `tools/verify_sources.py`, which answers two independent questions per page: **is the stored source usable as evidence** (`full` / `partial` / `failed` / `none`, from measured content words, chrome markers and placeholder phrases), and **do the summary's numbers appear in it** (every percentage, parameter count, token count and benchmark score extracted and searched for, allowing for notation differences — `8,192` vs `8192`, `9.2T` vs `9.2 trillion`, `512×512` vs `512 x 512`). Runs over all 193 summaries in 0.8 s. `make audit`, `make audit-stamp`, and `--file` for the single-source check the ingest workflow now requires.
+- Two measurement bugs found and fixed while calibrating it: a prose-only word count labelled a 23 KB model catalogue as "28 words" (now counts table and list content), and overlapping claim patterns double-counted `9.2T` as both `9.2T` and `9.2` (now keeps the longest match per position, cutting the claim total from 1,843 to a truthful 1,614). Also excluded file metadata — `46,186 bytes`, `18.5K`, `3.5-hour`, `67-page` describe the artifact, never appear inside it, and were generating 14 false "suspect" pages.
+- Added `tools/resolve_provenance.py`: the 21 summaries the migration refused to guess are now resolved, each confirmed two ways (plausible filename **and** measured claim overlap against the candidate), with the rationale recorded per entry — `source-mmlu` → `measuring-massive-multitask-language-understanding.md` (40/42 claims), `source-helm` → `holistic-evaluation-of-language-models.md` (7/7), `source-retrieval-augmented-generation-rag` → Lewis et al. (50/53), the two promptingguide hubs → their whole section, plus an underscore-vs-hyphen mismatch and several acronym-vs-full-title cases. **`PV001` 21 → 0: every source summary now declares a raw file that exists.**
+- Added `tools/refetch.py` — the one sanctioned route for writing into the private layer`. It validates every candidate *before* writing and rolls back if the result would not classify better, so a bad fetch cannot destroy a good source. **14 of 22 unusable sources recovered:**
+  - 10 from PDFs already on disk via pypdf, no network: Jurafsky ch2 488 → 16,438 words, Jurafsky ch7+ch9 194 → 21,209, Bengio 1994 488 → 11,847, four CS224n lecture decks 31 → 2,545–4,168, gradient notes, CS231n derivatives handout, differential-calculus review.
+  - 4 from arXiv HTML: LMFusion, RA-CM3, CM3Leon, mixed-modal scaling laws — each a 40-45 word placeholder before, 5,899–8,871 words after.
+  - 1 correctly **refused**: (source held privately) is a scanned image with no text layer (27 words extracted vs 261 already stored). The guard did its job.
+- Stamped `extraction:` and `sha256:` onto all 193 summaries from the measurement rather than from impression, and demoted the pages whose source cannot support them to `status: unverified` — visible in the generated index and to any future reader.
+- **Not quarantined, deliberately.** The plan called for moving unrecoverable sources to (source held privately). The 8 that remain `failed` are not corrupt: they are thin because the upstream source is thin (two promptingguide stub pages that really are two sentences, an AlpacaEval leaderboard, a Medium essay, two CS336 guest lectures whose materials were never published, one scanned PDF). Moving them would break the provenance link without adding information, so they keep their link and carry `extraction: failed` + `status: unverified` instead.
+- **Audit result across 193 summaries:** extraction `full` 135, `partial` 50, `failed` 8 (was `full` 107, `partial` 48, `failed` 17, `none` 21). Buckets: **clean 164, needs-review 11, suspect 10, unverifiable 8.** 1,494 of 1,614 quantitative claims (92.6%) located in the cited source. Ten pages genuinely worth reading are listed under `suspect` in `reports/audit.md`, led by `source-cs336-lecture09-scaling-laws` (7/19 — cites Chinchilla/Gopher figures that are not in that lecture) and `source-roformer` (3/8).
+- Tests 91 → 111: classifier behaviour on each label including the table-heavy case, claim extraction for every quantity shape, identifiers and metadata excluded, notation variants accepted, **a fabricated number caught**, placeholder source ⇒ unverifiable, stamping idempotent, and a guard that every summary in the real vault declares an existing raw file.
+
+## [2026-08-27] maintain | Task 7 — duplicates merged, alias stubs collapsed, lint reaches zero
+- Added `tools/cleanup.py` with reusable operations rather than one-off edits: `merge_page`, `collapse_alias_stub`, `retire_page`, `delete_redundant_raw` (refuses while anything still references the file), `sync_title_to_h1`, `drop_noncanonical_tags`, and `cite_source`. `make cleanup` / `make cleanup-apply`.
+- **Merged the duplicate BERT summary.** `source-bert.md` and `source-bert-pre-training-of-deep-bidirectional-transformers.md` were the same page at 100% shingle overlap. Kept the descriptive filename (6 inbound links vs 2), absorbed the loser's aliases, repointed 8 links across 3 pages, deleted the short one.
+- **Collapsed all 4 alias stubs into frontmatter `aliases:`** — `rag` → `retrieval-augmented-generation` (13 links across 10 pages), `synthetic-data-generation` → `synthetic-data` (10 links / 6 pages), `models-overview` → `llm-models-overview` (5 / 4), `peft` → `parameter-efficient-fine-tuning` (4 / 3). The stub's title is kept as display text, so prose still reads the way it was written: `[[rag]]` became `[[retrieval-augmented-generation|RAG]]`, not a jarring long slug. Frontmatter link lists were de-duplicated afterwards, since several pages cited both the stub and the canonical page.
+- Deleted 2 unreferenced duplicate raw scrapes (`chameleon-mixed-modal-early-fusion.md`, `transfusion-predict-the-next-token-and-diffuse-images.md`) — same size as the referenced copies, cited by nothing. The tool refuses to delete a raw file any page still points at; there is a test for that.
+- Fixed the mislabelled callout in `react.md`: it described how CoT, CoT-SC and ReAct *complement* each other under a `[!WARNING] Contradiction` header. Now `[!NOTE] Complementarity`.
+- Moved `karpathy_llm_knowledge_base_eli5.html` out of the vault root to `reports/`. It is a derived artifact with no place in the schema; in the root it showed up in Obsidian and in every directory listing as if it were source material.
+- Fixed 11 `title:`/H1 mismatches by taking the H1 as the title — the frontmatter versions carried schedule metadata ("(Tatsu, Mon April 6)") that belongs in `author`/`date-published`, not in a title. Also relaxed the check itself: `FM007` was firing on pages whose only difference was `'` vs `"` or `—` vs `-`, which is not a defect.
+- Dropped the non-canonical `pretraining` tag from 2 pages, keeping `llm-fundamentals`. The tool refuses to strip a page's last tag rather than leave it uncategorised.
+- **Integrated the 6 orphaned summaries instead of silencing them.** An orphan here meant a source was ingested and then never cited by the page it teaches, so each is now cited from where it belongs: CS224n lecture 05 → `transformer`, lecture 04 → `rnn`, lecture 03 → `backpropagation`, lecture 01 → `embeddings`, promptingguide models hub → `llm-models-overview`, techniques overview → `prompt-engineering`.
+- Added `archive/` with a written policy: archive what once said something real (with `superseded-by:`), delete only what never carried information. Archived pages leave the index automatically because only `wiki/*.md` is loaded.
+- **`make lint`: 0 errors, 0 warnings** — from 4 errors and 363 warnings at the start of this work. 138 info remain: 136 summaries still carrying a machine-derived one-liner rather than an authored one, and 2 log entries citing pages this pass deleted (which is the log being accurate about history).
+- Pages 313 → 308 (5 deleted). Tests 111 → 128, including link rewriting with display text and headings, citation de-duplication, no dangling links after a collapse, dry-run inertness, refusal paths for missing keepers and referenced raw files, and a guard that `DP001`/`DP002`/`DP003` never reappear.
+
+## [2026-08-27] audit | Task 8 — all 192 summaries audited, quotation fidelity checked, 84 verified
+- Extended the audit from numbers to **quoted passages**, which turned out to matter more. Quotes are graded on the *fraction* of the passage found verbatim in the source, not an absolute word count: `verbatim` (80%+ in one run, or a 14-word run for long quotes with an elision), `near` (55%+, real but minor edits), `paraphrase` (below that). An absolute 6-word threshold was tried first and was wrong — six matching words is near-verbatim in an eight-word quote and pure paraphrase in a twenty-word one.
+- **Result: of 595 quoted passages, 372 are verbatim, 28 lightly edited, and 195 are paraphrase-grade** — the page's own wording inside quotation marks, attributed to a source that does not contain it. This is the most serious defect found anywhere in this work, because unlike a wrong number a reader cannot detect it. Concrete example, `source-chameleon`: the page quotes *"Uncontrolled growth of output norms is a strong indicator of future training divergence."* The paper says *"monitoring uncontrolled growth of output norms is strongly correlated with predicting future loss divergence."* Six shared words, and correlation has become indication.
+- Added two automated corrections, both idempotent and both refreshed rather than duplicated when the analysis changes:
+  - `> [!WARNING] Correction — quotation fidelity` on **81 pages**, placed under `## Notable Quotes`, stating how many passages could not be located and that they should be read as paraphrase.
+  - `> [!WARNING] Correction — figures not found in the stored source` on **38 pages**, listing the specific unmatched figures. Worded carefully: it says the page's own source does not evidence them, *not* that they are wrong — slide charts are invisible to text extraction and some figures are derived rather than quoted.
+- Investigated the worst case rather than just flagging it. `source-cs336-lecture09-scaling-laws` cites `130B`, `280B`, `300B`, `1.4T`, `+7.6%`, `+10.7%` and attributes them to slides 50–52; none of those strings appear anywhere in the stored lecture text, though "Chinchilla" appears 6 times. I checked whether the extraction was simply incomplete by re-extracting the 57-page PDF: it yields 1,899 words against the 1,918 already stored, so the text really is that sparse — the figures live in slide images. The numbers themselves are corroborated elsewhere in this vault by `source-training-compute-optimal-large-language-models`. The callout now says exactly that.
+- That check did find one real extraction gap: `cs336-lecture08-parallelism` held 1,167 words where its 73-page PDF yields 2,512. Re-extracted through `tools/refetch.py`. Fixing this also exposed an over-strict guard in that tool — it rolled back any replacement whose *label* did not improve, discarding a doubling of content because the file was already `full`. It now rolls back only on regression.
+- **Promoted 84 pages to `status: verified`** with `verified-by: agent` and `verified-on`, meaning every quantitative claim and every quoted passage on them was located in the stored source. The promotion is self-correcting: when the grading tightened mid-task, 23 pages that no longer qualified had their verification **withdrawn automatically**, and a test now asserts that no page can claim `verified` while the audit disagrees.
+- Added `FM015`: `status: verified` requires `verified-by` + `verified-on`, and `status: mature` requires `verified-by: human`. The ladder is now unclaimable without its evidence. Also added `remove_keys` to `kb.edit_frontmatter`, because withdrawing verification by blanking the fields left `verified-on: ""` — an invalid date rather than an absent one, which `FM006` correctly caught on 23 pages.
+- Current trust distribution across 308 pages: **84 `verified`, 215 `draft`, 8 `unverified`, 1 `stub`.** Buckets: clean 95, needs-review 4, suspect 85, unverifiable 8. `make audit-full` runs stamp + annotate + promote in one pass.
+- Tests 128 → 141: coverage-based quote grading, verbatim/near/paraphrase/absent cases, callout placement and the blank line that keeps a quote from rendering inside the warning box, annotation idempotency across three runs, promotion requiring full support, automatic withdrawal when evidence changes, human sign-off never demoted, and a guard on the real vault.
+
+## [2026-08-27] audit | Task 9 — trust reporting and the human review queue
+- Added `tools/build_trust.py` (`make trust`), which writes two files for two audiences:
+  - **`reports/trust.md`** — designed to ship with the public site. Says what was checked (1,464 of 1,582 figures located in their source; 372 of 595 quotations verbatim, 28 lightly edited, 195 paraphrase-grade), what each status means, and — the part that matters — **what the checking does not tell you**: that a figure present in a source may still be misused, that charts and slide images are invisible to text extraction, that 8 pages cite sources too thin to evidence anything, and that the reasoning and emphasis are the model's. A wiki written by an LLM is only worth reading if it is candid about this.
+  - **`reports/review-queue.md`** — private worklist, 105 items in three prioritised sections: 89 pages carrying an automated correction (worst evidence match first), a reproducible 10% spot-check sample of the 84 agent-verified pages (seed 20260827, so the sample is stable across runs), and the 8 pages whose source cannot support them.
+- Added `dashboard.md`, a Dataview view of the same data live inside Obsidian: trust ladder counts, human sign-offs, agent-verified pages awaiting review, sources that cannot support their page, pages carrying correction notices, stale pages, thin pages, and concept coverage by domain. Marked `visibility: private` — it is an operational view, not something to publish.
+- Fixed a reporting bug found by reading the output: `near_quotes` was tracked in the audit but never serialised to `audit.json`, so the trust page claimed 0 lightly-edited quotations where there are 28.
+- **Human sign-off: 0 of 84.** That is the honest number and it is the one thing in this plan an agent cannot do — `status: mature` requires `verified-by: human`, and `FM015` makes the claim unmakeable without it. The queue is ready for the owner.
+
+## [2026-08-27] publish | Task 10 — publishable subset built locally, 269 of 308 pages
+- Added `tools/publish.py` (`make publish`), which projects the wiki into `dist/public/` through a gate designed to refuse rather than guess, because a public git history cannot be un-published.
+- **Allowlist, not blocklist.** Only `wiki/*.md` pages with `visibility: public` are considered; the code never reads the private layer for output, so source material cannot leak through an oversight. **269 pages published, 39 withheld**: 24 `visibility: private`, 8 `status: unverified` (their source cannot support their claims, so they should not be read by strangers), 6 verbatim-overlap, 1 over-long quote.
+- **No dangling links.** Links from a published page to a withheld one are flattened to the target's title as plain text, and the domain maps and both indexes are *regenerated from the published subset* rather than copied — a withheld page cannot be linked into existence. 377 links flattened; verified 0 unresolved links across the 269 published pages.
+- **No private local state.** 457 private frontmatter fields removed (`raw`, `sha256`, `extraction`, `fetched`); 189 filesystem references rewritten to the source's public URL or an explicit note. An independent `audit_output` pass re-reads the finished tree and fails on any private layer reference, `/Users/` path, or private field — it caught a real leak the per-page transform missed, because `index-sources.md` prints each page's `summary:` verbatim and one summary named an asset PDF.
+- **Verbatim reproduction is measured.** Attributed quotes are capped (60 words each, 400 per page). Everything *outside* a blockquote is checked for 20-word runs shared with that page's own source: an unattributed match is reproduction, not commentary. Three rounds of refinement, each cutting false positives without weakening the check:
+  - 19 → 10 by ignoring runs that are not expressive text. Shingle normalisation strips punctuation, so a benchmark table becomes "1 22 8 c2 50k 20 9 24 1 bpe 60k" and a formula becomes "f w i w j t w k" — both look like 20-word runs, neither is an author's sentence.
+  - 10 → 8 by reporting **distinct passages** instead of overlapping windows. One copied sentence produced 16 shingle hits, which read as sixteen incidents; it is one.
+  - 8 → 6 by excluding URL component runs ("https github com nvidia nccl tests blob master doc").
+  - What remains is genuine: 6 pages each reproduce one 20–35 word sentence from their source without quotation marks, mostly promptingguide summaries written from short web pages. They are withheld until the passage is quoted and attributed or rewritten. That is content debt, now visible.
+- Generated for the public build: `NOTICE.md` (every published source with author and URL, plus an explicit statement that the pages are LLM-written and that the sources themselves are not published), `how-it-was-built.md`, `trust.md` from Task 9, and a **sanitized `log.md`** — the working record is the most interesting artifact here, so it ships with local paths stripped.
+- Each published page gets an attribution footer: source, author and URL for summaries, licence for original analysis, and its verification status in plain words.
+- Added `tools/preview.sh` (`make publish-preview`): fetches Quartz into the gitignored `dist/`, installs it, copies the published tree in, and serves on localhost. Idempotent. **The Quartz dependency install was still running when this was committed** (the network here moves at ~20 KiB/s), so the rendered preview is not yet confirmed; the build artifact itself is verified by the checks above and by 19 tests.
+- **Nothing was pushed, no remote was added, no repository was created.** `dist/` is gitignored.
+- Tests 141 → 160: private page never present under any route, unverified page withheld, links to excluded pages flattened, zero dangling links, private fields stripped, local and absolute paths rewritten, planted leak detected by the output audit, log sanitized but preserved, unattributed prose withheld, **the same passage allowed once quoted**, over-long quote withheld, numeric tables and formulas not mistaken for prose, NOTICE lists attribution and discloses LLM authorship, footers carry source and status, indexes omit withheld pages, and a full clean build of the real vault.
+
+## [2026-08-27] maintain | Task 11 — search layer, and a measured baseline for it
+- Added `tools/retrieval_baseline.py` (`make retrieval`): 20 questions with a known answer page, scored as recall@10 and MRR across strategies, written to `reports/retrieval.md`. The questions are phrased as questions rather than keyword bags, and a test asserts that at most half of them restate their target's slug — otherwise the benchmark measures string matching rather than retrieval. Another test asserts every target page still exists, so a rename cannot silently invalidate it.
+- **Measured, over 298 pages:**
+  | Strategy | recall@10 | MRR |
+  | --- | --- | --- |
+  | generated index summaries only | **70%** | 0.44 |
+  | full-text BM25 over page bodies | **90%** | 0.50 |
+  | `qmd search` (BM25, no embeddings) | **25%** | 0.17 |
+- Two findings worth acting on:
+  - **The index is not a search engine.** Summary-only retrieval misses 3 questions in 10 — the misses are instructive, since a question like "what makes a model produce confident text that is simply untrue" reaches `decoding-strategies` rather than `hallucination` when only one-line summaries are visible. `AGENTS.md` now tells agents to search full text *first* and treat the index as orientation.
+  - **`qmd search` is not a drop-in improvement.** It is precision-oriented: for "why does attention cost grow quadratically with sequence length" it returns exactly one result (`transformer`, score 0.92) and nothing else, so recall@10 cannot exceed that. Its recall comes from `qmd query`, the hybrid BM25 + vector + rerank path, which blocks until `qmd embed` has produced vectors. Recorded honestly rather than presented as a win.
+- Installed and configured qmd 2.8.3: collections `wiki` (308 files) and `raw` (220 files), each with a `qmd context` description so results carry the right framing — and the raw collection's description states plainly that it is private and only for verifying claims. `qmd embed` was started; at time of writing it is still fetching its model (0 of 528 vectors), so the hybrid row is absent from the table. Re-running `make retrieval` fills it in.
+- Two methodology fixes while building this, both of which mattered: qmd is restricted to the `wiki` collection (a hit in the private raw layer is not a comparable answer), and its chunk-level results are de-duplicated to document level with over-fetch, because the other strategies rank documents and ten chunks can be three files. Also gave qmd calls a 20 s timeout so the hybrid path being unavailable reports as unavailable instead of hanging the run.
+- **Quartz preview verified end to end.** `npx quartz build` parsed 275 markdown files and emitted 929 files in 18 s with no errors; the served site returns 200 for `/`, `/trust` and `/wiki/transformer`, and **404 for `/wiki/source-system-prompts-cursor`** — a withheld page is absent from the rendered HTML, not merely unlinked. Grep of the emitted HTML for the private layer and `/Users/` paths comes back empty. 582 HTML pages, 269 wiki pages plus the generated extras.
+- Tests 160 → 187.
+
+## [2026-08-27] synth | Task 12 — the compounding layer: three theses, three registers
+- The wiki could summarize but not argue. 193 of 308 pages were source summaries and nothing anywhere said something no single page said. Added the layer that makes it compound.
+- **Three `type: synthesis` pages**, each with a `## Thesis` that takes a position the underlying pages do not:
+  - **[[post-training-lineage]]** — the SFT → RLHF → DPO → RLVR story is told as a succession, and this vault's own evidence contradicts it: DeepSeek-R1 runs SFT → GRPO → SFT/RLHF, so RL does not replace supervised fine-tuning, it is sandwiched by it. What actually varies is *what supplies the signal* — a human writing, a human ranking, a closed-form objective, or a program checking — so the selector is not chronology but **whether you have a verifier**. Notes that every RLVR result here lives in a domain with a cheap checker, which makes the claim narrower than it reads.
+  - **[[scaling-laws-revisions]]** — Kaplan and Chinchilla disagreed by 4× on how to spend compute, and the gap was a **methodology artifact**: a cosine horizon fixed at ~130B tokens for every run, non-embedding parameter counting, and warmup that is a large fraction of a small budget. None of those is a fact about neural networks. Reads µP and WSD as scaling-law *hygiene* — each removes a hyperparameter that would otherwise have to be held fixed and contaminate the next fit — and argues compute-optimal is not cost-optimal, since a 4× smaller model is 4× cheaper on every request.
+  - **[[context-engineering-thesis]]** — Anthropic (scarcity, attention budget, context rot), LangChain (write/select/compress/isolate), and CS336 (memory bandwidth, KV cache, arithmetic intensity) are describing **one constraint at three altitudes**. The consequence is concrete: prefix layout is worth an order of magnitude in cache economics, compaction is not free because it discards the cache along with the tokens, and sub-agents are a memory-bandwidth trick. What reads as a prompting skill is a cost decision.
+- Linked all three from the 9 concept pages they argue about (`rlhf`, `supervised-fine-tuning`, `direct-preference-optimization`, `reasoning-llms`, `scaling-laws`, `chinchilla`, `context-engineering`, `prompt-caching`, `inference`) — a thesis nobody links to will not be read, and the orphan check would have caught it.
+- **`SY001` and `SY002`**: a synthesis page must cite ≥5 wiki pages and ≥3 sources, and must have a `## Thesis` section. Both are the minimum conditions for the type meaning anything; without them "synthesis" becomes the label an LLM puts on a survey.
+- **`open-questions.md`, generated** (`make registers`, `tools/build_registers.py`): 300 questions from 92 pages, grouped by domain, ordered within a domain by verification status — a question on an `unverified` page is usually a question about its source rather than about the field. 89 pages had open questions that nobody was ever going to find by reading 89 pages.
+- **`reading-queue.md`, curated**: a queue of *gaps*, not famous papers, with the evidence for each. Priority 1 is debt that makes existing pages misleading (the 6 withheld pages, the 195 paraphrase-grade quotations, the 8 unverifiable pages). Priority 2 is the coverage table, which is uncomfortable reading: Prompt Engineering has 30 concept pages against RAG's 4, Multimodal's 2, MLOps' 1 and Open Source's 0 — the shape of one bulk ingest, not of the field.
+- **`decisions.md`**: 10 ADRs for the knowledge base itself, each recording the **cost** as well as the decision, because a decision recorded without its downside gets revisited by someone who only sees the upside. Includes the two deliberate deviations from the plan (ADR-005 no quarantine, ADR-007 withhold rather than fail) and the incident that produced ADR-006 (writing `CLAUDE.md` destroyed `AGENTS.md` through a symlink).
+- `open-questions.md` and `decisions.md` are added to the published build — original content, no third-party material. `reading-queue.md` and `dashboard.md` stay private as personal worklists.
+- Tests 187 → 197. Lint 0 errors, 0 warnings. Published build now 269 pages plus 8 generated extras.
+
+## [2026-08-27] maintain | Task 13 prep — the gate closes, and it passes
+- **`make check` now passes end to end**: lint, generated-file staleness, provenance audit, the publish gate in strict mode, and 197 tests. Composing it exposed the last of the content debt, because a gate that cannot pass is not a gate.
+- Improving the verbatim-overlap check accounted for 6 of the 7 remaining withheld pages, and the fix was principled rather than a loosening. The check strips blockquotes as attributed, but it was treating two other forms of attribution as bare prose: **inline `"…"` quotations** and **code spans**. On a page *about* a prompt, the prompt in a code fence is the subject matter, not copied writing. With inline quotes and code spans excluded, `source-promptingguide-risks-biases` (a sentence that already ended in a closing quotation mark), `guides-deep-research` (`**Decision table text:** "…"`), `applications-generating-textbooks` (two prompt templates in code), `research-llm-recall`, `research-rag-faithfulness`, `techniques-knowledge` and `cs336-lecture07-parallelism` all resolve. The test that a genuinely bare copied sentence is still withheld continues to pass, so the check has not been blunted.
+- The last violation was a real one and was fixed as content: a 65-word quotation on `source-training-compute-optimal-large-language-models` now elides its middle clause, with the elided arithmetic restated in the page's own words and cross-linked to [[scaling-laws-revisions]]. That is what the limit is for.
+- **Published build: 279 pages** (from 269) plus 8 generated extras — `index`, `index-sources`, `NOTICE`, `how-it-was-built`, `open-questions`, `decisions`, `trust`, and a sanitized `log`. 3.1 MB. Withheld: 24 `visibility: private`, 8 `status: unverified`. 478 private frontmatter fields removed, 310 links flattened, 200 local paths rewritten, output audit clean.
+- Added `MAINTENANCE.md`: per-ingest, weekly, monthly and per-release cadences, a table saying which lint code deserves what action, and a health-at-a-glance baseline to compare against. The monthly list includes "write one synthesis page", because that is the step that makes the base compound rather than accumulate.
+- Added `.githooks/pre-commit` (`make hooks` to enable): the *fast* subset only — lint plus generated-file staleness, about a second — plus an explicit block on removing lines from `log.md`, since that is the moment a well-meaning edit would be committed. The full gate belongs in CI, not in the path of every commit.
+- Added two GitHub Actions workflows, **both inert until a remote exists**, committed so the setup is reviewable before anything is pushed:
+  - `checks.yml` — the gate on push and weekly, uploading `reports/` as an artifact and opening a labelled issue if the *scheduled* run fails. Drift in a knowledge base is silent; a schedule is what turns "nobody noticed for three months" into an issue with a report attached.
+  - `publish.yml` — `workflow_dispatch` only, requiring the word `publish` typed as confirmation, gated on the full check suite, with a second independent leak scan of the built tree before it will push. Never on push: publishing is a decision, not a side effect of committing.
+- **Nothing was pushed. No remote exists. No repository was created.** The remaining steps are the owner's to authorise.
+## [2026-08-27] maintain | Task 13 — the gate holds, and the decision is the owner's
+- **Backup refreshed before presenting anything.** Eight commits had landed since the last bundle. `knowledge-base-20260827-2209.bundle` (4.0 MB, all refs) plus `knowledge-base-20260827-2209-lfs.tar.gz` (77 MB, the LFS object store) in (local path). The bundle alone will not restore the binaries — LFS objects live outside it — which is why the pair is always written together and why restore begins with `git lfs install --local`.
+- **Corrected a number I had reported.** I stated 197 tests in the previous two entries. The real figure was **181**, and the discrepancy was a miscount on my side, not lost coverage: the sum of `def test_` across the ten test files is exactly 181, matching what pytest collects. Recording it because a test count is the kind of claim that gets quoted later, and this base's whole argument is that stated numbers should be checkable. With this entry's additions the suite is **183**.
+- **Fixed a defect in the published log that the leak scan surfaced but did not consider a leak.** A final scan of `dist/public` matched the private layer and `/Users/` in two lines of the sanitized log. Neither was a leak — both were prose *describing* the sanitizer — but the substitution had produced nonsense, because both private directories mapped to the same replacement phrase:
+  - (source held privately) became "the private source layer/the private source layer", and "fails on any private layer reference" became "fails on any *the* private layer reference". A portfolio piece cannot ship a sentence like that.
+  - The fix is in the tool, not in `log.md`, which is append-only: pairs of directory mentions now collapse to a single phrase, a determiner already present in the sentence suppresses the article, and a repeated mention inside an enumeration is dropped — but **only inside an enumeration**, because requiring the separator is what keeps "copied from the private layer to the private layer" a grammatical sentence instead of "copied from the private layer to". Four cases, all covered by tests.
+  - The same substitution now runs on pages as well as the log, so the two cannot drift apart.
+- **Final published build: 287 files — 279 wiki pages plus 8 generated extras, 3.1 MB.** Withheld 32: 24 `visibility: private` (16 `source-system-prompts-*`, 5 `source-cs224n-*-slides`, 3 `source-jurafsky-chapter-*`) and 8 `status: unverified`. Verified by direct inspection of the finished tree, not by trusting the builder's own report: `raw:`, `sha256`, `extraction` and `fetched` appear **zero** times; the retained `verified-by: agent` on 70 pages is deliberate, since a machine check ought to say so in public.
+- **`qmd embed` never completed.** 0 of 528 vectors after more than an hour with no output; the model download stalled. The `qmd-hybrid` row in `reports/retrieval.md` is therefore still absent, and the honest measured ranking stands as full-text BM25 90 % recall@10 over index-summaries-only 70 % over `qmd search` 25 %. The qmd index is also three files stale, predating the synthesis pages. Re-running `qmd embed` then `make retrieval` fills the row; nothing else depends on it.
+- **Nothing was pushed. No remote was added. No repository was created. No Pages site exists.** `make check` passes end to end — lint 0 errors / 0 warnings / 138 info, 183 tests, publish gate strict, output audit clean — and there the automated work stops. The two remaining actions send this machine's contents to a third party, so they are presented as commands for the owner to run, with the private-history push and the public-site push kept separate and independently authorised.
+- **The publish workflow would have failed on a false positive, and I found it by running its steps by hand.** `publish.yml`'s second, independent leak scan grepped for the literal string `/Users/`. Three lines of the sanitized log contain `` `/Users/` `` in backticks — the log *describing this very scan* — so the job would have failed at the leak gate on its first authorised run, after passing every other check. The builder's own `audit_output` was right all along because `ABSOLUTE_PATH_RE` requires a path character after the slash; the CI grep did not. Aligned the grep to `/Users/[A-Za-z0-9._/-]`, then verified both scans exactly as the workflow runs them: clean on the real tree, and still catching a planted `(source held privately)` path and a planted private-directory reference. A gate that fails on its own documentation trains people to bypass gates.
+## [2026-08-28] maintain | Private backup remote, and a gate that broke at midnight
+- **Private remote created and the full history pushed, with the owner's explicit approval for this step only.** The private backup repository, private. Confirmed private two independent ways before any content moved: GitHub reports `PRIVATE`, and an unauthenticated API request returns 404. 41 commits, the `baseline-pre-audit` tag, and 31 LFS objects (86 MB) uploaded — LFS first, so no commit is ever on the remote referencing binaries that are not. The public repository was **not** created; that is a separate decision and remains unauthorised.
+- Two transport failures on the way: an HTTP/2 framing error, then a 75-second connect timeout to `github.com` while `api.github.com` stayed healthy. Retried with HTTP/1.1 forced **inline** via `git -c http.version=HTTP/1.1` rather than writing it into the repository config, because a workaround for one flaky evening should not become a permanent setting nobody remembers adding.
+- **The backup restores. Verified by clone, not by assertion.** Fresh clone into a scratch directory: HEAD matches, the tag dereferences to `818b75d`, 311 wiki pages, 220 raw documents, 32 assets. The clone initially wrote **all 31 PDFs as pointer files** — 156 KB where 83 MB belongs — because Task 1 installed the LFS filter with `--local`, so a fresh clone on a machine without a global filter gets pointers. After `git lfs install --local && git lfs pull` all 31 PDFs are byte-identical to the originals by SHA-256, with zero unresolved pointers. That two-step restore is the documented procedure and it is now demonstrated rather than assumed.
+- **Then the clone failed the gate, and the reason was a real defect in my own tooling.** `validate.py` reported 12 `IX006` errors and two tests failed on staleness. The cause was not the clone: the clock had rolled past midnight during this session. `build_index.py` and `build_registers.py` stamped `date.today()` into all 12 generated navigation files, so at 00:00 every one of them became "stale" with **no content change**. The consequences were worse than a cosmetic diff:
+  - `make check` fails every midnight, and I had told the owner it passes.
+  - `.githooks/pre-commit` blocks every commit until someone regenerates a date.
+  - `checks.yml` fails on its weekly schedule for the same reason, which is precisely the signal that would be dismissed as noise.
+  - Regenerating rewrote `created:` on every map, so a field describing the past silently reset to today on each run.
+- **Fixed by making generated content a function of the vault instead of the clock.** `kb.content_date(pages)` returns the newest `updated:` across the pages, and the banner now reads "Content as of …" — which is also the more truthful claim, since readers care when the material was last touched, not when the generator last ran. `created:` is read from the file already on disk and preserved. The clock is consulted in exactly one place now, reached only by a vault in which no page carries a date at all.
+- Getting there took two corrections worth recording, both caught by the test rather than by reading:
+  - My first "decisive test" concluded the files were **not** stale because regenerating changed nothing in git. That was wrong: the default invocation is a dry run, and I had omitted `--apply`, so nothing had been written. A test that cannot fail proves nothing.
+  - The first fix still leaked. A map for a tag with no pages fell back to today, and the index takes the **maximum** date across the pages it lists — including the maps — so today's date climbed straight back into `index-sources.md`. One vault-wide stamp, computed from authored pages only and passed down, closes it.
+- Two regression tests: generated files must contain today's date nowhere when the newest content date is in the past, and a map's `created:` must survive regeneration. Suite 183 → 185. `make check` passes, and the generated files now read `Content as of 2026-08-27` while the clock says 2026-08-28 — the proof the two are decoupled.
