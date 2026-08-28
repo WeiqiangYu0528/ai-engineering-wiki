@@ -12,7 +12,12 @@
 # honours the enclosing repository's .gitignore, and this repo ignores build
 # output, so a Quartz checkout inside the work tree makes every staged content
 # file invisible: the build reports "Found 0 input files" and silently emits a
-# 51-file shell of a site. That cost two failed runs to find.
+# 51-file shell of a site.
+#
+# Note on $RUNNER_TEMP vs ${{ runner.temp }}: the `runner` context is not
+# available in job-level `env`, only in step-level fields. Scripts therefore use
+# the built-in $RUNNER_TEMP variable, and `working-directory` uses the
+# expression, which is valid at step level.
 
 name: pages
 
@@ -37,10 +42,6 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # Job scope, not workflow scope: the `runner` context is not available in
-    # workflow-level env.
-    env:
-      QUARTZ: ${{ runner.temp }}/quartz
     steps:
       - uses: actions/checkout@v4
 
@@ -50,8 +51,8 @@ jobs:
 
       - name: Fetch Quartz outside the work tree
         run: |
-          git clone --depth 1 https://github.com/jackyzha0/quartz "$QUARTZ"
-          rm -rf "$QUARTZ/.git"
+          git clone --depth 1 https://github.com/jackyzha0/quartz "$RUNNER_TEMP/quartz"
+          rm -rf "$RUNNER_TEMP/quartz/.git"
 
       - name: Install Quartz dependencies
         working-directory: ${{ runner.temp }}/quartz
@@ -75,11 +76,11 @@ jobs:
 
       - name: Stage content and configuration
         run: |
-          rm -rf "$QUARTZ/content"
-          cp -R content "$QUARTZ/content"
-          cp quartz.config.yaml "$QUARTZ/quartz.config.yaml"
-          staged=$(find "$QUARTZ/content" -type f | wc -l)
-          echo "staged $staged files into $QUARTZ/content"
+          rm -rf "$RUNNER_TEMP/quartz/content"
+          cp -R content "$RUNNER_TEMP/quartz/content"
+          cp quartz.config.yaml "$RUNNER_TEMP/quartz/quartz.config.yaml"
+          staged=$(find "$RUNNER_TEMP/quartz/content" -type f | wc -l)
+          echo "staged $staged files"
           # Assert staging worked. Without this the build produces a shell of a
           # site and the failure surfaces two steps later with nothing in the log
           # explaining why.
@@ -94,8 +95,9 @@ jobs:
 
       - name: Verify the build produced a real site
         run: |
-          test -f "$QUARTZ/public/index.html" || { echo "::error::no index.html"; exit 1; }
-          pages=$(find "$QUARTZ/public" -name '*.html' | wc -l)
+          test -f "$RUNNER_TEMP/quartz/public/index.html" \
+            || { echo "::error::no index.html"; exit 1; }
+          pages=$(find "$RUNNER_TEMP/quartz/public" -name '*.html' | wc -l)
           echo "built $pages HTML pages"
           if [ "$pages" -lt 200 ]; then
             echo "::error::only $pages pages built, expected 200+ — build likely broken"
@@ -104,7 +106,7 @@ jobs:
 
       - name: Re-scan the rendered HTML
         run: |
-          if grep -rEl '/Users/[A-Za-z0-9._/-]' "$QUARTZ/public" --include='*.html' ; then
+          if grep -rEl '/Users/[A-Za-z0-9._/-]' "$RUNNER_TEMP/quartz/public" --include='*.html' ; then
             echo "::error::rendered HTML contains a local path"
             exit 1
           fi
