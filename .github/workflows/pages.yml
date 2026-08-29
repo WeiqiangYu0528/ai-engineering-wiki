@@ -1,8 +1,9 @@
-# Build the wiki with Quartz and deploy it to GitHub Pages.
+---
+# Build the wiki with Quartz, gate the built output, and deploy it to GitHub Pages.
 #
 # This repository holds only the *published* markdown. It is generated from a
 # private vault by a publish filter that withholds private and unverified pages
-# and strips local filesystem state. Nothing here is edited by hand.
+# and strips local filesystem state. Nothing in content/ is edited by hand.
 #
 # The site rebuilds itself on every push to main, so updating the wiki is a
 # single push of the `content/` directory — no local build step required.
@@ -18,6 +19,78 @@
 # available in job-level `env`, only in step-level fields. Scripts therefore use
 # the built-in $RUNNER_TEMP variable, and `working-directory` uses the
 # expression, which is valid at step level.
+#
+# ===========================================================================
+# THE GATES (spec .kiro/specs/wiki-site-experience task 12.2)
+# ===========================================================================
+#
+# Requirements 9.1, 9.4, 9.5, 10.2, 10.3, 10.4, 10.6, 15.5, 15.6 are facts about
+# HTML and JSON that only exist after `npx quartz build`, so they are checked
+# here rather than in the vault's `make check`. All of it runs in the build step,
+# against the same $RUNNER_TEMP tree, before a single byte is uploaded:
+#
+#   1. npx quartz build
+#   2. the build produced a real site           (index.html, 200+ pages)
+#   3. scripts/trim-search-index.mjs            9.1, 9.3, 9.5
+#   4. the same script a second time, asserting BYTE-IDENTICAL output — the real
+#      script measured against Property 28, which the vault suite can only assert
+#      of its Python reference
+#   5. scripts/check-built-site.mjs             2.2, 3.7, 5.10, 8.5, 9.3, 9.7,
+#                                               10.2-10.6, 11.1, 11.7, 11.10,
+#                                               11.11, 12.2, 12.4, 14.7
+#   6. scripts/check-styles.mjs                 11.4, 11.5, 11.6, 12.1, 12.6
+#   7. the retrieval floor on the trimmed index 9.4
+#
+# Two of those seven do not run today, and both say so loudly rather than going
+# quietly green:
+#
+#   * scripts/check-styles.mjs DOES NOT EXIST. Spec task 11.5 is optional and
+#     was skipped. Referencing it unguarded would make this gate red on every
+#     run, and dropping the step would lose the record that five requirements go
+#     unchecked. So the step tests for the file, warns when it is absent, and
+#     starts working the moment task 11.5 lands — no edit here.
+#
+#   * THE RETRIEVAL FLOOR CANNOT RUN ON THIS RUNNER. `retrieval_baseline.py`,
+#     `kb_lib.py` and the 20 hand-labelled questions live in the private vault,
+#     and `run()` loads a vault `wiki/` tree before it scores anything — a
+#     vendored copy of the script would not be enough, and a vendored copy of the
+#     vault's search policy is the duplication the design exists to avoid
+#     (Decision 3: one definition in kb_lib.py, shipped as .search-budget.json).
+#     So this workflow does not pretend to measure Requirement 9.4. It uploads
+#     the exact trimmed bytes as an artifact and prints the one command that
+#     measures them, so the authoritative figure is one vault command away
+#     instead of a claim nobody checked. Called out in the step summary of every
+#     run, deliberately, because the alternative is a green tick over an
+#     unmeasured requirement.
+#
+# EXIT-CODE POLICY. The three site scripts share one contract — 0 pass,
+# 1 failures, 2 could not run as designed, 3 no browser — and this workflow
+# treats every non-zero value as a failure, including 2 and 3:
+#
+#   2  means the gate did not run. A gate that could not run has verified
+#      nothing, so reading it as a pass would be the vacuous green the scripts
+#      were written to avoid. It usually means this file points somewhere wrong.
+#   3  means check-console.mjs found no browser. ubuntu-latest ships Google
+#      Chrome in PATH, so a 3 is a runner-image change worth a red X.
+#      --allow-missing-browser exists for local use and MUST NOT be passed here.
+#
+# check-built-site.mjs runs WITHOUT --strict-skips. Its two skippable checks —
+# a term that occurs only in the activity log (9.3) and a term in exactly one
+# title (9.7) — depend on what today's content happens to contain, not on
+# whether the site is correct, so a skip is not a regression and should not block
+# a deploy. It is still surfaced: the script reports RESULT=pass-with-skips and
+# the step turns that into a warning and a summary line. Add --strict-skips below
+# if you would rather the gate insist.
+#
+# THE FAVICON IS COPIED, NOT CONFIGURED (Requirement 12.4).
+# @quartz-community/favicon takes no options: its factory is `() => ({...})` and
+# the source path is hardcoded as joinSegments("quartz", "static", "icon.png"),
+# resolved against the build's working directory. A `favicon:` key in
+# quartz.config.yaml is ignored in silence. So the staging step copies this
+# repository's static/icon.png over $RUNNER_TEMP/quartz/quartz/static/icon.png
+# BEFORE the build, and check-built-site.mjs then follows the served
+# <link rel="icon"> and fails if it hashes to the stock Quartz icon. Move the
+# copy after the build and the gate goes red, which is the intended behaviour.
 
 name: pages
 
@@ -74,12 +147,17 @@ jobs:
           fi
           echo "content audit clean"
 
-      - name: Stage content and configuration
+      - name: Stage content, configuration, stylesheet and favicon
+        shell: bash
         run: |
-          rm -rf "$RUNNER_TEMP/quartz/content"
-          cp -R content "$RUNNER_TEMP/quartz/content"
-          cp quartz.config.yaml "$RUNNER_TEMP/quartz/quartz.config.yaml"
-          staged=$(find "$RUNNER_TEMP/quartz/content" -type f | wc -l)
+          set -euo pipefail
+          QUARTZ="$RUNNER_TEMP/quartz"
+
+          rm -rf "$QUARTZ/content"
+          cp -R content "$QUARTZ/content"
+          cp quartz.config.yaml "$QUARTZ/quartz.config.yaml"
+
+          staged=$(find "$QUARTZ/content" -type f | wc -l)
           echo "staged $staged files"
           # Assert staging worked. Without this the build produces a shell of a
           # site and the failure surfaces two steps later with nothing in the log
@@ -89,20 +167,249 @@ jobs:
             exit 1
           fi
 
-      - name: Build
-        working-directory: ${{ runner.temp }}/quartz
-        run: npx quartz build
+          # The search-budget manifest travels inside content/ as a dotfile, and
+          # `cp -R` carries it. Nothing in this repository's .gitignore
+          # (node_modules/, .quartz/, public/, .DS_Store) excludes it, so an
+          # absent manifest means the vault never staged it. Warn here, where the
+          # cause is visible; trim-search-index.mjs is what fails the run, with a
+          # message that lists every location it tried.
+          if [ -f "$QUARTZ/content/.search-budget.json" ]; then
+            echo "search budget manifest staged: $(wc -c <"$QUARTZ/content/.search-budget.json") bytes"
+          else
+            echo "::warning::content/.search-budget.json is missing — the trim step will fail; re-run the vault's publish step"
+          fi
 
-      - name: Verify the build produced a real site
+          # Overwrite Quartz's own two files, and assert each one existed first:
+          # Quartz compiles quartz/styles/custom.scss as a standalone module
+          # (quartz/plugins/emitters/componentResources.ts imports
+          # ../../styles/custom.scss) and the favicon emitter reads
+          # quartz/static/icon.png. If either path is ever renamed upstream, a
+          # blind `cp` would write a file nobody imports and the site would ship
+          # unstyled or stock-branded with every gate still green.
+          for target in quartz/styles/custom.scss quartz/static/icon.png ; do
+            if [ ! -f "$QUARTZ/$target" ]; then
+              echo "::error::$target is not in the Quartz checkout — upstream moved it, so copying over it would be a silent no-op"
+              exit 1
+            fi
+          done
+          cp custom.scss "$QUARTZ/quartz/styles/custom.scss"
+          cp static/icon.png "$QUARTZ/quartz/static/icon.png"
+
+          # Cheap proof the copies landed, since both failure modes are invisible
+          # in the built output until a gate catches them much later.
+          for pair in "custom.scss:$QUARTZ/quartz/styles/custom.scss" "static/icon.png:$QUARTZ/quartz/static/icon.png" ; do
+            src="${pair%%:*}"; dst="${pair#*:}"
+            if [ "$(sha256sum <"$src" | cut -d' ' -f1)" != "$(sha256sum <"$dst" | cut -d' ' -f1)" ]; then
+              echo "::error::$src did not reach $dst"
+              exit 1
+            fi
+          done
+          echo "staged custom.scss ($(wc -c <custom.scss) bytes) and static/icon.png (sha256 $(sha256sum <static/icon.png | cut -d' ' -f1))"
+
+      # One step on purpose: the build and every gate must see the same
+      # $RUNNER_TEMP tree, with nothing between them that could rewrite it. The
+      # ::group:: markers keep the log navigable, and the gates after the trim
+      # each record their own verdict so one run reports every problem rather
+      # than the first one.
+      - name: Build, trim the search index, and gate the built output
+        working-directory: ${{ runner.temp }}/quartz
+        shell: bash
         run: |
-          test -f "$RUNNER_TEMP/quartz/public/index.html" \
+          set -euo pipefail
+
+          WS="$GITHUB_WORKSPACE"
+          SITE="$RUNNER_TEMP/quartz/public"
+          INDEX="$SITE/static/contentIndex.json"
+          REPORTS="$RUNNER_TEMP/gate-reports"
+          BUDGET_BYTES=1000000
+          mkdir -p "$REPORTS"
+
+          summary() { printf '%s\n' "$*" >>"$GITHUB_STEP_SUMMARY"; }
+
+          # Exit codes are held in `rc`, never `status`: reproducing a CI failure
+          # means pasting these lines into a local shell, and `status` is a
+          # read-only alias for `$?` in zsh, which is the default shell on macOS.
+          #
+          # 0 pass · 1 failures · 2 could not run as designed · 3 no browser.
+          explain() {
+            case "$2" in
+              1) echo "::error::$1 found failures (exit 1)" ;;
+              2) echo "::error::$1 could not run as designed (exit 2) — a missing input or a wrong path in this workflow, not a site defect" ;;
+              3) echo "::error::$1 found no browser (exit 3) — nothing was verified, so this run says nothing about Requirement 15.5" ;;
+              *) echo "::error::$1 exited $2" ;;
+            esac
+          }
+
+          summary "## Site gates"
+          summary ""
+
+          echo "::group::npx quartz build"
+          npx quartz build
+          echo "::endgroup::"
+
+          # Before any gate reads the output: a build that found no input files
+          # emits a plausible-looking 51-page site, and every gate below would
+          # then report puzzling findings instead of the one fact that matters.
+          echo "::group::the build produced a real site"
+          test -f "$SITE/index.html" \
             || { echo "::error::no index.html"; exit 1; }
-          pages=$(find "$RUNNER_TEMP/quartz/public" -name '*.html' | wc -l)
+          pages=$(find "$SITE" -name '*.html' | wc -l)
           echo "built $pages HTML pages"
           if [ "$pages" -lt 200 ]; then
             echo "::error::only $pages pages built, expected 200+ — build likely broken"
             exit 1
           fi
+          summary "- Built **$pages** HTML pages."
+          echo "::endgroup::"
+
+          # ---- Requirements 9.1, 9.3, 9.5 ---------------------------------
+          # Fail-fast, unlike the read-only gates below: everything after this
+          # measures the trimmed artifact, so continuing past a failed trim would
+          # gate the wrong bytes.
+          echo "::group::trim the search index (Requirements 9.1, 9.3, 9.5)"
+          before=$(wc -c <"$INDEX")
+          rc=0
+          node "$WS/scripts/trim-search-index.mjs" "$INDEX" || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            explain "trim-search-index" "$rc"
+            exit "$rc"
+          fi
+          first=$(sha256sum "$INDEX" | cut -d' ' -f1)
+          after=$(wc -c <"$INDEX")
+          echo "contentIndex.json: $before -> $after bytes (budget $BUDGET_BYTES), sha256 $first"
+          summary "- Search index **$after bytes** after trimming, from $before, against a $BUDGET_BYTES byte budget."
+          echo "::endgroup::"
+
+          # ---- Property 28, against the real script ------------------------
+          # The vault suite asserts idempotence of the Python reference. This is
+          # the only place the shipped Node script is held to it, and it is worth
+          # asserting here because a second pass is exactly what a re-run of this
+          # workflow performs on a cached tree: compounding truncation would
+          # quietly shrink the Reader's search a little more on every run.
+          echo "::group::trimming twice is trimming once (Property 28)"
+          rc=0
+          node "$WS/scripts/trim-search-index.mjs" "$INDEX" || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            explain "trim-search-index (second pass)" "$rc"
+            exit "$rc"
+          fi
+          second=$(sha256sum "$INDEX" | cut -d' ' -f1)
+          if [ "$first" != "$second" ]; then
+            echo "::error::trimming twice changed the bytes — sha256 $first then $second, $(wc -c <"$INDEX") bytes now against $after before. Truncation is compounding, so re-running this workflow degrades search."
+            exit 1
+          fi
+          echo "byte-identical on the second pass: $second"
+          summary "- Trimming is idempotent: identical sha256 on a second pass."
+          echo "::endgroup::"
+
+          # Every gate from here on is read-only, so they all run and the step
+          # fails once at the end. A run that reports three problems is worth
+          # three runs that each report one.
+          failed=0
+
+          # ---- Requirements 10.2-10.4, 10.6 and fifteen more ---------------
+          echo "::group::check-built-site.mjs"
+          rc=0
+          node "$WS/scripts/check-built-site.mjs" "$SITE" \
+            --report "$REPORTS/check-built-site.json" \
+            | tee "$REPORTS/check-built-site.log" || rc=$?
+          if [ "$rc" -ne 0 ]; then
+            explain "check-built-site" "$rc"
+            failed=1
+            summary "- \`check-built-site.mjs\`: **FAILED** (exit $rc). See the log and the uploaded report."
+          else
+            summary "- \`check-built-site.mjs\`: passed. \`$(grep -m1 'RESULT=' "$REPORTS/check-built-site.log" || echo 'no RESULT line')\`"
+          fi
+          if grep -q 'RESULT=pass-with-skips' "$REPORTS/check-built-site.log" ; then
+            echo "::warning::check-built-site passed with skips — a check could not run against today's content, so some requirement went unchecked in this run"
+            summary "  - Some checks were skipped, so they verified nothing in this run. Pass \`--strict-skips\` to make that a failure."
+          fi
+          # A `partial` is neither a pass nor a skip: the check verified its
+          # precondition and said so, but the full claim is not observable from
+          # static files. search-title-rank (Requirement 9.7) is one — ranking
+          # happens in the Reader's browser. Surfaced so `RESULT=pass … partial=1`
+          # is never read as a whole requirement verified.
+          if grep -qE 'RESULT=[a-z-]+ .*partial=[1-9]' "$REPORTS/check-built-site.log" ; then
+            summary "  - $(grep -oE 'partial=[0-9]+' "$REPORTS/check-built-site.log" | head -1) check(s) reported *partial*: the precondition holds, the full claim is not observable from static files. See the log for which."
+          fi
+          echo "::endgroup::"
+
+          # ---- Requirements 11.4, 11.5, 11.6, 12.1, 12.6 -------------------
+          # Guarded, not omitted: spec task 11.5 is optional and was skipped, so
+          # the script does not exist yet. Add it and this starts checking with
+          # no change here.
+          echo "::group::check-styles.mjs"
+          if [ -f "$WS/scripts/check-styles.mjs" ]; then
+            rc=0
+            node "$WS/scripts/check-styles.mjs" "$WS/custom.scss" || rc=$?
+            if [ "$rc" -ne 0 ]; then
+              explain "check-styles" "$rc"
+              failed=1
+              summary "- \`check-styles.mjs\`: **FAILED** (exit $rc)."
+            else
+              summary "- \`check-styles.mjs\`: passed."
+            fi
+          else
+            echo "::warning::scripts/check-styles.mjs is absent (spec task 11.5, optional, skipped) — contrast, the explorer focus indicator, the 80-character measure and the no-hidden-header rule are UNCHECKED in this run"
+            summary "- \`check-styles.mjs\`: **not present**. Requirements 11.4, 11.5, 11.6, 12.1 and 12.6 are unchecked here; the stylesheet ships unverified. Write \`scripts/check-styles.mjs\` (spec task 11.5) to close this."
+          fi
+          echo "::endgroup::"
+
+          # ---- Requirement 9.4 ---------------------------------------------
+          # This runner cannot measure it, and the honest thing is to say so and
+          # hand over the bytes rather than print a number nobody computed. See
+          # the header comment for why vendoring the harness is not a fix: it
+          # needs kb_lib.py, a vault `wiki/` tree and 20 hand-labelled questions,
+          # none of which belong in a public content repository.
+          echo "::group::the retrieval floor on the trimmed index (Requirement 9.4)"
+          cp "$INDEX" "$REPORTS/contentIndex.trimmed.json"
+          echo "::warning::Requirement 9.4 is NOT measured in this run — the retrieval harness and its ground truth live in the private vault. The trimmed index is uploaded as an artifact so the floor can be measured there."
+          cat <<'MSG'
+          The authoritative measurement, run from the vault after downloading the
+          gate-reports artifact (the vault-body proxy in `make check` reads about
+          five points high, so this is the figure that decides Requirement 9.4):
+
+            python3 tools/retrieval_baseline.py \
+              --index-file <downloaded>/contentIndex.trimmed.json \
+              --assert-floor --no-report
+
+          Floors: recall@10 >= 90%, MRR >= 0.50.
+          MSG
+          summary "- Retrieval floor (Requirement 9.4): **not measured here.** The harness and its 20-question ground truth are in the private vault. \`contentIndex.trimmed.json\` ($(wc -c <"$INDEX") bytes) is in the \`site-gate-reports\` artifact; measure it with \`tools/retrieval_baseline.py --index-file … --assert-floor\` (recall@10 ≥ 90%, MRR ≥ 0.50)."
+          echo "::endgroup::"
+
+          if [ "$failed" -ne 0 ]; then
+            echo "::error::one or more site gates failed — nothing will be deployed"
+            summary ""
+            summary "**Result: failed.** Nothing was uploaded or deployed."
+            exit 1
+          fi
+          echo "every gate that could run, passed"
+
+      # Its own step: this is the only gate that depends on the runner image
+      # rather than on the site, and a red X here should be readable as "the
+      # browser" and not as "the build". It must run AFTER the trim — the search
+      # interaction it performs loads the trimmed index, so running it earlier
+      # would exercise bytes that never ship.
+      - name: Load a page sample in a real browser (Requirement 15.5)
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/gate-reports"
+          rc=0
+          # No --allow-missing-browser, ever: it turns exit 3 into a silent pass
+          # and this check into decoration. ubuntu-latest ships google-chrome.
+          node "$GITHUB_WORKSPACE/scripts/check-console.mjs" "$RUNNER_TEMP/quartz/public" \
+            --report "$RUNNER_TEMP/gate-reports/check-console.json" || rc=$?
+          if [ "$rc" -eq 3 ]; then
+            echo "::error::check-console found no browser (exit 3) — nothing was verified. Install one with browser-actions/setup-chrome@v1 rather than passing --allow-missing-browser."
+            exit 3
+          fi
+          if [ "$rc" -ne 0 ]; then
+            echo "::error::check-console exited $rc"
+            exit "$rc"
+          fi
+          printf -- '- `check-console.mjs`: passed.\n' >>"$GITHUB_STEP_SUMMARY"
 
       - name: Re-scan the rendered HTML
         run: |
@@ -111,6 +418,18 @@ jobs:
             exit 1
           fi
           echo "rendered output clean"
+
+      # Uploaded whether the gates passed or failed: the findings are the reason
+      # to look, and the trimmed index is the input to the Requirement 9.4
+      # measurement that cannot run on this runner.
+      - name: Upload the gate reports and the trimmed search index
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-gate-reports
+          path: ${{ runner.temp }}/gate-reports
+          if-no-files-found: warn
+          retention-days: 14
 
       - uses: actions/upload-pages-artifact@v3
         with:

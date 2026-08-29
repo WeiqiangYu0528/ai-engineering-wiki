@@ -1,9 +1,35 @@
 # yaml-language-server: $schema=./quartz/plugins/quartz-plugins.schema.json
+#
+# Site configuration for the AI Engineering Wiki (Quartz v5.0.0).
+#
+# Baseline is the file currently on `main` in WeiqiangYu0528/ai-engineering-wiki.
+# Task 11.2 of .kiro/specs/wiki-site-experience makes three edits, all inside
+# `plugins:`. `configuration:` and `layout:` are byte-identical to the baseline.
+#
+#   note-properties   enabled: false                       Req 12.2
+#   explorer          options: collapse + group counts     Req 5.9, 8.1-8.5
+#   favicon           a comment, and nothing else          Req 12.4
+#
+# Five settings below are load-bearing for the grouped published layout and are
+# deliberately untouched. Each is marked at its plugin:
+#
+#   crawl-links `markdownLinkResolution: shortest`   the reason there is no
+#                                                    wikilink rewriter (Req 5.6)
+#   alias-redirects                                  emits the wiki/<slug>.html
+#                                                    redirects (Req 5.8)
+#   breadcrumbs                                      names the group (Req 5.10)
+#   content-index                                    trimming is post-build,
+#                                                    not a config change (Req 9.1)
+#   analytics: null                                  no third-party analytics
+#                                                    (Req 14.7)
 configuration:
   pageTitle: AI Engineering Wiki
   pageTitleSuffix: ""
   enableSPA: true
   enablePopovers: true
+  # Requirement 14.7: no third-party analytics, ever. `scripts/check-built-site.mjs`
+  # loads a page sample and fails on a request to any known analytics host, so
+  # this is asserted against the served bytes and not only declared here.
   analytics: null
   locale: en-US
   baseUrl: weiqiangyu0528.github.io/ai-engineering-wiki
@@ -72,6 +98,12 @@ plugins:
     layout:
       position: right
       priority: 30
+  # DO NOT CHANGE `markdownLinkResolution`. `shortest` resolves a bare basename
+  # across directories, which is the whole reason the publish pipeline can move
+  # pages into <domain>/<kind>/ without rewriting a single wikilink. The
+  # pipeline pays for it with a basename-uniqueness invariant it fails the build
+  # on (`group_collisions`). Set this to `absolute` or `relative` and every
+  # cross-group link in 279 pages breaks at once.
   - source: "@quartz-community/crawl-links"
     enabled: true
     options:
@@ -108,13 +140,37 @@ plugins:
     enabled: true
   - source: "@quartz-community/explicit-publish"
     enabled: false
+  # DO NOT DISABLE. Requirement 5.8's redirects are this plugin reading the
+  # `aliases:` entry that tools/publish.py appends to the *published copy* of
+  # every page (`wiki/<slug>`, the page's pre-grouping URL). It emits
+  # wiki/<slug>.html with a meta-refresh, a canonical link and robots noindex.
+  # There is no second emitter; turn this off and every previously published URL
+  # 404s.
   - source: "@quartz-community/alias-redirects"
     enabled: true
+  # Unchanged. Requirement 9.1's byte budget is met after the build, by
+  # scripts/trim-search-index.mjs rewriting static/contentIndex.json against
+  # .search-budget.json. Nothing here can express a per-page-type content limit,
+  # so nothing here is asked to.
   - source: "@quartz-community/content-index"
     enabled: true
     options:
       enableSiteMap: true
       enableRSS: true
+  # Requirement 12.4 is satisfied here by *nothing*, and that is deliberate.
+  #
+  # This plugin accepts no options. Its factory is `() => ({ ... })` and the
+  # source path is hardcoded as `joinSegments("quartz", "static", "icon.png")`.
+  # A `favicon:` key or an `options:` block on this entry would be ignored
+  # silently, which is worse than failing, because the stock icon would ship and
+  # the config would claim otherwise.
+  #
+  # The project icon is installed by the workflow instead: task 12.2 copies this
+  # repository's `static/icon.png` over
+  # `$RUNNER_TEMP/quartz/quartz/static/icon.png` *before* `npx quartz build`.
+  # scripts/check-built-site.mjs then asserts the served favicon resolves and
+  # differs from the Quartz default (sha256 532d053e33c2c6bd...), so a workflow
+  # that loses the copy step fails the gate rather than quietly regressing.
   - source: "@quartz-community/favicon"
     enabled: true
   - source: "@quartz-community/og-image"
@@ -129,8 +185,113 @@ plugins:
     enabled: true
   - source: "@quartz-community/tag-page"
     enabled: true
+  # Requirements 5.9 and 8.1 through 8.5. Four things to know before editing.
+  #
+  # ORDERING IS NOT CONFIGURED HERE, ON PURPOSE. Requirement 8.2 wants concept
+  # pages ahead of reading notes. The default comparator sorts folders before
+  # files and then by display name, and the publish pipeline names the kind
+  # directories `concepts` < `entities` < `sources`, so alphabetical order *is*
+  # the required order. No `sortFn` is supplied, which means the ordering is a
+  # fact about directory names and survives any client that ignores these
+  # options. `mapFn` below appends its count as a suffix for exactly this
+  # reason: a suffix cannot reorder labels whose prefixes already differ.
+  #
+  # The one way to break that: the comparator sorts on *display name*, and a
+  # kind directory falls back to its slug segment only because no page sits at
+  # `<domain>/<kind>/index.md`. Add one, and its `title` becomes the label and
+  # decides the position. Domain folders already work this way by design — their
+  # label is the Map_Page title — which is fine, because Requirement 8.2 is
+  # about order *within* a domain.
+  #
+  # GROUPING likewise comes from directories, not from options. The client
+  # builds its trie with `insert(entry.slug.split("/"), ...)` and marks a node a
+  # folder only while descending a slug segment, so `<domain>/<kind>/<slug>` is
+  # what puts the 160 reading notes in their own group (Requirement 8.1).
+  #
+  # LABELS come from frontmatter `title`: the trie's `displayName` getter
+  # prefers `data.title` over the slug segment, and a domain folder takes its
+  # label from the Map_Page at `<domain>/index.md`. That is why no published
+  # title carries a `source-` or `moc-` prefix and why Requirements 8.3 and 8.4
+  # need no configuration.
+  #
+  # `folderClickBehavior: collapse` IS a change from the default `link`, and it
+  # is a trade. Under `link` the client replaces `<button class="folder-button">`
+  # with an `<a>` at render time and the only collapse control left is a bare
+  # `<svg>`, which no keyboard can reach. Requirement 8.5 asks for a real
+  # button and Requirement 11.6 needs something focusable to carry the
+  # `:focus-visible` rule, so `collapse` it is. The cost: a domain's folder
+  # label no longer links to its Map_Page. The breadcrumb (Requirement 5.10),
+  # the Landing_Page entry paths and the catalog all still reach it.
   - source: "@quartz-community/explorer"
     enabled: true
+    options:
+      # Requirement 8.5. Also the client's hardcoded default: the inline script
+      # reads saved state as `state[slug] !== undefined ? state[slug] : true`
+      # and never looks at this value, so in v5.0.0 this line documents the
+      # intent rather than causing it. Written out so a future version that does
+      # read it agrees with what the Reader already gets.
+      folderDefaultState: collapsed
+      # See the note above. This one is read: the client renders it as
+      # `data-behavior` and branches on it both when building a folder row and
+      # when handling a click.
+      folderClickBehavior: collapse
+      # The documented default, restated. In v5.0.0 the inline script applies
+      # filter -> map -> sort unconditionally and ignores this array; it is
+      # serialised into `data-data-fns` and never read back. Kept because map
+      # must run before sort for the count suffix to be sorted on, and a future
+      # client that honours the field should honour that order.
+      order:
+        - filter
+        - map
+        - sort
+      # Requirement 5.9: every group states how many pages it holds.
+      #
+      # This is a function *source string*, which works because the component
+      # serialises its options with `opts.mapFn?.toString()` -- the identity on a
+      # string -- and the client rebuilds it with
+      # `new Function("node", "(" + src + ")(node)")`. The plugin schema types
+      # `options` as an open object, so a string where a function is expected
+      # passes validation. Verified against the Quartz v5.0.0 client bundle and
+      # exercised against a faithful reimplementation of its trie.
+      #
+      # Counts leaf pages in the subtree, so a domain reports its own total and
+      # each kind directory reports its own. Folder nodes are not counted:
+      # a domain's Map_Page *is* the folder node rather than a child of it, so
+      # counting folders would report the index page as one of its own entries.
+      #
+      # Appending is not cumulative. `R()` rebuilds the trie from
+      # contentIndex.json on every `nav` and `render` event, so each build
+      # starts from fresh nodes and appends exactly once.
+      #
+      # Every access is guarded and nothing is logged, because both failure
+      # modes are expensive: a throw inside `map` is caught by the client's
+      # trie builder, which returns null and renders an empty Explorer, and a
+      # console write fails scripts/check-console.mjs.
+      #
+      # FALLBACK, if this ever stops working: move the count into each
+      # Map_Page's `title` in tools/build_index.py ("LLM Fundamentals (84)")
+      # and delete this option. The explorer already prefers `title` over the
+      # slug, so the labels read the same with no client capability involved.
+      mapFn: |-
+        (node) => {
+          if (!node || node.isFolder !== true) return
+          const segments = node.slugSegments
+          if (!Array.isArray(segments) || segments.length === 0) return
+          const tally = (branch) => {
+            let total = 0
+            const kids = Array.isArray(branch.children) ? branch.children : []
+            for (const kid of kids) {
+              if (!kid) continue
+              if (kid.isFolder === true) total += tally(kid)
+              else if (kid.data) total += 1
+            }
+            return total
+          }
+          const count = tally(node)
+          if (count === 0) return
+          const label = node.displayName || node.slugSegment || ''
+          node.displayName = label + ' (' + count + ')'
+        }
     layout:
       position: left
       priority: 50
@@ -184,6 +345,10 @@ plugins:
       position: left
       priority: 35
       group: toolbar
+  # DO NOT DISABLE. This is all of Requirement 5.10: the breadcrumb is what
+  # names the domain and the kind on every page, and under
+  # `folderClickBehavior: collapse` it is also the Reader's link back up to a
+  # domain's Map_Page.
   - source: "@quartz-community/breadcrumbs"
     enabled: true
     layout:
@@ -223,8 +388,20 @@ plugins:
     enabled: true
     options: {}
     order: 50
+  # Disabled for Requirement 12.2. This plugin rendered a `description` / `tags`
+  # / `aliases` properties table above every page body -- build output presented
+  # as content. The Page_Header that tools/publish.py injects replaces it and
+  # says more: the summary in prose, a trust badge naming who checked the page
+  # and when, and the Relationship_Panel. Two blocks of metadata above one body
+  # would be the worst of both.
+  #
+  # scripts/check-built-site.mjs asserts no properties-table markup survives
+  # anywhere in the built output, so this cannot regress silently.
+  #
+  # `options` and `layout` are left in place: re-enabling is a one-word change,
+  # and deleting them would lose the record of what was rendered before.
   - source: "@quartz-community/note-properties"
-    enabled: true
+    enabled: false
     options:
       includeAll: false
       includedProperties:
@@ -240,6 +417,12 @@ plugins:
       position: beforeBody
       priority: 15
       display: all
+  # Unchanged, and required by task 10.2: the publish pipeline writes
+  # `unlisted: true` into the published frontmatter of the five Catalog_Pages.
+  # This plugin only copies that value onto `file.data`; the content-index
+  # emitter is what skips the entry. The page is still emitted and still
+  # reachable by URL, which is why Requirement 9.6 asks the Landing_Page and the
+  # footer to link it -- `unlisted` also removes it from the Explorer.
   - source: "@quartz-community/unlisted-pages"
     enabled: true
     options: {}
