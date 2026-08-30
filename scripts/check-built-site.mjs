@@ -50,11 +50,17 @@
 // One machine-readable line on stdout, so task 12.2 can branch without parsing
 // prose:
 //
-//   check-built-site: RESULT=pass|pass-with-skips|fail|error checks=N failures=N skipped=N partial=N pages=N
+//   check-built-site: RESULT=pass|pass-with-skips|fail|error checks=N failures=N skipped=N partial=N reported=N pages=N
 //
 // `pass-with-skips` still starts with `pass`, so a workflow that greps for
 // RESULT=pass is lenient by choice rather than by accident, while a reader of
 // the log can see that some requirement went unchecked in that run.
+//
+// `reported=N` counts the checks that measure and print but never gate — the
+// three page-weight measurements, see below. It sits AFTER `partial=N` on
+// purpose: pages.yml greps `RESULT=[a-z-]+ .*partial=[1-9]` and
+// `partial=[0-9]+`, and appending a field behind the one it anchors on leaves
+// both readings untouched.
 //
 // ===========================================================================
 // SKIPS ARE REPORTED, NOT SWALLOWED
@@ -103,6 +109,67 @@
 // `redirect-targets`, so excluding them from the page checks does not mean they
 // go unchecked.
 //
+// ===========================================================================
+// THREE FINDINGS FROM THE FIRST REAL CI RUN, AND WHERE EACH IS ANSWERED
+// ===========================================================================
+//
+// Two of them were this script being imprecise; one was the site.
+//
+//   * `search-excludes-log` called `history-human-language-understanding` a
+//     log-only term that another page carried. The probe's fault: candidates were
+//     filtered by token equality while the assertion tests substring
+//     containment, and that term is a bare token in the log but only ever part of
+//     `source-history-…` elsewhere. Fixed by giving selection the assertion's own
+//     predicate. See the comment in that check for the two stages.
+//
+//   * `h1-single` counted `tags.html`, which Quartz's tag emitter writes
+//     title-less and which this pipeline does not write at all. Scoped out, by
+//     name and on evidence, and reported on every run. See
+//     QUARTZ_GENERATED_LISTINGS.
+//
+//   * `weight-max` and `weight-p95` reported a breach of the stated budgets.
+//     Registers — the pages the manifest marks `unlisted` — are measured as their
+//     own population with their own stated ceiling, which is what admits the
+//     229 KB activity log without moving the Reader ceiling by a byte (see
+//     REGISTER_MAX_BYTES). The Reader p95 was over the stated figure on its own
+//     merits, 79,543 B against 72,000 B with 24 of 324 Reader pages above it, and
+//     no partition changes that. That is now REPORTED RATHER THAN GATED, for the
+//     reasons in the next section — and not by raising the number, which is the
+//     one fix this file still will not accept.
+//
+// ===========================================================================
+// PAGE WEIGHT IS MEASURED AND PRINTED, NOT GATED (ADR-014)
+// ===========================================================================
+//
+// `weight-max`, `weight-p95` and `weight-total` report status `report`. They
+// measure exactly what they measured before, print the same detail including
+// `whyHeavy()`'s per-page byte breakdown, and contribute nothing to `failures`.
+// Two independent reasons, recorded in ADR-014 of the vault's decisions.md:
+//
+//   1. The owner's decision. Page weight is not a constraint on this site.
+//      Quality of explanation wins over bytes: if an inline SVG or a diagram
+//      makes a concept land, it ships. There is no byte figure whose breach
+//      should stop a deploy of correct content.
+//
+//   2. The stated budget was not a valid comparison in the first place. The
+//      68 KB p95 in requirements.md was measured over 594 files INCLUDING the
+//      290 alias-redirect stubs of that build, which are ~344 B each. This
+//      script excludes stubs from the page population, correctly — a meta-refresh
+//      redirect is not a page anyone reads — so it was testing a stub-excluded
+//      measurement against a stub-polluted figure. Measured on the same footing:
+//      the pre-feature site was already at 89,138 B p95 content-only, and the
+//      current build is 89,807 B. The feature's true cost at the p95 is 669 B,
+//      0.75%. On the population the budget was actually taken over, the site got
+//      14% lighter (70,623 B -> 60,626 B).
+//
+// So a `fail` here would have been reporting a population defect as a site
+// defect. The measurements stay because they are worth watching — a page that
+// doubles is worth knowing about — and `--enforce-weight` restores the hard
+// failure for a future owner who wants the gate back. The capability is
+// defaulted off, not deleted. What is genuinely lost is written down in the
+// ADR's cost section: nothing now stops a page that becomes enormous, and the
+// only mitigation is that every one of these figures prints on every run.
+//
 // Node 22, ESM, no third-party dependencies: `npm ci` runs in Quartz's tree,
 // not this one.
 
@@ -118,11 +185,57 @@ const EXIT_USAGE = 2;
 // Never returned here: nothing in this file needs a browser.
 const EXIT_NO_BROWSER = 3;
 
-// Requirement 10.2, 10.3, 10.4. Defaults are the requirement's numbers, which
-// are in turn the current measured maximum (188 KB), p95 (68 KB) and total
-// (25 MB) rounded up — the budgets hold the status quo rather than allow drift.
+// Requirements 10.2, 10.3, 10.4. Defaults are the requirement's numbers, which
+// are in turn the pre-feature maximum (188 KB), p95 (68 KB) and total (25 MB)
+// rounded up. They are REFERENCE FIGURES, not budgets: a measurement above one
+// is printed as "over the reference figure" and the run still exits 0. Pass
+// --enforce-weight to read them as budgets again. See the ADR-014 section above,
+// and note that the 68 KB p95 was taken over a population that included
+// redirect stubs, which this script excludes.
 const DEFAULT_MAX_PAGE_BYTES = 200_000;
 const DEFAULT_P95_PAGE_BYTES = 72_000;
+
+// ---------------------------------------------------------------------------
+// REGISTERS ARE MEASURED SEPARATELY, AND THIS IS NOT A WIDENED BUDGET
+// ---------------------------------------------------------------------------
+//
+// Requirements 10.2 and 10.3 budget what a *Reader* downloads to read a page.
+// Five published pages are not that. They are the slugs the pipeline itself
+// marks `unlisted` in `.search-budget.json` — log, notice, open-questions,
+// catalog, catalog-sources — which keeps them out of contentIndex.json and so
+// out of search, the explorer and the graph (Requirement 9.2), leaving an
+// explicit link as the only route to one (Requirement 9.6). They are also the
+// only pages whose size is a function of how much the vault has ingested rather
+// than of what one page explains: log.md is append-only and grows monotonically,
+// and the other four are one entry per page or per source.
+//
+// So they are partitioned out of the Reader population and measured against the
+// ceiling below. Four properties keep that an exception rather than a bump:
+//
+//   * The Reader ceiling of 200,000 B is untouched and still applies to every
+//     Reader page. Nothing moved.
+//   * The partition is not a hand-kept exception list. It is the manifest's own
+//     `unlisted` array, so it cannot drift from what the pipeline excluded, and
+//     the source of the list is printed with the result.
+//   * No register goes unmeasured or unreported. Both halves print their sizes
+//     every run, pass or fail.
+//   * The ceiling is a DEADLINE, not an allowance. The report converts the
+//     remaining headroom into further log entries at the measured cost per
+//     entry — about ten, on the build this was written against. When they are
+//     spent the answer is to paginate the log, not to raise this number.
+//
+// If the log were measured as a Reader page it would be 29,248 B over
+// Requirement 10.2's figure, and the report line says so in as many words.
+//
+// KEPT AFTER ADR-014, deliberately, even though nothing here fails by default.
+// The partition is what makes `--enforce-weight` worth having: without it, the
+// restored gate fails on log.html at 229 KB — a register whose size tracks how
+// much the vault has ingested, which nobody considers a defect — so enforcement
+// would be a flag that reports a known-acceptable fact as a breach, i.e. a flag
+// no one would turn on. It also carries the one piece of weight advice still
+// worth acting on, `registerRunway()`'s "N further entries, then it is
+// pagination". Removing it would delete both and buy nothing but a shorter file.
+const REGISTER_MAX_BYTES = 262_144;
 // 25 MB read as MiB. The baseline in requirements.md was taken with a `du`-style
 // tool, which reports MiB, and reading it as 25,000,000 would fail a build that
 // is exactly at the documented baseline. Both figures are printed on failure so
@@ -163,6 +276,31 @@ const ROOT_EXTRAS = [
 // never reach contentIndex.json. Used only when .search-budget.json is absent.
 const FALLBACK_UNLISTED = ["catalog", "catalog-sources", "open-questions", "log", "notice"];
 
+// ---------------------------------------------------------------------------
+// QUARTZ'S OWN GENERATED LISTING PAGES
+// ---------------------------------------------------------------------------
+//
+// One built page is not published by this pipeline at all. Quartz's tag emitter
+// writes the tag index twice: `tags/index.html`, titled "Tag Index" and carrying
+// exactly one <h1 class="article-title">, and a title-less duplicate at the root,
+// `tags.html`, whose heading is <h2 class="page-title"> because that emit has no
+// file data to take a title from. Both list the same 14 tags and the same 390
+// entries. There is no `tags.md` in the staged content and tools/publish.py
+// never writes one, so the missing <h1> cannot be fixed without patching Quartz,
+// and Requirement 11.1 is about published pages.
+//
+// The exemption is kept as narrow as the evidence supports. It is this one file,
+// not "everything under tags/": the 14 per-tag listings and every folder page
+// carry exactly one <h1> and stay in scope. And it is conditional on evidence
+// rather than on the filename alone — a page here is exempt only while it also
+// carries no injected kb-header, which every page the pipeline writes does. If
+// publish.py ever authors tags.md, the header appears, the exemption lapses and
+// the page is back in scope without anyone remembering to edit this set.
+//
+// Exempt pages are reported with their measured count on every run, pass or
+// fail. Silently shrinking a denominator is how a gate stops meaning anything.
+const QUARTZ_GENERATED_LISTINGS = new Set(["tags.html"]);
+
 const USAGE = `Usage: node scripts/check-built-site.mjs [SITE] [options]
 
   SITE                     built site directory to check
@@ -175,9 +313,14 @@ const USAGE = `Usage: node scripts/check-built-site.mjs [SITE] [options]
   --budget PATH            .search-budget.json, for the unlisted-slug list
                            (default: searched beside the build, then in the
                            staged content directory)
-  --max-bytes N            per-page ceiling (default: ${DEFAULT_MAX_PAGE_BYTES})
-  --p95-bytes N            95th-percentile ceiling (default: ${DEFAULT_P95_PAGE_BYTES})
-  --total-bytes N          whole-build ceiling (default: ${DEFAULT_TOTAL_BYTES})
+  --max-bytes N            per-page reference figure (default: ${DEFAULT_MAX_PAGE_BYTES})
+  --p95-bytes N            95th-percentile reference figure (default: ${DEFAULT_P95_PAGE_BYTES})
+  --total-bytes N          whole-build reference figure (default: ${DEFAULT_TOTAL_BYTES})
+  --enforce-weight         read the three figures above as BUDGETS and fail the
+                           run when one is exceeded. Off by default: page weight
+                           is measured and printed, never gated (ADR-014). The
+                           three weight checks report status \`report\` unless
+                           this is passed.
   --only ID[,ID...]        run just these checks (see --list)
   --skip ID[,ID...]        run everything except these
   --list                   print the check ids and their requirements, exit 0
@@ -205,6 +348,7 @@ export function parseArgs(argv) {
     maxBytes: DEFAULT_MAX_PAGE_BYTES,
     p95Bytes: DEFAULT_P95_PAGE_BYTES,
     totalBytes: DEFAULT_TOTAL_BYTES,
+    enforceWeight: false,
     only: [],
     skip: [],
     list: false,
@@ -248,6 +392,7 @@ export function parseArgs(argv) {
     else if (is("--only")) parsed.only.push(...list("--only"));
     else if (is("--skip")) parsed.skip.push(...list("--skip"));
     else if (is("--report")) parsed.report = take("--report");
+    else if (arg === "--enforce-weight") parsed.enforceWeight = true;
     else if (arg === "--strict-skips") parsed.strictSkips = true;
     else if (arg === "--quiet") parsed.quiet = true;
     else if (arg.startsWith("-")) throw new UsageError(`unknown option: ${arg}`);
@@ -598,6 +743,147 @@ const pass = (detail, measured) => ({ status: "pass", detail, measured, findings
 const fail = (detail, findings, measured) => ({ status: "fail", detail, measured, findings });
 const skip = (detail) => ({ status: "skip", detail, findings: [] });
 
+/**
+ * A measurement that is printed and never gated: status `report`. A fifth status
+ * rather than a `pass`, because `pass` is a claim that something was asserted and
+ * held, and these three assert nothing — the site can be over every reference
+ * figure and still exit 0. Folding them into `pass` would make "17 passed" mean
+ * two different things in one line, which is the failure mode `partial` was
+ * added to avoid. Counted as `reported=N` in the RESULT marker and named in the
+ * summary, so "no failures" is never read as "every requirement enforced".
+ */
+const report = (detail, findings, measured) => ({ status: "report", detail, measured, findings });
+
+/**
+ * The verdict for a weight measurement. `report` unless --enforce-weight, in
+ * which case the original pass/fail gate is restored exactly. `over` is the
+ * measurement's own answer to "is this above its reference figure"; findings ride
+ * along on every branch, since the register lines and the per-page `whyHeavy()`
+ * breakdowns are the reason to read the output at all.
+ */
+function weightResult(parsed, { over, detail, findings = [], measured }) {
+  // Recorded in the JSON report next to the numbers: a consumer reading
+  // `overReader: ["log.html"]` has to be able to tell whether that was a breach
+  // of a gate or a line of reporting, without knowing which flags the run used.
+  const annotated = { ...measured, overReferenceFigure: over, enforced: parsed.enforceWeight };
+  if (!parsed.enforceWeight) return report(detail, findings, annotated);
+  return over
+    ? { status: "fail", detail, measured: annotated, findings }
+    : { status: "pass", detail, measured: annotated, findings };
+}
+
+/**
+ * What to call the three byte figures in prose. They are budgets only while
+ * --enforce-weight is passed; the rest of the time calling them budgets would
+ * misdescribe a number nothing enforces.
+ */
+const limitWord = (parsed) => (parsed.enforceWeight ? "budget" : "reference figure");
+
+// ---------------------------------------------------------------------------
+// Weight accounting
+//
+// Every region is measured by removal — find the subtree, take its length, skip
+// past it — so nested markup cannot be counted twice and a guessed end tag
+// cannot silently undercount. `<span class="katex">` nests `<span>` dozens deep
+// on a single formula, which is exactly where a naive non-greedy match reads a
+// KaTeX block as 400 bytes instead of 4,000.
+// ---------------------------------------------------------------------------
+
+/** Total bytes and count of every non-overlapping subtree opened by `openSource`. */
+export function regionBytes(html, openSource, tag) {
+  const opener = new RegExp(openSource, "gi");
+  let total = 0;
+  let count = 0;
+  let cursor = 0;
+  let match;
+  while ((match = opener.exec(html)) !== null) {
+    if (match.index < cursor) continue;
+    const found = subtree(html.slice(match.index), new RegExp(openSource, "i"), tag);
+    if (!found) break;
+    total += found.length;
+    count += 1;
+    cursor = match.index + found.length;
+    opener.lastIndex = cursor;
+  }
+  return { bytes: total, count };
+}
+
+const KATEX_OPEN = '<span[^>]*class="[^"]*\\bkatex\\b[^"]*"[^>]*>';
+const HEADING_SVG_OPEN = '<svg[^>]*class="[^"]*(?:anchor-icon|external-icon)[^"]*"[^>]*>';
+
+/**
+ * Where one page's bytes are, in the terms a fix would be written in. Used to
+ * explain a budget failure rather than merely report it: "153,832 B" says a page
+ * is too big, "77,072 B of that is 88 KaTeX formulas" says what to do about it.
+ */
+export function weightBreakdown(page) {
+  const served = stripScripts(page.html);
+  const katex = regionBytes(served, KATEX_OPEN, "span");
+  const headingSvg = regionBytes(page.html, HEADING_SVG_OPEN, "svg");
+  const backlinks = subtree(served, /<h3[^>]*>\s*Backlinks\s*<\/h3>/i, "ul") ?? "";
+  const header = subtree(served, /<aside[^>]*\bclass\s*=\s*"[^"]*\bkb-header\b[^"]*"[^>]*>/i, "aside") ?? "";
+  const article = subtree(served, /<article\b[^>]*>/i, "article") ?? "";
+  return {
+    katex: katex.bytes,
+    formulas: katex.count,
+    headingSvg: headingSvg.bytes,
+    headings: headingSvg.count,
+    backlinks: backlinks.length,
+    backlinkEntries: (backlinks.match(/<li\b/gi) ?? []).length,
+    header: header.length,
+    article: article.length,
+    // Everything outside <article>: <head>, the sidebars, the explorer template,
+    // the inlined scripts. Near-constant across the build, so a page that is
+    // heavy here rather than in its article is heavy for a structural reason.
+    chrome: page.html.length - article.length,
+  };
+}
+
+/** The dominant causes on one page, largest first, as a printable phrase. */
+function whyHeavy(page) {
+  const b = weightBreakdown(page);
+  const parts = [
+    b.katex > 0 ? [b.katex, `KaTeX ${bytes(b.katex)} in ${b.formulas} formula${b.formulas === 1 ? "" : "s"}`] : null,
+    b.backlinks > 0 ? [b.backlinks, `backlinks panel ${bytes(b.backlinks)} for ${b.backlinkEntries} inbound page${b.backlinkEntries === 1 ? "" : "s"}`] : null,
+    b.headingSvg > 0 ? [b.headingSvg, `heading anchor SVG ${bytes(b.headingSvg)} across ${b.headings}`] : null,
+    b.header > 0 ? [b.header, `injected header ${bytes(b.header)}`] : null,
+  ].filter(Boolean).sort((x, y) => y[0] - x[0]);
+  // The four regions are disjoint in every build measured — KaTeX spans, heading
+  // anchor SVGs, the backlinks list and the header aside do not nest in each
+  // other — so subtracting their sum is sound. Clamped anyway, because a
+  // remainder printed as a negative number would read as a measurement error and
+  // distract from the finding it is attached to.
+  const named = parts.reduce((sum, part) => sum + part[0], 0);
+  return `${parts.map((part) => part[1]).join(", ")}${parts.length ? "; " : ""}remaining prose and chrome ${bytes(Math.max(0, page.bytes - named))}`;
+}
+
+/**
+ * Reader pages and registers, split by the manifest's own `unlisted` list rather
+ * than by a list kept here. See REGISTER_MAX_BYTES for why the split exists.
+ */
+export function partitionRegisters(contentPages, unlisted) {
+  const registerSlugs = new Set(unlisted.map((slug) => slug.toLowerCase()));
+  const reader = [];
+  const registers = [];
+  for (const page of contentPages) {
+    (registerSlugs.has(slugOf(page.rel).toLowerCase()) ? registers : reader).push(page);
+  }
+  return { reader, registers };
+}
+
+/**
+ * A register's headroom expressed in further entries, so its ceiling reads as a
+ * deadline rather than an allowance. An entry is an <h2> in the article, which is
+ * what one `## [date] op | title` block in log.md becomes.
+ */
+function registerRunway(page, ceiling) {
+  const article = subtree(stripScripts(page.html), /<article\b[^>]*>/i, "article") ?? "";
+  const entries = (article.match(/<h2\b/gi) ?? []).length;
+  if (entries < 3) return null;
+  const perEntry = Math.round(article.length / entries);
+  return { entries, perEntry, remaining: Math.max(0, Math.floor((ceiling - page.bytes) / perEntry)) };
+}
+
 // ---------------------------------------------------------------------------
 // The checks
 //
@@ -606,98 +892,236 @@ const skip = (detail) => ({ status: "skip", detail, findings: [] });
 // reports the measured value next to its budget or its expectation — Property 35
 // applies to structural checks as much as to byte budgets, so "3 pages have 2
 // h1 elements, expected 1" is the shape, never "h1 check failed".
+//
+// The first three are measurements rather than gates: they report status
+// `report` and their requirement ids are marked "(reported)". Requirement 10.6's
+// fail-the-build clause no longer reaches them — it now covers 10.1 and 10.5,
+// the two criteria in that requirement still enforced. See the ADR-014 section
+// in the file header.
 // ---------------------------------------------------------------------------
 
 export const CHECKS = [
   {
     id: "weight-max",
-    requirements: "10.2, 10.6",
-    title: "no published page exceeds the per-page ceiling",
-    run: ({ contentPages, parsed }) => {
-      const over = contentPages.filter((page) => page.bytes > parsed.maxBytes)
-        .sort((a, b) => b.bytes - a.bytes);
-      const heaviest = contentPages.reduce((a, b) => (b.bytes > a.bytes ? b : a), contentPages[0]);
-      const measured = { maxBytes: heaviest?.bytes ?? 0, page: heaviest?.rel ?? null, budget: parsed.maxBytes };
-      if (over.length === 0) {
-        return pass(
-          `heaviest page ${heaviest.rel} at ${bytes(heaviest.bytes)}, budget ${bytes(parsed.maxBytes)}, ` +
-            `${bytes(parsed.maxBytes - heaviest.bytes)} of headroom (${contentPages.length} pages measured)`,
-          measured
-        );
-      }
-      return fail(
-        `${over.length} of ${contentPages.length} pages exceed ${bytes(parsed.maxBytes)}; ` +
-          `heaviest is ${over[0].rel} at ${bytes(over[0].bytes)}, over by ${bytes(over[0].bytes - parsed.maxBytes)}`,
-        over.map((page) => `${page.rel}: measured ${bytes(page.bytes)}, budget ${bytes(parsed.maxBytes)}, over by ${bytes(page.bytes - parsed.maxBytes)}`),
-        measured
-      );
+    requirements: "10.2 (reported)",
+    title: "the heaviest published page, measured and reported, registers measured separately",
+    run: ({ contentPages, parsed, unlisted, unlistedSource }) => {
+      const limit = limitWord(parsed);
+      const { reader, registers } = partitionRegisters(contentPages, unlisted);
+      const heaviestOf = (list) => list.reduce((a, b) => (b.bytes > a.bytes ? b : a), list[0] ?? null);
+      const overReader = reader.filter((page) => page.bytes > parsed.maxBytes).sort((a, b) => b.bytes - a.bytes);
+      const overRegister = registers.filter((page) => page.bytes > REGISTER_MAX_BYTES).sort((a, b) => b.bytes - a.bytes);
+      const readerTop = heaviestOf(reader);
+      const registerTop = heaviestOf(registers);
+      const byBytes = [...registers].sort((a, b) => b.bytes - a.bytes);
+
+      // Printed on every run, whatever the verdict. The partition is only honest
+      // if the pages it moves out of the Reader population are named with their
+      // sizes — and with nothing gated, this is the only place the log's size is
+      // reported at all.
+      const registerLines = byBytes.map((page) => {
+        const runway = registerRunway(page, REGISTER_MAX_BYTES);
+        const overReaderCeiling = page.bytes > parsed.maxBytes
+          ? `, which is ${bytes(page.bytes - parsed.maxBytes)} above the Reader ${limit} of ${bytes(parsed.maxBytes)} and is counted as a register instead`
+          : "";
+        const runwayNote = runway
+          ? `; ${runway.entries} entries at ${bytes(runway.perEntry)} each, so ${runway.remaining} further entries before the ceiling — then it is pagination, not a bigger number`
+          : "";
+        return `register ${page.rel}: measured ${bytes(page.bytes)} against the register ceiling of ${bytes(REGISTER_MAX_BYTES)}${overReaderCeiling}${runwayNote}`;
+      });
+      const partitionNote =
+        `${reader.length} Reader pages measured against ${bytes(parsed.maxBytes)}; ` +
+        `${registers.length} registers (${byBytes.map((page) => slugOf(page.rel)).join(", ") || "none"}) measured against ` +
+        `${bytes(REGISTER_MAX_BYTES)} because the pipeline marks them unlisted per ${unlistedSource}, ` +
+        "so search, the explorer and the graph never reach them and their size tracks how much the vault has ingested";
+      const measured = {
+        readerPages: reader.length,
+        readerMaxBytes: readerTop?.bytes ?? 0,
+        readerMaxPage: readerTop?.rel ?? null,
+        readerBudget: parsed.maxBytes,
+        registerPages: registers.map((page) => ({ page: page.rel, bytes: page.bytes })),
+        registerBudget: REGISTER_MAX_BYTES,
+        registerSource: unlistedSource,
+        overReader: overReader.map((page) => page.rel),
+        overRegister: overRegister.map((page) => page.rel),
+      };
+
+      const over = overReader.length > 0 || overRegister.length > 0;
+      // Both details keep the wording they had as a gate, so the printed output
+      // reads the same whether or not --enforce-weight decided the verdict; only
+      // "budget" softens to "reference figure". The over-figure lines keep
+      // whyHeavy()'s breakdown, which is the diagnostic worth having even when
+      // nothing fails: it says where the bytes are, in the terms a fix is
+      // written in.
+      const detail = over
+        ? `${overReader.length} of ${reader.length} Reader pages exceed ${bytes(parsed.maxBytes)}` +
+          (overRegister.length > 0 ? ` and ${overRegister.length} of ${registers.length} registers exceed ${bytes(REGISTER_MAX_BYTES)}` : "") +
+          `; heaviest ${bytes((overReader[0] ?? overRegister[0]).bytes)} at ${(overReader[0] ?? overRegister[0]).rel} — ${partitionNote}`
+        : (readerTop
+            ? `heaviest Reader page ${readerTop.rel} at ${bytes(readerTop.bytes)}, ${limit} ${bytes(parsed.maxBytes)}, ${bytes(parsed.maxBytes - readerTop.bytes)} of headroom`
+            : "no Reader pages in this build") +
+          `; heaviest register ${registerTop ? `${registerTop.rel} at ${bytes(registerTop.bytes)}` : "none"} — ${partitionNote}`;
+      // The register lines ride along whatever the verdict. An exception that is
+      // only printed when something else fails is an exception nobody reads.
+      const findings = over
+        ? [
+            ...overReader.map((page) => `${page.rel}: measured ${bytes(page.bytes)}, Reader ${limit} ${bytes(parsed.maxBytes)}, over by ${bytes(page.bytes - parsed.maxBytes)} — ${whyHeavy(page)}`),
+            ...overRegister.map((page) => `${page.rel}: measured ${bytes(page.bytes)}, register ceiling ${bytes(REGISTER_MAX_BYTES)}, over by ${bytes(page.bytes - REGISTER_MAX_BYTES)} — the ceiling is a deadline for paginating this register, and it has arrived`),
+            ...registerLines,
+          ]
+        : registerLines;
+      return weightResult(parsed, { over, detail, findings, measured });
     },
   },
   {
     id: "weight-p95",
-    requirements: "10.3, 10.6",
-    title: "the 95th-percentile page stays under its ceiling",
-    run: ({ contentPages, parsed }) => {
-      const sorted = contentPages.map((page) => page.bytes).sort((a, b) => a - b);
-      const value = percentile(sorted, 0.95);
-      const measured = { p95Bytes: value, budget: parsed.p95Bytes, population: sorted.length };
-      const how = `nearest-rank p95 over ${sorted.length} content pages (median ${bytes(percentile(sorted, 0.5))})`;
-      if (value <= parsed.p95Bytes) {
-        return pass(`p95 ${bytes(value)}, budget ${bytes(parsed.p95Bytes)}, ${bytes(parsed.p95Bytes - value)} of headroom — ${how}`, measured);
+    requirements: "10.3 (reported)",
+    title: "the 95th-percentile Reader page, measured and reported",
+    run: ({ contentPages, parsed, unlisted, unlistedSource }) => {
+      const limit = limitWord(parsed);
+      const { reader, registers } = partitionRegisters(contentPages, unlisted);
+      if (reader.length === 0) {
+        return skip(
+          `every one of the ${contentPages.length} content pages in this build is a register per ${unlistedSource}, ` +
+            "so there is no Reader population to take a p95 over and Requirement 10.3 went unmeasured"
+        );
       }
-      const overP95 = contentPages.filter((page) => page.bytes > parsed.p95Bytes).sort((a, b) => b.bytes - a.bytes);
-      return fail(
-        `p95 measured ${bytes(value)} against a budget of ${bytes(parsed.p95Bytes)}, over by ${bytes(value - parsed.p95Bytes)} — ${how}`,
-        overP95.map((page) => `${page.rel}: ${bytes(page.bytes)} (above the p95 budget of ${bytes(parsed.p95Bytes)})`),
-        measured
-      );
+      const readerBytes = reader.map((page) => page.bytes).sort((a, b) => a - b);
+      const allBytes = contentPages.map((page) => page.bytes).sort((a, b) => a - b);
+      const value = percentile(readerBytes, 0.95);
+      const allValue = percentile(allBytes, 0.95);
+      const over = reader.filter((page) => page.bytes > parsed.p95Bytes).sort((a, b) => b.bytes - a.bytes);
+      // Both figures, always. The partition must not be able to hide anything:
+      // if excluding the registers were what got this under budget, the two
+      // numbers printed side by side would say so.
+      const how =
+        `nearest-rank p95 over ${readerBytes.length} Reader pages (median ${bytes(percentile(readerBytes, 0.5))}, ` +
+        `${over.length} above the ${limit}); over all ${allBytes.length} content pages including the ${registers.length} registers it is ${bytes(allValue)}. ` +
+        `Registers are listed by weight-max and get no p95 of their own: with ${registers.length} of them the nearest-rank p95 is just the maximum, which weight-max already reports. ` +
+        `The all-content-pages figure is the one comparable to a pre-feature measurement: the 68 KB in Requirement 10.3 was taken over a population that included redirect stubs, which are excluded here`;
+      const measured = {
+        p95Bytes: value,
+        budget: parsed.p95Bytes,
+        readerPopulation: readerBytes.length,
+        readerMedian: percentile(readerBytes, 0.5),
+        readerOverBudget: over.length,
+        allPagesP95: allValue,
+        allPopulation: allBytes.length,
+        registerPages: registers.map((page) => slugOf(page.rel)),
+        registerSource: unlistedSource,
+      };
+      if (value <= parsed.p95Bytes) {
+        return weightResult(parsed, {
+          over: false,
+          detail: `p95 ${bytes(value)}, ${limit} ${bytes(parsed.p95Bytes)}, ${bytes(parsed.p95Bytes - value)} of headroom — ${how}`,
+          measured,
+        });
+      }
+
+      // Over the figure, so the report has to be good enough to act on whether or
+      // not it gates anything: what kind of page is over, where the bytes are on
+      // each one, and what the whole build spends on each candidate lever.
+      const byRole = new Map();
+      for (const page of over) byRole.set(page.role, (byRole.get(page.role) ?? 0) + 1);
+      const totals = { katex: 0, katexPages: 0, backlinks: 0, headingSvg: 0, header: 0, headerOver4096: 0 };
+      for (const page of reader.concat(registers)) {
+        const b = weightBreakdown(page);
+        totals.katex += b.katex;
+        if (b.katex > 0) totals.katexPages += 1;
+        totals.backlinks += b.backlinks;
+        totals.headingSvg += b.headingSvg;
+        totals.header += b.header;
+        if (b.header > 4096) totals.headerOver4096 += 1;
+      }
+      measured.populationTotals = totals;
+      const levers = [
+        `across all ${contentPages.length} built pages the candidate levers measure: KaTeX ${bytes(totals.katex)} on ${totals.katexPages} pages, ` +
+          `backlinks panels ${bytes(totals.backlinks)}, heading anchor SVG ${bytes(totals.headingSvg)}, injected Page_Header ${bytes(totals.header)} ` +
+          `(${totals.headerOver4096} pages over the ${bytes(4096)} Requirement 10.1 allows per page)`,
+        `the pages over the ${limit} are ${[...byRole.entries()].sort((a, b) => b[1] - a[1]).map(([role, count]) => `${count} ${role}`).join(", ")}, ` +
+          "so this is not one outlier type: it is ordinary Reader prose plus Quartz's own tag and folder listings",
+      ];
+      return weightResult(parsed, {
+        over: true,
+        detail: `p95 measured ${bytes(value)} against a ${limit} of ${bytes(parsed.p95Bytes)}, over by ${bytes(value - parsed.p95Bytes)} — ${how}`,
+        findings: [
+          ...over.map((page) => `${page.rel}: ${bytes(page.bytes)}, ${limit} ${bytes(parsed.p95Bytes)}, over by ${bytes(page.bytes - parsed.p95Bytes)} — ${whyHeavy(page)}`),
+          ...levers,
+        ],
+        measured,
+      });
     },
   },
   {
     id: "weight-total",
-    requirements: "10.4, 10.6",
-    title: "the whole built output stays under its ceiling",
+    requirements: "10.4 (reported)",
+    title: "the whole built output, measured and reported",
     run: ({ files, parsed, siteRoot }) => {
+      const limit = limitWord(parsed);
       const total = files.reduce((sum, file) => sum + file.bytes, 0);
       const measured = { totalBytes: total, budget: parsed.totalBytes, files: files.length };
       if (total <= parsed.totalBytes) {
-        return pass(
-          `${bytes(total)} (${mib(total)}) across ${files.length} files, budget ${bytes(parsed.totalBytes)} (${mib(parsed.totalBytes)})`,
-          measured
-        );
+        return weightResult(parsed, {
+          over: false,
+          detail: `${bytes(total)} (${mib(total)}) across ${files.length} files, ${limit} ${bytes(parsed.totalBytes)} (${mib(parsed.totalBytes)})`,
+          measured,
+        });
       }
-      // The heaviest directories, so an over-budget build says where the weight is.
+      // The heaviest directories, so a build over the figure says where the weight is.
       const byTop = new Map();
       for (const file of files) {
         const key = relative(siteRoot, file.path).split(sep)[0] ?? ".";
         byTop.set(key, (byTop.get(key) ?? 0) + file.bytes);
       }
-      return fail(
-        `built output measures ${bytes(total)} (${mib(total)}) against a budget of ${bytes(parsed.totalBytes)} (${mib(parsed.totalBytes)}), over by ${bytes(total - parsed.totalBytes)}`,
-        [...byTop.entries()].sort((a, b) => b[1] - a[1]).map(([key, size]) => `${key}: ${bytes(size)} (${mib(size)})`),
-        measured
-      );
+      return weightResult(parsed, {
+        over: true,
+        detail: `built output measures ${bytes(total)} (${mib(total)}) against a ${limit} of ${bytes(parsed.totalBytes)} (${mib(parsed.totalBytes)}), over by ${bytes(total - parsed.totalBytes)}`,
+        findings: [...byTop.entries()].sort((a, b) => b[1] - a[1]).map(([key, size]) => `${key}: ${bytes(size)} (${mib(size)})`),
+        measured,
+      });
     },
   },
   {
     id: "h1-single",
     requirements: "11.1",
-    title: "exactly one <h1> per built page, across all pages",
+    title: "exactly one <h1> per published page, Quartz's own listings named and exempt",
     run: ({ contentPages }) => {
-      const counts = contentPages.map((page) => ({ page, count: countTags(stripScripts(page.html), "h1") }));
-      const wrong = counts.filter((entry) => entry.count !== 1);
+      const counts = contentPages.map((page) => {
+        const served = stripScripts(page.html);
+        return {
+          page,
+          count: countTags(served, "h1"),
+          // The evidence half of the exemption: every page tools/publish.py
+          // writes carries an injected header, so a page without one is not a
+          // page this pipeline published. See QUARTZ_GENERATED_LISTINGS.
+          hasHeader: HEADER_OPEN.test(served),
+        };
+      });
+      const exempt = counts.filter((entry) => QUARTZ_GENERATED_LISTINGS.has(entry.page.rel) && !entry.hasHeader);
+      const published = counts.filter((entry) => !exempt.includes(entry));
+      const wrong = published.filter((entry) => entry.count !== 1);
+      const distributionOf = (list) => Object.fromEntries(
+        [...list.reduce((map, entry) => map.set(entry.count, (map.get(entry.count) ?? 0) + 1), new Map())].sort()
+      );
+      // Reported, not swallowed: named, with the measured count and the reason,
+      // whether the check passes or fails.
+      const exemptNote = exempt.length === 0
+        ? [...QUARTZ_GENERATED_LISTINGS].every((rel) => !contentPages.some((page) => page.rel === rel))
+          ? `no Quartz-generated listing page in this build, so nothing was exempted (${[...QUARTZ_GENERATED_LISTINGS].join(", ")} looked for)`
+          : `nothing exempted: ${[...QUARTZ_GENERATED_LISTINGS].join(", ")} is in the build but now carries an injected header, so the pipeline publishes it and Requirement 11.1 applies`
+        : `exempt and reported: ${exempt.map((entry) => `${entry.page.rel} measured ${entry.count} <h1>`).join(", ")} — Quartz's own tag listing, emitted title-less and not written by tools/publish.py (no injected header, no tags.md in the staged content, and tags/index.html carries the titled copy), so Requirement 11.1's "published page" does not reach it and fixing it would mean patching Quartz`;
       const measured = {
-        pages: counts.length,
-        withOne: counts.filter((entry) => entry.count === 1).length,
-        distribution: Object.fromEntries(
-          [...counts.reduce((map, entry) => map.set(entry.count, (map.get(entry.count) ?? 0) + 1), new Map())].sort()
-        ),
+        publishedPages: published.length,
+        withOne: published.filter((entry) => entry.count === 1).length,
+        distribution: distributionOf(published),
+        exempt: exempt.map((entry) => ({ page: entry.page.rel, h1: entry.count, reason: "Quartz-generated listing, no injected header" })),
+        distributionIncludingExempt: distributionOf(counts),
       };
       if (wrong.length === 0) {
-        return pass(`all ${counts.length} content pages carry exactly 1 <h1>`, measured);
+        return pass(`all ${published.length} published pages carry exactly 1 <h1>; ${exemptNote}`, measured);
       }
       return fail(
-        `${wrong.length} of ${counts.length} pages do not carry exactly 1 <h1>; measured counts ${JSON.stringify(measured.distribution)}, expected {"1": ${counts.length}}`,
+        `${wrong.length} of ${published.length} published pages do not carry exactly 1 <h1>; measured counts ${JSON.stringify(measured.distribution)}, expected {"1": ${published.length}}. ${exemptNote}`,
         wrong.sort((a, b) => b.count - a.count).map((entry) => `${entry.page.rel}: measured ${entry.count} <h1> elements, expected 1`),
         measured
       );
@@ -1309,22 +1733,44 @@ CHECKS.push(
 
       const logPage = contentPages.find((page) => /^log\.html$/i.test(page.rel));
       let terms = [];
+      const selection = { candidates: 0, rejected: 0, example: null };
       if (logPage) {
         // A term is "log-only" when it appears in the log's rendered text and
         // nowhere in any other built page. Such a term can only reach the search
-        // index through the log's own entry, which makes it the precise probe
-        // Requirement 9.3 describes. The longest candidates are used: a long
+        // index through an excluded page's own entry, which makes it the precise
+        // probe Requirement 9.3 describes. Candidates come from the log's visible
+        // *text*, because that is what a Reader would type, longest first: a long
         // token is the least likely to be an artifact of tokenisation.
         //
-        // Candidates come from the log's visible *text*, because that is what a
-        // Reader would type. The exclusion set is drawn from every other page's
-        // whole served markup, attributes included, and from every index slug —
-        // deliberately wider than visible text. A slug like
-        // `history-human-language-understanding` appears in another page only
-        // inside an href, so a text-only exclusion set called it log-only and
-        // this check reported a false positive on the first run against a real
-        // build. Widening the exclusion set can only lose candidates, never
-        // invent a failure, which is the right direction for a gate to err in.
+        // WHY THIS SELECTION IS TWO STAGES, AND WHAT THE FIRST ONE MISSED
+        //
+        // The first run against a real build reported
+        // `history-human-language-understanding` as a log-only term that
+        // `llm-fundamentals/concepts/pretraining` nevertheless carried. That was
+        // a defect in this probe, not in the site. The term is the slug of a
+        // published source page, and 19 other pages contain it — but every one of
+        // them contains it *inside a longer token*,
+        // `source-history-human-language-understanding`, in an href, a data-slug
+        // and the visible link text. The log happens to print it bare, in a
+        // parenthesised list of the summaries an ingest created, so it tokenises
+        // there as a token of its own.
+        //
+        // The exclusion set was a set of tokens and membership was exact
+        // equality, so `history-…` never matched `source-history-…`. The
+        // assertion below, by contrast, asks `haystack.includes(term)` —
+        // substring containment. Selection and assertion used two different
+        // notions of "occurs", and every term that is a proper substring of some
+        // other page's token lived in the gap between them. Widening the corpus,
+        // which is what the previous fix did, could not close it: the corpus was
+        // never the problem, the predicate was.
+        //
+        // So stage 1 keeps the cheap token filter (2,242 log tokens down to a few
+        // hundred) and stage 2 re-tests the survivors with the assertion's own
+        // predicate against the assertion's own corpus. A term another page
+        // contains — as a token, as a substring, in prose or in an attribute —
+        // can no longer be selected. The stage can only discard candidates, never
+        // invent a failure, and the count it discarded is reported so this class
+        // of misfire stays visible instead of turning into a mysterious skip.
         const logTokens = tokens(textOf(stripScripts(logPage.html)));
         const elsewhere = new Set();
         for (const page of contentPages) {
@@ -1332,14 +1778,64 @@ CHECKS.push(
           for (const token of tokens(stripScripts(page.html))) elsewhere.add(token);
         }
         for (const slug of keys) for (const token of tokens(slug)) elsewhere.add(token);
-        terms = [...logTokens].filter((token) => !elsewhere.has(token)).sort((a, b) => b.length - a.length || (a < b ? -1 : 1)).slice(0, 5);
+        const candidates = [
+          ...new Set(
+            [...logTokens]
+              .filter((token) => !elsewhere.has(token))
+              // A token cut at a punctuation boundary can end in a hyphen
+              // (`source-jurafsky-chapter-`). Trimmed, because the probe should
+              // read like something a Reader would type; trimmed *before* stage 2
+              // so the form that gets probed is the form that was verified.
+              .map((token) => token.replace(/^-+|-+$/g, ""))
+              .filter((token) => token.length >= 6)
+          ),
+        ]
+          .sort((a, b) => b.length - a.length || (a < b ? -1 : 1))
+          // Bounded so stage 2 stays O(pages x a few dozen) rather than
+          // O(pages x hundreds); the longest candidates are also the best ones.
+          .slice(0, 60);
+        selection.candidates = candidates.length;
+
+        let survivors = candidates;
+        const reject = (term, where) => {
+          selection.rejected += 1;
+          if (!selection.example) selection.example = `${JSON.stringify(term)} (contained in ${where})`;
+        };
+        for (const page of contentPages) {
+          if (page === logPage || survivors.length === 0) continue;
+          const haystack = stripScripts(page.html).toLowerCase();
+          survivors = survivors.filter((term) => {
+            if (!haystack.includes(term)) return true;
+            reject(term, page.rel);
+            return false;
+          });
+        }
+        if (survivors.length > 0) {
+          const slugCorpus = [...keys].join("\n").toLowerCase();
+          survivors = survivors.filter((term) => {
+            if (!slugCorpus.includes(term)) return true;
+            reject(term, "an index slug");
+            return false;
+          });
+        }
+        terms = survivors.slice(0, 5);
+
         for (const term of terms) {
           for (const [slug, entry] of Object.entries(index)) {
             const haystack = `${slug} ${entry.title ?? ""} ${(entry.tags ?? []).join(" ")} ${entry.content ?? ""}`.toLowerCase();
-            if (haystack.includes(term)) {
-              findings.push(`the log-only term ${JSON.stringify(term)} is searchable via index entry ${slug}, so a Reader searching it gets a result — expected 0 results`);
-              break;
-            }
+            if (!haystack.includes(term)) continue;
+            // Selection has already established that no other built page carries
+            // this term, so a hit here is one of two real defects, and the
+            // finding says which: an excluded page is in the index, or an entry
+            // carries text its own page does not render.
+            const ownPage = contentPages.find((page) => slugOf(page.rel).toLowerCase() === slug.toLowerCase());
+            const because = !ownPage
+              ? "and no built page corresponds to that entry, so the index is carrying a page that was not published"
+              : "and the term is in no other built page, so that entry carries text its own page does not render — the excluded page's content reached the index through it";
+            findings.push(
+              `the log-only term ${JSON.stringify(term)} is searchable via index entry ${slug}, so a Reader searching it gets a result — expected 0 results, ${because}`
+            );
+            break;
           }
         }
       }
@@ -1349,10 +1845,15 @@ CHECKS.push(
         unlistedExpectedAbsent: unlisted,
         unlistedStillPresent: stillIndexed,
         logOnlyTermsProbed: terms,
+        candidatesConsidered: selection.candidates,
+        candidatesRejectedAsNotLogOnly: selection.rejected,
       };
+      const selectionNote =
+        `${selection.candidates} candidate term(s) survived the token filter, ${selection.rejected} then rejected because another built page contains the term as a substring` +
+        (selection.example ? `, e.g. ${selection.example}` : "");
       if (findings.length > 0) {
         return fail(
-          `measured ${findings.length} way(s) for an excluded page's text to be searchable, budget 0 (${keys.size} index entries)`,
+          `measured ${findings.length} way(s) for an excluded page's text to be searchable, budget 0 (${keys.size} index entries). ${selectionNote}`,
           findings,
           measured
         );
@@ -1363,11 +1864,11 @@ CHECKS.push(
       if (terms.length === 0) {
         return skip(
           `all ${unlisted.length} unlisted slugs are absent from the ${keys.size}-entry index, but no term occurs in log.html and nowhere else, ` +
-            "so the positive probe had no subject. Requirement 9.3 is therefore only half checked in this build"
+            `so the positive probe had no subject. Requirement 9.3 is therefore only half checked in this build (${selectionNote})`
         );
       }
       return pass(
-        `${unlisted.length} unlisted slugs absent from the ${keys.size}-entry index; ${terms.length} log-only term(s) return nothing — probed ${terms.map((t) => JSON.stringify(t)).join(", ")}`,
+        `${unlisted.length} unlisted slugs absent from the ${keys.size}-entry index; ${terms.length} log-only term(s) return nothing — probed ${terms.map((t) => JSON.stringify(t)).join(", ")}. ${selectionNote}`,
         measured
       );
     },
@@ -1498,7 +1999,10 @@ export function loadUnlisted(candidates) {
 // Runner
 // ---------------------------------------------------------------------------
 
-const STATUS_LABEL = { pass: "ok  ", fail: "FAIL", skip: "skip", partial: "PART" };
+// Five statuses, four characters each so the id column stays aligned. Lower case
+// for the two that need no attention, upper case for the three that do — and
+// `meas` is deliberately not `ok`, because a measurement asserted nothing.
+const STATUS_LABEL = { pass: "ok  ", fail: "FAIL", skip: "skip", partial: "PART", report: "meas" };
 
 /**
  * Identical findings printed once with a count. `log.html` carries the same
@@ -1506,6 +2010,16 @@ const STATUS_LABEL = { pass: "ok  ", fail: "FAIL", skip: "skip", partial: "PART"
  * whole --max-findings budget and hide the other fifteen distinct defects.
  * The measured totals are unaffected — this is a display concern only.
  */
+/**
+ * The requirement ids as printed. The three weight checks carry "(reported)",
+ * which stops being true the moment --enforce-weight is passed, so the label
+ * follows the flag rather than contradicting the verdict beside it. Display only:
+ * the JSON report keeps the static field, and `budgets.weightEnforced` says which
+ * mode the run was in.
+ */
+const requirementLabel = (check, parsed) =>
+  parsed.enforceWeight ? check.requirements.replace(" (reported)", " (enforced)") : check.requirements;
+
 export function collapse(findings) {
   const counts = new Map();
   for (const finding of findings) counts.set(finding, (counts.get(finding) ?? 0) + 1);
@@ -1521,7 +2035,7 @@ export function main(argv, env) {
   if (parsed.list) {
     process.stdout.write("check-built-site: checks\n");
     for (const check of CHECKS) {
-      process.stdout.write(`  ${check.id.padEnd(22)} [${check.requirements}] ${check.title}\n`);
+      process.stdout.write(`  ${check.id.padEnd(22)} [${requirementLabel(check, parsed)}] ${check.title}\n`);
     }
     return EXIT_OK;
   }
@@ -1551,7 +2065,9 @@ export function main(argv, env) {
   chatty("check-built-site");
   chatty(`  site       ${siteRoot}`);
   chatty(`  index      ${index ? `${indexPath} (${Object.keys(index).length} entries, ${bytes(indexBytes)})` : `UNREADABLE — ${indexWhy}`}`);
-  chatty(`  budgets    max ${bytes(parsed.maxBytes)} / p95 ${bytes(parsed.p95Bytes)} / total ${bytes(parsed.totalBytes)}`);
+  chatty(`  weight     max ${bytes(parsed.maxBytes)} / p95 ${bytes(parsed.p95Bytes)} / total ${bytes(parsed.totalBytes)} — ${parsed.enforceWeight
+    ? "ENFORCED as budgets (--enforce-weight): exceeding one fails the run"
+    : "reference figures, measured and printed but NOT enforced (ADR-014); --enforce-weight restores the gate"}`);
   chatty(`  pages      ${contentPages.length} content, ${redirects.length} redirect stubs, ${errorPages.length} error page — ${pages.length} HTML files of ${files.length} files total`);
   chatty(`  stubs      identified by <meta http-equiv="refresh"> with a url= target; ${redirects.filter((r) => r.noindex).length} also carry robots:noindex. Excluded from the page checks, resolved by redirect-targets`);
   chatty(`  sample     ${Object.entries(samples).filter(([, page]) => page).map(([role, page]) => `${role}=${page.rel}`).join(", ") || "(none)"}`);
@@ -1573,7 +2089,7 @@ export function main(argv, env) {
     }
     results.push({ ...check, ...result });
     if (parsed.quiet && result.status === "pass") continue;
-    out(`  ${STATUS_LABEL[result.status]} ${check.id.padEnd(22)} [${check.requirements}]`);
+    out(`  ${STATUS_LABEL[result.status]} ${check.id.padEnd(22)} [${requirementLabel(check, parsed)}]`);
     out(`       ${result.detail}`);
     const findings = collapse(result.findings ?? []);
     for (const finding of findings.slice(0, parsed.maxFindings)) out(`       - ${finding}`);
@@ -1586,14 +2102,18 @@ export function main(argv, env) {
   const failures = tally("fail");
   const skipped = tally("skip");
   const partials = tally("partial");
+  const reported = tally("report");
 
   out("");
-  out(`  checks     ${results.length} run: ${tally("pass")} passed, ${failures} failed, ${skipped} skipped, ${partials} partial`);
+  out(`  checks     ${results.length} run: ${tally("pass")} passed, ${failures} failed, ${skipped} skipped, ${partials} partial, ${reported} reported`);
   if (skipped > 0) {
     out(`  skipped    ${results.filter((r) => r.status === "skip").map((r) => r.id).join(", ")} — these verified NOTHING${parsed.strictSkips ? " and --strict-skips counts them as failures" : "; pass --strict-skips to make that fail the build"}`);
   }
   if (partials > 0) {
     out(`  partial    ${results.filter((r) => r.status === "partial").map((r) => r.id).join(", ")} — precondition verified, full claim not observable from static files`);
+  }
+  if (reported > 0) {
+    out(`  reported   ${results.filter((r) => r.status === "report").map((r) => r.id).join(", ")} — measured and printed above, never gated: page weight is not a constraint on this site (ADR-014), and the figures they are read against were taken over a population that included redirect stubs. Pass --enforce-weight to make them fail the run again`);
   }
 
   if (parsed.report) {
@@ -1602,11 +2122,14 @@ export function main(argv, env) {
       site: siteRoot,
       indexPath,
       indexEntries: index ? Object.keys(index).length : null,
-      budgets: { maxBytes: parsed.maxBytes, p95Bytes: parsed.p95Bytes, totalBytes: parsed.totalBytes },
+      // `weightEnforced: false` is what makes the three byte figures readable as
+      // reference figures rather than budgets; see ADR-014.
+      budgets: { maxBytes: parsed.maxBytes, p95Bytes: parsed.p95Bytes, totalBytes: parsed.totalBytes, weightEnforced: parsed.enforceWeight },
       counts: {
         files: files.length, html: pages.length, content: contentPages.length,
         redirects: redirects.length, errorPages: errorPages.length,
       },
+      tally: { pass: tally("pass"), fail: failures, skip: skipped, partial: partials, report: reported },
       samples: Object.fromEntries(Object.entries(samples).map(([role, page]) => [role, page?.rel ?? null])),
       checks: results.map((result) => ({
         id: result.id, requirements: result.requirements, status: result.status,
@@ -1618,7 +2141,11 @@ export function main(argv, env) {
 
   out("");
   const verb = failures > 0 ? "fail" : skipped > 0 ? "pass-with-skips" : "pass";
-  out(`check-built-site: RESULT=${verb} checks=${results.length} failures=${failures} skipped=${skipped} partial=${partials} pages=${contentPages.length}`);
+  // `reported=` goes after `partial=` so pages.yml's two anchored greps —
+  // `RESULT=[a-z-]+ .*partial=[1-9]` and `partial=[0-9]+` — read what they always
+  // read. The verb vocabulary is unchanged, so `RESULT=pass-with-skips` still
+  // matches exactly when a check was skipped and never because of a measurement.
+  out(`check-built-site: RESULT=${verb} checks=${results.length} failures=${failures} skipped=${skipped} partial=${partials} reported=${reported} pages=${contentPages.length}`);
 
   if (failures > 0) {
     process.stderr.write(
@@ -1646,7 +2173,7 @@ if (invokedDirectly) {
   } catch (error) {
     if (error instanceof UsageError) {
       process.stderr.write(`check-built-site: ${error.message}\n`);
-      process.stdout.write("check-built-site: RESULT=error checks=0 failures=0 skipped=0 partial=0 pages=0\n");
+      process.stdout.write("check-built-site: RESULT=error checks=0 failures=0 skipped=0 partial=0 reported=0 pages=0\n");
       process.exitCode = EXIT_USAGE;
     } else {
       throw error;

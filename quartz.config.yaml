@@ -6,7 +6,7 @@
 # Task 11.2 of .kiro/specs/wiki-site-experience makes three edits, all inside
 # `plugins:`. `configuration:` and `layout:` are byte-identical to the baseline.
 #
-#   note-properties   enabled: false                       Req 12.2
+#   note-properties   hidePropertiesView: true             Req 12.2
 #   explorer          options: collapse + group counts     Req 5.9, 8.1-8.5
 #   favicon           a comment, and nothing else          Req 12.4
 #
@@ -363,10 +363,109 @@ plugins:
     layout:
       position: afterBody
       priority: 10
+  # THE FIRST THREE LINKS ARE NAVIGATION, NOT CREDITS. Requirements 11.10 and
+  # 9.6 both land here, for the same underlying reason: the Explorer is built
+  # client-side.
+  #
+  # The Explorer ships an empty <ul> and fills it on the `nav` event from
+  # contentIndex.json, so with JavaScript unavailable it contributes no links at
+  # all and the footer is the only navigation left on the page. That is
+  # Requirement 11.10, and the first real CI run failed it: 2 of 3 sampled pages
+  # had no script-free route to the catalog. `page-title` already covers the
+  # route to the Landing_Page — it emits `pathToRoot(slug)`, so `../..` at depth
+  # 2 — but `byPageType` strips the whole `left` position on the 404 page, which
+  # takes page-title with it, so `Start here` is repeated here deliberately
+  # rather than left to depend on a component another layout can remove.
+  #
+  # Requirement 9.6 is the same link seen from the other end. The five
+  # Catalog_Pages are `unlisted`, which keeps them out of contentIndex.json to
+  # meet the byte budget — and the Explorer, the graph and search all read that
+  # one file, so `unlisted` costs sidebar presence too. tools/publish.py links
+  # all five from the Landing_Page, which discharges 9.6 as written ("linked
+  # from the Landing_Page or the site footer"), but that is one page out of 293.
+  # `Catalog` and `Source summaries` make the two registers reachable from
+  # every page instead of only from the one a Reader may never land on.
+  # `open-questions` and `log` are deliberately NOT here: they stay
+  # Landing_Page-only, because a footer that lists every register is a sitemap.
+  #
+  # THESE MUST BE ABSOLUTE URLs, AND THAT IS A LIMITATION, NOT A PREFERENCE.
+  # This plugin renders `Object.entries(links)` straight into `href` with no
+  # resolution step — verified in
+  # node_modules/@quartz-community/footer/dist/components/index.js, whose
+  # component takes only `{displayClass, cfg}` and never reads `fileData`, so it
+  # cannot know the page's depth. Whatever is written here ships byte-for-byte
+  # on all 293 pages — confirmed on a real build by diffing the emitted <footer>
+  # of catalog.html (depth 0) against llm-fundamentals/concepts/scaling-laws.html
+  # (depth 2): identical, every href unchanged.
+  #
+  # All four candidate forms were measured against a real build. Each one fails
+  # either the Reader or the gate, and no form satisfies both:
+  #
+  #   https://…/ai-engineering-wiki/catalog   correct everywhere it is served
+  #                                           (GET /ai-engineering-wiki/NOTICE
+  #                                           and /trust both 200). Invisible to
+  #                                           `nojs-nav` — see KNOWN GAP below.
+  #   /catalog                                makes `nojs-nav` PASS, and 404s for
+  #                                           every Reader: the site is served
+  #                                           from /ai-engineering-wiki/, and GET
+  #                                           weiqiangyu0528.github.io/catalog
+  #                                           returns 404 while
+  #                                           /ai-engineering-wiki/ returns 200.
+  #                                           `links-resolve` does not catch it —
+  #                                           it resolves against the build root,
+  #                                           so it is only counted in that
+  #                                           check's root-absolute note (332
+  #                                           hrefs, "404 under a path-prefixed
+  #                                           baseURL"). A green gate and a
+  #                                           broken site is the worst trade on
+  #                                           offer; do not take it.
+  #   /ai-engineering-wiki/catalog            correct in production, but
+  #                                           `resolveHref` reports `missing` on
+  #                                           every page, so it fails
+  #                                           `links-resolve` outright
+  #   catalog                                 depth-0 only. Measured: bare
+  #                                           `catalog-sources` took
+  #                                           `links-resolve` from 20 findings to
+  #                                           342, one per page below the root
+  #
+  # Do NOT "fix" these to root-relative form. It works in *content* — a
+  # root-absolute href in markdown is rewritten by crawl-links against the
+  # page's depth, measured as `/trust` -> `../../trust` at depth 2 — and that
+  # rewriting is exactly what does not happen to a component option. The cost of
+  # absolute URLs is that a fork or a local preview sends these three links to
+  # the production host; the cost of root-relative would be a 404 for every
+  # Reader, so this is the cheaper of the two.
+  #
+  # KNOWN GAP, AND REQUIREMENT 11.10 IS NOT DISCHARGED HERE. `nojs-nav` cannot
+  # see these links and cannot be made to. Its `resolveHref` skips any href
+  # matching /^[a-z][a-z0-9+.\-]*:/ as "absolute URL or non-http scheme", and the
+  # check counts only anchors that resolve to a built file, so an absolute
+  # catalog link scores zero no matter how correct it is for a Reader. Confirmed
+  # on a real build: with all three links above in place, `nojs-nav` still fails
+  # 2 of 3 sampled pages, reporting exactly the same "no link to the catalog" it
+  # reported before they were added.
+  #
+  # The links stay anyway, because they are correct for the Reader and they are
+  # what discharges Requirement 9.6 on 293 pages instead of 1. The gate is the
+  # thing that is wrong here, not the config.
+  #
+  # WHERE THE ACTUAL FIX GOES: a depth-aware relative href, which only a
+  # *content*-level link can produce. The asymmetry is verified in both
+  # directions on one build — a root-absolute href in a component option ships
+  # verbatim, while the same string in markdown is rewritten by crawl-links
+  # against the page's depth. tools/publish.py already relies on this: the
+  # `kb-header` aside it injects carries a literal `<a href="/trust">`, and that
+  # shipped as `../../trust` at depth 2. One more anchor in that same injected
+  # block — `<a href="/catalog">` — becomes `../../catalog`, which resolves in
+  # the build tree, is correct under the path prefix, and is what `nojs-nav`
+  # is looking for. That is a publish-pipeline change, not a config change.
   - source: "@quartz-community/footer"
     enabled: true
     options:
       links:
+        Start here: https://weiqiangyu0528.github.io/ai-engineering-wiki/
+        Catalog: https://weiqiangyu0528.github.io/ai-engineering-wiki/catalog
+        Source summaries: https://weiqiangyu0528.github.io/ai-engineering-wiki/catalog-sources
         Source: https://github.com/WeiqiangYu0528/ai-engineering-wiki
         Attribution: https://weiqiangyu0528.github.io/ai-engineering-wiki/NOTICE
         What is checked: https://weiqiangyu0528.github.io/ai-engineering-wiki/trust
@@ -388,20 +487,43 @@ plugins:
     enabled: true
     options: {}
     order: 50
-  # Disabled for Requirement 12.2. This plugin rendered a `description` / `tags`
-  # / `aliases` properties table above every page body -- build output presented
-  # as content. The Page_Header that tools/publish.py injects replaces it and
-  # says more: the summary in prose, a trust badge naming who checked the page
-  # and when, and the Relationship_Panel. Two blocks of metadata above one body
-  # would be the worst of both.
+  # ENABLED, WITH ITS VIEW HIDDEN. Requirement 12.2 wants the properties table
+  # gone; it does NOT want frontmatter parsing gone, and in this plugin set those
+  # are the same plugin.
   #
-  # scripts/check-built-site.mjs asserts no properties-table markup survives
-  # anywhere in the built output, so this cannot regress silently.
+  # THIS WAS `enabled: false` AND IT BROKE THE ENTIRE SITE. Measured on a real
+  # build: `note-properties` is the only plugin here that runs
+  # remark-frontmatter, and its transformer ends with an unconditional
+  # `file.data.frontmatter = data`. Disable it and nothing parses the YAML block,
+  # so on all 293 pages the frontmatter rendered as visible body text -- `---`
+  # became an <hr/> and `type:`, `title:`, `summary:`, `aliases:` became a
+  # paragraph and a bullet list at the top of every page. Everything downstream
+  # of `file.data.frontmatter` went with it: no `title`, so article-title emitted
+  # no <h1> on any of the 293 content pages (only Quartz's own 34 folder and tag
+  # pages had one); no breadcrumbs; descriptions fell back to body text; the
+  # `aliases:` entries never reached alias-redirects, so 1 redirect stub was
+  # emitted instead of 279 and every pre-grouping URL 404'd; and `unlisted: true`
+  # never reached the content index, so the activity log stayed searchable. Nine
+  # of nineteen checks in scripts/check-built-site.mjs failed on that one cause.
   #
-  # `options` and `layout` are left in place: re-enabling is a one-word change,
-  # and deleting them would lose the record of what was rendered before.
+  # `hidePropertiesView: true` is the correct lever. The parse is unconditional,
+  # and the component starts with
+  #   if (noteProps.showProperties !== true && noteProps.hideView) return null
+  # so it emits NO markup rather than hiding it with CSS -- which is what lets
+  # check-built-site.mjs's no-properties-table check still pass. Verified on a
+  # real build: 0 of 318 pages carry note-properties markup.
+  #
+  # Do not set this back to `enabled: false` to satisfy Requirement 12.2. The
+  # table is what 12.2 forbids, and hiding the view is what removes it; disabling
+  # the plugin removes the table by removing the frontmatter, which is not the
+  # same thing and is not survivable.
+  #
+  # One caveat, since the component's guard reads it first: a page setting
+  # `quartz-properties-show: true` in its own frontmatter overrides `hideView`
+  # and renders the table. No published page sets it, and nothing in
+  # tools/publish.py writes it.
   - source: "@quartz-community/note-properties"
-    enabled: false
+    enabled: true
     options:
       includeAll: false
       includedProperties:
@@ -409,7 +531,9 @@ plugins:
         - tags
         - aliases
       excludedProperties: []
-      hidePropertiesView: false
+      # See the block above: true keeps the frontmatter parse and emits no
+      # markup. This is the whole of Requirement 12.2.
+      hidePropertiesView: true
       delimiters: ---
       language: yaml
     order: 5
