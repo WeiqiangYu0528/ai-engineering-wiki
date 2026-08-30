@@ -2,8 +2,6 @@
 title: "Reading path: Fine-tuning & Alignment"
 ---
 
-# Reading path: Fine-tuning & Alignment
-
 > 8 pages in order, about 45 minutes of reading · content as of 2026-08-27
 
 Each entry assumes the ones above it, which is the only claim this page makes — it is a route in, not a table of contents. The [Fine-tuning & Alignment map](/fine-tuning/) has the full list.

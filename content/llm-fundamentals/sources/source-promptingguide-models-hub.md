@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">Aggregated summary of 3 representative model pages from pages/models (21 models listed: chatgpt, claude-3, code-llama, flan, gemini family, gpt-4, llama variants, mistral, mixtral, olmo, phi-2, sora etc.).</p>
 <p class="kb-provenance">DAIR.AI Prompt Engineering Guide, 2024-01-01. <a href="https://github.com/dair-ai/Prompt-Engineering-Guide/tree/main/pages/models">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

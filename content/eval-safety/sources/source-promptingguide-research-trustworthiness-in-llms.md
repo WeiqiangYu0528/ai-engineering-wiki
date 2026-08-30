@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Overview of Sun et al. (2024) "TrustLLM: Trustworthiness in Large Language Models" — a comprehensive trustworthiness survey and benchmark spanning 8 principles and evaluating 6 dimensions (truthfulness, safety…</p>
 <p class="kb-provenance">Sun et al. (2024) via DAIR.AI, 2024-01-10. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/trustworthiness-in-llms.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

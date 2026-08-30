@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The July 2024 (v3 Nov 2024) 92-page technical report from Meta introducing Llama 3 / Llama 3.1 — a herd of dense decoder-only Transformers at 8B, 70B, and 405B parameters (126 layers, 16,384 dim, 128 heads, GQA-8)…</p>
 <p class="kb-provenance">Llama Team, AI @ Meta, 2024-07-23. <a href="https://arxiv.org/abs/2407.21783">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

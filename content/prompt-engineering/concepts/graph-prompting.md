@@ -26,6 +26,7 @@ related:
 <p class="kb-summary">Graph Prompting (GraphPrompt) (Liu et al., 2023) is the porting of the prompting paradigm from NLP to graph-structured data.</p>
 <p class="kb-trust kb-status-stub"><a href="/trust">Stub - placeholder, not yet written</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/prompt-engineering/concepts/in-context-learning">In-Context Learning</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

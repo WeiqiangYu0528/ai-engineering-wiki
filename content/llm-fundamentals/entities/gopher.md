@@ -24,6 +24,7 @@ aliases:
 <p class="kb-summary">Gopher (280B parameters, 300B tokens) is the large dense decoder-only Transformer introduced by DeepMind in Rae et al. (December 2021).</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/entities/chinchilla">Chinchilla</a></li><li><a href="/llm-fundamentals/concepts/scaling-laws">Scaling Laws</a></li><li><a href="/llm-fundamentals/entities/deepmind">DeepMind</a></li><li><a href="/llm-fundamentals/concepts/pretraining">Pretraining</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

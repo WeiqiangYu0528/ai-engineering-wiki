@@ -25,6 +25,7 @@ aliases:
 <p class="kb-summary">An EMNLP 2024 (Miami, Nov 15) tutorial by Yu Su (OSU), Diyi Yang (Stanford), Shunyu Yao (OpenAI), and Tao Yu (HKU) that defines and systematizes language agents: AI agents whose distinct trait is using language as a…</p>
 <p class="kb-provenance">Yu Su, Diyi Yang, Shunyu Yao, Tao Yu, 2024-11-15. <a href="https://language-agent-tutorial.github.io/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

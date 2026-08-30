@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Production case study (Clavié et al. 2023 https://arxiv.org/abs/2303.07142) on prompt engineering for medium-scale entry-level job classification (is this a true graduate job?).</p>
 <p class="kb-provenance">Clavié et al., 2023 (via DAIR.AI), 2023-03-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/applications/workplace_casestudy.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

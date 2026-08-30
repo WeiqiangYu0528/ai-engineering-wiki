@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Brief on Meta LLaMA 7B–65B open efficient foundations (Feb 2023).</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.) / Meta AI, 2023-03-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/models/llama.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

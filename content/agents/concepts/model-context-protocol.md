@@ -32,6 +32,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/agents/concepts/function-calling">Function Calling</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/agents/concepts/claude-code">Claude Code</a></li><li><a href="/eval-safety/concepts/prompt-injection">Prompt Injection</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/agents/sources/source-model-context-protocol">Model Context Protocol (MCP) Documentation &amp; Specification</a></li><li><a href="/prompt-engineering/sources/source-maximizing-the-value-of-your-claude-code-sessions">Maximizing the value of your Claude Code sessions</a></li><li><a href="/llm-fundamentals/sources/source-deep-dive-into-llms-like-chatgpt">Deep Dive into LLMs like ChatGPT</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

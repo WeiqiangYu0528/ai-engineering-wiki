@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Research summary of LLM-based agents from the Prompt Engineering Guide.</p>
 <p class="kb-provenance">DAIR.AI (Prompt Engineering Guide), 2024-02-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/llm-agents.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

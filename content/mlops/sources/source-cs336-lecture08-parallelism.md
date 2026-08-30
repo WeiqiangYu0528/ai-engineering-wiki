@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Lecture 08 (Tatsu Hashimoto, April 22 2026) is the 73-slide capstone on parallelism (PDF 6.3 MB) with three goals: systems complexities of huge models, why multiple paradigms are combined, and what production training…</p>
 <p class="kb-provenance">Tatsu Hashimoto (Stanford CS336), 2026-04-22. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_08.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary
@@ -57,7 +58,7 @@ Lecture 08 (Tatsu Hashimoto, April 22 2026) is the **73-slide capstone** on para
 > [!WARNING] Correction — quotation fidelity
 > 1 of 3 passages in this section could not be located in the stored source ([https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_08.pdf](https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_08.pdf)) — under 55% of each was found verbatim. Read them as paraphrase, not quotation, until checked against the original. Flagged 2026-08-27 by `tools/verify_sources.py`.
 
-> "New unit of compute — the datacenter. What we want: linear memory scaling (max params ∝ #GPUs), linear compute scaling (FLOPs ∝ #GPUs), simple collectives" — Part 1 recap (slide 13)
+> "New unit of compute — the datacenter. What we want: linear memory scaling (max params ∝ &#35;GPUs), linear compute scaling (FLOPs ∝ &#35;GPUs), simple collectives" — Part 1 recap (slide 13)
 
 > "Zero stage 1 is free (in the bandwidth-limited regime) — you might as well always do it" — ZeRO slide (slide 27)
 

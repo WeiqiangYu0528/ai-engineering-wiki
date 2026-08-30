@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Concise decomposition of AI agents into three pillars: planning (the brain), tool utilization, and memory systems (short-term/working vs long-term/vector-store).</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-03-01. <a href="https://www.promptingguide.ai/agents/components">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

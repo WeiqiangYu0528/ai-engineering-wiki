@@ -33,6 +33,7 @@ aliases:
 <p class="kb-summary">The Spring 2026 CS336 Lecture 10 (Percy Liang, Apr 29, lecture10.py trace) is the systems companion to scaling — how to serve the model you just chose to train.</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336), 2026-04-29. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_10">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

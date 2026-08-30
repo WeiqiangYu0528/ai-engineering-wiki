@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Collobert et al. (NEC Labs, JMLR 12:2493–2537, 2011) is the founding demonstration that a single unified neural architecture — lookup-table embeddings → window/convolutional feature extraction → nonlinear layers trained…</p>
 <p class="kb-provenance">Ronan Collobert, Jason Weston, Léon Bottou, Michael Karlen, Koray Kavukcuoglu, Pavel Kuksa, 2011-08-01. <a href="https://www.jmlr.org/papers/volume12/collobert11a/collobert11a.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

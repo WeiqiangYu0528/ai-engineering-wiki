@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Foundational taxonomy distinguishing AI workflows (LLMs + tools orchestrated via predefined code paths) from AI agents (LLMs dynamically directing their own processes/tool usage).</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-04-15. <a href="https://www.promptingguide.ai/agents/ai-workflows-vs-ai-agents">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

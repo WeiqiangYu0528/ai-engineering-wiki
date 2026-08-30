@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">This chapter introduces Retrieval Augmented Generation (RAG) as the architecture that couples an information-retrieval component over external knowledge sources (e.g., Wikipedia) with a text generator to serve…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/rag.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

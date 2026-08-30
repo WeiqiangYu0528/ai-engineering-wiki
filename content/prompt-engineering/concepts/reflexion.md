@@ -29,6 +29,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/react">ReAct (Reasoning + Acting)</a></li><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/llm-fundamentals/concepts/thinking-models">Thinking Models</a></li><li><a href="/agents/concepts/model-context-protocol">Model Context Protocol</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-reflexion">Prompt Engineering Guide — Reflexion</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

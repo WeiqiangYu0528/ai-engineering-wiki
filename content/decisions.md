@@ -2,8 +2,6 @@
 title: Decisions
 ---
 
-# Decisions
-
 Architecture decision records for the knowledge base itself. Each entry states the
 problem, the decision, and what it costs — the last part matters most, because a
 decision recorded without its downside gets revisited by someone who only sees the upside.
@@ -17,7 +15,7 @@ Append new records; do not rewrite old ones. Supersede instead.
 **Status:** accepted 2026-08-27
 
 **Problem.** The v1 `index.md` was written by hand. Descriptions were sliced out of page
-bodies at ~120 characters with `...` markup deleted, producing 308 malformed entries
+bodies at ~120 characters with `[[...]]` markup deleted, producing 308 malformed entries
 such as "founding member of . Formerly the". Ten entities were listed twice and the
 declared page count never matched the directory.
 
@@ -303,3 +301,88 @@ test pinning "exactly 1 page over 4,096" is the tripwire if it does not. And ADR
 that a presentation budget relaxed once is easier to relax again; this record is the first
 evidence for that warning rather than a counterexample to it, so a request to raise 4,608
 should be answered with the per-group cap ADR-012 deferred, not with a larger constant.
+
+---
+
+## ADR-014 — Page weight is measured and reported, not enforced
+
+**Status:** accepted 2026-08-30, amends Requirement 10 of the wiki-site-experience spec: criteria
+10.2, 10.3 and 10.4 become reported measurements, and 10.6's fail-the-build clause now reaches only
+10.1 and 10.5
+
+**Problem.** Two things, and the order matters.
+
+The owner's decision came first: page weight is not a constraint on this site. In their words, they
+are lenient toward the HTML budget and more concerned about quality than anything — if images,
+inline SVG or anything else makes the site richer and helps a Reader understand a concept, it ships.
+There is no byte figure whose breach should stop a deploy of correct content.
+
+The second thing is what turns that from a relaxation into a correction. **The budget was not a valid
+comparison in the first place.** Requirement 10.3 states its p95 as "at or below 72,000 bytes
+uncompressed, holding the current p95 of 68 KB". That 68 KB was measured over 594 built HTML files —
+the whole pre-feature output, **including its 290 alias-redirect stubs**, which are meta-refresh
+documents of about 344 bytes each and made up 49% of the population. `check-built-site.mjs` excludes
+stubs from its page population, correctly, because a redirect nobody reads is not a page. So the gate
+was comparing a stub-excluded measurement against a stub-polluted figure. Measured on both footings —
+pre-feature at `b54ce4a` of the public repo under its own configuration, against the current build:
+
+| Population | Pre-feature | Current | Change |
+| --- | --- | --- | --- |
+| Content pages + redirect stubs (n=594 → 900) | 70,623 B | 60,626 B | −9,997 B, −14% |
+| Content pages only (n=304 → 330) | 89,138 B | 89,807 B | +669 B, +0.75% |
+
+The first row is where the 68 KB came from, and it reproduces there — so on the population the budget
+was written against, the site got 14% lighter. The second row is the population the gate measured,
+and on it the pre-feature site was already 89,138 B, 17 KB over its own stated budget, before this
+feature existed. The feature's true cost at the p95 is 669 bytes. Failing the build on that would
+have been reporting a population defect as a site defect. Also re-measured: the content-only maximum
+went 187,924 B → 229,248 B, which is `log.html` growing because this work appended to the changelog,
+not a page-weight regression from the feature.
+
+**Decision.** `weight-max`, `weight-p95` and `weight-total` in `scripts/check-built-site.mjs` become
+reported measurements. They measure what they measured before, print the same detail — including
+`whyHeavy()`'s per-page byte breakdown, which is the diagnostic worth keeping — and contribute
+nothing to `failures`. Four choices inside that:
+
+*A fifth status, `report`, not a `pass`.* `pass` is a claim that something was asserted and held;
+these three assert nothing, and the build can be over every figure and still exit 0. Reusing `pass`
+would make one summary line mean two things, which is the failure mode `partial` was added to avoid.
+It is counted as `reported=N` in the `RESULT=` marker, placed after `partial=N` because `pages.yml`
+greps `RESULT=[a-z-]+ .*partial=[1-9]` and `partial=[0-9]+` and must keep reading what it always
+read. The verb vocabulary is untouched, so `RESULT=pass-with-skips` still means a skip and never a
+measurement.
+
+*Enforcement is retained behind `--enforce-weight`, not deleted.* The flag restores the original
+pass/fail gate for all three, verified to still fail. A future owner who wants the gate back turns it
+on rather than reconstructing it, and `--max-bytes` / `--p95-bytes` / `--total-bytes` keep working as
+the figures a measurement is reported against.
+
+*The register partition and `REGISTER_MAX_BYTES` stay.* That partition existed to admit the activity
+log without moving the Reader ceiling, which sounds like dead weight once nothing fails. It is what
+makes `--enforce-weight` worth having: without it the restored gate fails on `log.html` at 229,248 B,
+a register whose size tracks how much the vault has ingested and which nobody considers a defect — a
+flag that reports a known-acceptable fact as a breach is a flag no one turns on. It also carries
+`registerRunway()`'s "N further entries, then it is pagination", the one piece of weight advice still
+worth acting on, and it keeps the log's size printed on every run.
+
+*Two neighbouring budgets are deliberately untouched.* The Search_Index budget of 1,000,000 bytes
+(Requirement 9.1, `SEARCH_CONTENT_LIMITS`) bounds `static/contentIndex.json`, which every visitor
+downloads before search works at all — a different kind of cost from a page a Reader chose to open,
+and a separate question the owner is raising separately. And `kb.HEADER_BUDGET_BYTES` (Requirement
+10.1, ADR-012 and ADR-013) stays a gate: it is a tripwire on a header-rendering bug, not a
+page-weight budget.
+
+**Cost.** Nothing now catches a page that becomes genuinely enormous. Not a page that grows — a page
+that breaks: a template defect that inlines something 40 times, a KaTeX regression, an emitter loop.
+The gate would have caught that class of thing for the wrong stated reason, and it will no longer
+catch it at all. The only mitigation is that the figures print on every run, with the heaviest pages
+named and their bytes broken down, so the evidence is in front of anyone who reads the gate output —
+which is weaker than a gate, because it depends on someone reading. If a page-weight surprise is ever
+found in production, this ADR is where to look first, and the fix is `--enforce-weight` with figures
+re-measured on the content-only population, not the ones recorded above.
+
+Two smaller costs. The three reference figures now have no mechanism keeping them current: a budget
+is re-derived when it fails, a reference figure just goes stale, so the numbers in Requirement 10.2
+to 10.4 should be read as "what the site measured on 2026-08-30" and not as a target. And the status
+vocabulary grew to five, so anything that parses this script's output has one more value to know
+about — `pages.yml` does not, having been checked, but the next consumer will have to be.

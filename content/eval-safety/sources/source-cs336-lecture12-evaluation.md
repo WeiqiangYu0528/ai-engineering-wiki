@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The Spring 2026 CS336 Lecture 12 (Percy Liang, May 6, lecture12.py trace) closes the training arc — "we've covered everything for training an LM; what data do you train on?</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336), 2026-05-06. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_12">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

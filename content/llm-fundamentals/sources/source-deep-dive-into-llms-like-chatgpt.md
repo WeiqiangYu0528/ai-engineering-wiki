@@ -36,6 +36,7 @@ aliases:
 <p class="kb-summary">A foundational 3.5-hour lecture by Andrej Karpathy providing a complete end-to-end breakdown of how modern Large Language Models work.</p>
 <p class="kb-provenance">Andrej Karpathy, 2025-02-04. <a href="https://www.youtube.com/watch?v=7xTGNNLPyMI">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -25,6 +25,7 @@ aliases:
 <p class="kb-summary">Stanford University (specifically the Stanford Artificial Intelligence Laboratory, SAIL, and Center for Research on Foundation Models, CRFM) is one of the world's foremost academic institutions leading AI and machine…</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/fine-tuning/concepts/direct-preference-optimization">Direct Preference Optimization</a></li><li><a href="/fine-tuning/concepts/rlhf">Reinforcement Learning from Human Feedback</a></li><li><a href="/fine-tuning/concepts/alignment">AI Alignment</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

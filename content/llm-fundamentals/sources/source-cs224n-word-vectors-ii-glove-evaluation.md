@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Winter 2019 Lecture Notes Part II (Mundra et al., Manning/Socher, 13 pages, cs224n-2019-notes02-wordvecs2.pdf) is the companion to Note 1 that finishes the word-vector story.</p>
 <p class="kb-provenance">Rohit Mundra, Emma Peng, Richard Socher, Ajay Sohmshetty, Amita Kamath (Christopher Manning, Richard Socher instructors), 2019-01-01. <a href="https://web.stanford.edu/class/cs224n/readings/cs224n-2019-notes02-wordvecs2.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

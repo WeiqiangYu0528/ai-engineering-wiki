@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Follow-up to the RAG synthetic-data guide addressing diversity failures in bulk LLM generation and how to fix them via randomized entity seeding and iterative hierarchical generation.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-09-20. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/applications/generating_textbooks.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

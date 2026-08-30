@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">Encyclopedic survey of adversarial prompting: prompt injection (hijacking concatenated trusted+untrusted prompts), prompt leaking (exfiltrating IP/exemplars), and jailbreaking (bypassing safety policies) with detailed…</p>
 <p class="kb-provenance">DAIR.AI / Elvis Saravia, 2023-04-01. <a href="https://www.promptingguide.ai/risks/adversarial">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

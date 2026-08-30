@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The seminal January 2020 OpenAI research paper by Jared Kaplan et al. that established empirical power-law scaling laws governing autoregressive Transformer language models.</p>
 <p class="kb-provenance">Jared Kaplan, Sam McCandlish, Tom Henighan, Tom B. Brown, Benjamin Chess, Rewon Child, Scott Gray, Alec Radford, Jeffrey Wu, Dario Amodei (OpenAI), 2020-01-23. <a href="https://arxiv.org/abs/2001.08361">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

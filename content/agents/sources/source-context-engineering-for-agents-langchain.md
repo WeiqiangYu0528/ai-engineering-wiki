@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The July 2, 2025 LangChain Blog (14-min) that complements Anthropic's attention-budget view with an operational 4-bucket taxonomy for building agents on LangGraph/LangSmith: write, select, compress, and isolate context.</p>
 <p class="kb-provenance">LangChain Team, 2025-07-02. <a href="https://www.langchain.com/blog/context-engineering-for-agents">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

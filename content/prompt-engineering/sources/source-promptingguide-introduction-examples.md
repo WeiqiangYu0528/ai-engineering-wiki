@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">This capstone of the introduction section walks through seven canonical prompt-engineering use cases on gpt-3.5-turbo — Text Summarization, Information Extraction, Question Answering, Text Classification, Conversation…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/introduction/examples.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

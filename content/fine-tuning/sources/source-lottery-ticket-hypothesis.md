@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Frankle &amp; Carbin (MIT, arXiv 1803.03635v5, ICLR 2019) articulate the Lottery Ticket Hypothesis (LTH): dense, randomly-initialized feed-forward networks contain sparse subnetworks (winning tickets) that — when trained in…</p>
 <p class="kb-provenance">Jonathan Frankle, Michael Carbin (MIT CSAIL), 2019-03-04. <a href="https://arxiv.org/abs/1803.03635">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

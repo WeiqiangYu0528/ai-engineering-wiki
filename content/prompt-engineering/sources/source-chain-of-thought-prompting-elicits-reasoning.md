@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The foundational January 2022 (v6 Jan 2023) Google Research Brain paper by Wei et al. that introduced Chain-of-Thought (CoT) prompting — augmenting few-shot exemplars with &lt;input, chain of thought, output&gt; triples so…</p>
 <p class="kb-provenance">Jason Wei, Xuezhi Wang, Dale Schuurmans, Maarten Bosma, Brian Ichter, Fei Xia, Ed H. Chi, Quoc V. Le, Denny Zhou (Google Research, Brain Team), 2022-01-28. <a href="https://arxiv.org/abs/2201.11903">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

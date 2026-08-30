@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Summary of Lee et al. (2024, arXiv 2404.03414) proposing LM-Guided CoT: distill reasoning from a large LM into a small LM via rationale-generated knowledge distillation, then optimize the small LM with RL using…</p>
 <p class="kb-provenance">Lee et al. (2024) via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/guided-cot.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">This chapter introduces Generated Knowledge Prompting (Liu et al. 2022 — https://arxiv.org/pdf/2110.08387.pdf) as the two-stage technique where the LLM first generates task-relevant knowledge statements, then uses them…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/knowledge.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Noah Smith's (UW/AllenAI) invited Communications of the ACM (June 2020) introductory essay — intentionally non-mathematical, non-algorithmic — tracing how NLP moved from discrete word integers to static distributional…</p>
 <p class="kb-provenance">Noah A. Smith (University of Washington / Allen Institute for AI), 2020-04-17. <a href="https://arxiv.org/abs/1902.06006">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

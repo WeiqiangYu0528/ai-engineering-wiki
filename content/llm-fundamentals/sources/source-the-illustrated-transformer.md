@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The landmark 2018 visual tutorial by Jay Alammar that became the standard pedagogical reference for understanding the Transformer architecture.</p>
 <p class="kb-provenance">Jay Alammar, 2018-06-27. <a href="https://jalammar.github.io/illustrated-transformer/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

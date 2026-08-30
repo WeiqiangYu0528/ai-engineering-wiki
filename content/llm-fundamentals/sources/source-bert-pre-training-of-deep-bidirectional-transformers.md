@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The seminal October 2018 (NAACL 2019) paper from Google Research that introduced BERT — Bidirectional Encoder Representations from Transformers.</p>
 <p class="kb-provenance">Jacob Devlin, Ming-Wei Chang, Kenton Lee, Kristina Toutanova (Google AI Language), 2019-05-24. <a href="https://arxiv.org/abs/1810.04805">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

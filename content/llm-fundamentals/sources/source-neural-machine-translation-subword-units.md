@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The August 2015 (ACL 2016) Edinburgh paper that introduced Byte Pair Encoding (BPE) to neural machine translation and established subword tokenization as the default solution to open-vocabulary NMT.</p>
 <p class="kb-provenance">Rico Sennrich, Barry Haddow, Alexandra Birch, 2015-08-31. <a href="https://arxiv.org/abs/1508.07909">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The Nov 2024 paper (arXiv 2411.04996, CS224n Week 9 – Multimodality, Luke Zettlemoyer) introduces Mixture-of-Transformers (MoT), a sparse, modality-routed transformer that decouples all non-embedding parameters by…</p>
 <p class="kb-provenance">Weixin Liang, Lili Yu, Liang Luo, Srinivasan Iyer, Ning Dong, Chunting Zhou, Gargi Ghosh, Mike Lewis, Wen-tau Yih, Luke Zettlemoyer, Xi Victoria Lin (Stanford, FAIR at Meta), 2024-11-07. <a href="https://arxiv.org/abs/2411.04996">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

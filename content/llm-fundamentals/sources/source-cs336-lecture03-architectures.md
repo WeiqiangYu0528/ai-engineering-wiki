@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Lecture 03 (67-page PDF, Tatsu Hashimoto) exhaustively surveys what 19+ dense LMs from 2024–2025 actually share vs what varies, giving the "experience of others" complement to hands-on architecture implementation.</p>
 <p class="kb-provenance">Tatsu Hashimoto, 2026-04-06. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_03.pdf">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

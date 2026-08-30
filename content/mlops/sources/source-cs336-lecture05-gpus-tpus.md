@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Lecture 05 (55-page PDF, Tatsu) makes CUDA/GPUs non-magic and actionable for LLM systems: Part 1 dissects GPU anatomy (SM/SP, SIMT threads→warps(32)→blocks→grids, memory hierarchy SRAM/shared/L1 ~8× faster than…</p>
 <p class="kb-provenance">Tatsu Hashimoto, 2026-04-13. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_05.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

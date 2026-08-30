@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The EMNLP 2023 paper by Ahia et al. (CMU/UW/AI2) that quantifies multilingual tokenization unfairness in the commercial Language-Model-as-a-Service era.</p>
 <p class="kb-provenance">Orevaoghene Ahia, Sachin Kumar, Hila Gonen, Jungo Kasai, David R. Mortensen, Noah A. Smith, Yulia Tsvetkov, 2023-12-01. <a href="https://aclanthology.org/2023.emnlp-main.614/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

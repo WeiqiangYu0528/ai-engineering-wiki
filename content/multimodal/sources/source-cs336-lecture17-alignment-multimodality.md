@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The Spring 2026 CS336 Lecture 17 (lecture17.py trace, Wed May 27, Percy Liang) is the capstone synthesis listed on the schedule as "Alignment - multimodality" but executed as "Lecture 17: multimodal models" — a…</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336, Spring 2026), 2026-05-27. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_17">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

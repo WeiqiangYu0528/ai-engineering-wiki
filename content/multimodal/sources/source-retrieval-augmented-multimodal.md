@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">RA-CM3 (ICML 2023, arXiv 2211.12561v2 Jun 2023) is the first retrieval-augmented multimodal model that retrieves and generates both text and images – unifying text-centric RAG (Lewis et al. 2020, Karpukhin 2020 DPR…</p>
 <p class="kb-provenance">Michihiro Yasunaga, Armen Aghajanyan, Weijia Shi, Rich James, Jure Leskovec, Percy Liang, Mike Lewis, Luke Zettlemoyer, Wen-tau Yih (Stanford/Meta/UW), 2022-11-23. <a href="https://arxiv.org/abs/2211.12561">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

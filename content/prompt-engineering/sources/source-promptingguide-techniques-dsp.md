@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">This brief chapter introduces Li et al. (2023) Directional Stimulus Prompting.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.) — based on Li et al. (2023), 2023-02-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/dsp.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

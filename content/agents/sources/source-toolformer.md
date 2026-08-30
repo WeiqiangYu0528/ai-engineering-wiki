@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Schick et al. (Meta AI, arXiv 2302.04761, ICLR 2023) present Toolformer — a self-supervised method that teaches a language model (GPT-J 6.7B) to decide which APIs to call, when, with what arguments, and how to…</p>
 <p class="kb-provenance">Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli, Luke Zettlemoyer, Nicola Cancedda, Thomas Scialom (Meta AI Research), 2023-02-09. <a href="https://arxiv.org/abs/2302.04761">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

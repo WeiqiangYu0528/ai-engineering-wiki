@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Wang et al. (AI2/UW, arXiv 2306.04751v2, Oct 2023) systematically evaluate instruction tuning on 12 open datasets across LLaMA/LLaMA-2/OPT/Pythia 6.7B–65B.</p>
 <p class="kb-provenance">Yizhong Wang, Hamish Ivison, Pradeep Dasigi, Jack Hessel et al. (AI2, UW), 2023-10-30. <a href="https://arxiv.org/abs/2306.04751">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

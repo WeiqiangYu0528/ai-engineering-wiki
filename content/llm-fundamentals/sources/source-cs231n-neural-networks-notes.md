@@ -24,6 +24,7 @@ aliases:
 <p class="kb-summary">Two companion chapters of Stanford's CS231n course notes, assigned as CS224n Week 2 background.</p>
 <p class="kb-provenance">Andrej Karpathy and CS231n teaching staff (Stanford), 2016-01-01. <a href="http://cs231n.github.io/neural-networks-1/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

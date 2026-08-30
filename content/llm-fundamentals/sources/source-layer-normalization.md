@@ -26,6 +26,7 @@ aliases:
 <p class="kb-summary">The July 2016 University of Toronto/Google paper that introduced Layer Normalization (LN), now the ubiquitous normalization in every Transformer block.</p>
 <p class="kb-provenance">Jimmy Lei Ba, Jamie Ryan Kiros, Geoffrey E. Hinton, 2016-07-21. <a href="https://arxiv.org/abs/1607.06450">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

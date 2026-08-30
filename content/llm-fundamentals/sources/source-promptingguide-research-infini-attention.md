@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Summary of Google paper (arXiv 2404.07143) introducing Infini-attention — a modified attention layer that integrates compressive memory into vanilla dot-product attention to process infinitely long inputs with bounded…</p>
 <p class="kb-provenance">Google (Munkhdalai et al., 2024) via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/infini-attention.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

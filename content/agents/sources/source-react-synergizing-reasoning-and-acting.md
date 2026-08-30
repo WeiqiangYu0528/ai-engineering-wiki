@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The October 2022 (v3 Mar 2023) Google Research/Princeton paper by Yao et al. (ICLR 2023) that introduces ReAct — a prompting paradigm that synergizes reasoning traces ($\mathcal{L}$) and task actions ($\mathcal{A}$) in…</p>
 <p class="kb-provenance">Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran, Karthik Narasimhan, Yuan Cao (Princeton &amp; Google Research), 2022-10-06. <a href="https://arxiv.org/abs/2210.03629">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

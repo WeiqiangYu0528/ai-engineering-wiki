@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Primer on Google DeepMind Gemini (Ultra/Pro/Nano) as natively multimodal (text+image+video+audio+code) via Transformer decoders + multi-query attention, 32K context, 98% needle-retrieval across length, joint multimodal…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2024-01-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/models/gemini.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

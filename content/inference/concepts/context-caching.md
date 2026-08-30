@@ -34,6 +34,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/context-engineering">Context Engineering</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/agents/concepts/claude-code">Claude Code</a></li><li><a href="/prompt-engineering/concepts/applications-overview">LLM Applications Overview</a></li><li><a href="/rag/concepts/retrieval-augmented-generation">Retrieval Augmented Generation (RAG)</a></li><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/agents/concepts/ai-agents">AI Agents</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/agents/sources/source-effective-context-engineering-for-ai-agents">Effective Context Engineering for AI Agents</a></li><li><a href="/inference/sources/source-promptingguide-applications-context-caching">Context Caching with Gemini 1.5 Flash — Prompt Engineering Guide (DAIR.AI) Applications</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Summary of Wu et al. (2024) "How Faithful are RAG Models?" studying the tension between retrieved context and LLM parametric prior on question answering (focused on GPT-4 family).</p>
 <p class="kb-provenance">Wu et al. (2024) via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/rag-faithfulness.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

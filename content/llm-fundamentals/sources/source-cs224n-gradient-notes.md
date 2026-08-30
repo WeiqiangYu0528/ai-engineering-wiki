@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The 202 KB CS224n supplemental note (readings/gradient-notes.pdf, Last-Modified 2025-09-05, [https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf](https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf)) is the hands-on companion to Lecture 03 for mastering Backpropagation by hand before PyTorch…</p>
 <p class="kb-provenance">Stanford CS224n Staff (Diyi Yang, Yejin Choi), 2025-09-05. <a href="https://web.stanford.edu/class/cs224n/readings/gradient-notes.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

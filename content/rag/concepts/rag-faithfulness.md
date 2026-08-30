@@ -31,6 +31,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/rag/concepts/retrieval-augmented-generation">Retrieval Augmented Generation (RAG)</a></li><li><a href="/eval-safety/concepts/hallucination">Hallucination</a></li><li><a href="/rag/concepts/rag-evaluation">RAG Evaluation</a></li><li><a href="/llm-fundamentals/concepts/in-context-recall">In-Context Recall</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/rag/sources/source-promptingguide-research-rag-faithfulness">How Faithful are RAG Models? — Tug-of-War Between RAG and LLM Prior</a></li><li><a href="/rag/sources/source-promptingguide-research-rag">Retrieval Augmented Generation (RAG) for LLMs — Survey Summary</a></li><li><a href="/rag/sources/source-promptingguide-research-rag-hallucinations">Reducing Hallucination in Structured Outputs via RAG</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

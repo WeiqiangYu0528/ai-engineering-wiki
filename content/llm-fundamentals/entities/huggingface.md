@@ -26,6 +26,7 @@ aliases:
 <p class="kb-summary">Hugging Face is the open-source AI platform and company behind the transformers library, the Hub (models/datasets/Spaces), and the canonical practical guides for LLM inference.</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/concepts/transformer">Transformer</a></li><li><a href="/inference/concepts/decoding-strategies">Decoding Strategies</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/llm-fundamentals/concepts/tokenization">Tokenization</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

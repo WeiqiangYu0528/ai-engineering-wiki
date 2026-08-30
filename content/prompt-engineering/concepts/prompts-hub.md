@@ -31,6 +31,7 @@ related:
 <p class="kb-summary">The Prompts Hub (pages/prompts in the Prompt Engineering Guide) is an indexed collection of 12 task-specific prompt families, each aggregating concrete runnable prompts.</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/prompt-engineering/concepts/prompt-elements">Prompt Elements</a></li><li><a href="/prompt-engineering/concepts/in-context-learning">In-Context Learning</a></li><li><a href="/prompt-engineering/concepts/chain-of-thought">Chain-of-Thought Prompting</a></li><li><a href="/rag/concepts/retrieval-augmented-generation">Retrieval Augmented Generation (RAG)</a></li><li><a href="/prompt-engineering/concepts/few-shot-prompting">Few-Shot Prompting</a></li><li><a href="/prompt-engineering/concepts/zero-shot-prompting">Zero-Shot Prompting</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

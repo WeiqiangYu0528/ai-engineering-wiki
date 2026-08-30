@@ -24,6 +24,7 @@ aliases:
 <p class="kb-summary">Groq is an LLM inference hardware and cloud provider whose LPU™ Inference Engine and custom Language Processing Units (LPUs) accelerate autoregressive decoding by reducing time-per-word.</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/inference/concepts/decoding-strategies">Decoding Strategies</a></li><li><a href="/llm-fundamentals/concepts/infini-attention">Infini-attention</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

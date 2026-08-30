@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">A comprehensive engineering guide by Lydia Hallie from Anthropic on optimizing agentic coding sessions in Claude Code.</p>
 <p class="kb-provenance">Lydia Hallie (Anthropic), 2026-08-14. <a href="https://claude.com/blog/maximizing-the-value-of-your-claude-code-sessions">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

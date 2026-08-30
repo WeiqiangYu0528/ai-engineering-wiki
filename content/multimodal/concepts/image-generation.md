@@ -31,6 +31,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/multimodal-cot">Multimodal Chain-of-Thought (Multimodal CoT)</a></li><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/prompt-engineering/concepts/prompt-optimization">Prompt Optimization</a></li><li><a href="/agents/concepts/reasoning-llms">Reasoning LLMs</a></li><li><a href="/prompt-engineering/concepts/applications-overview">LLM Applications Overview</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/multimodal/sources/source-promptingguide-guides-4o-image-generation">OpenAI 4o Image Generation Guide — Prompt Engineering Guide (DAIR.AI) Guides</a></li><li><a href="/llm-fundamentals/sources/source-promptingguide-models-gpt-4">GPT-4 — Prompt Engineering Guide (DAIR.AI) Models</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

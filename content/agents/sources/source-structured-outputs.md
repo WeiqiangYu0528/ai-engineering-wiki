@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The canonical OpenAI Developers guide for Structured Outputs — the feature that guarantees model responses adhere to a supplied JSON Schema (strict:true) so no required key is omitted or enum hallucinated.</p>
 <p class="kb-provenance">OpenAI, 2025-08-24. <a href="https://developers.openai.com/api/docs/guides/structured-outputs">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

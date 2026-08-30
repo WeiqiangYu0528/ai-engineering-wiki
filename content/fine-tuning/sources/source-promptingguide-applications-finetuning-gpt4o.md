@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Announcement-style guide to OpenAI GPT-4o / GPT-4o mini fine-tuning (GA via GPT-4o-2024-08-06 checkpoint).</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2024-08-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/applications/finetuning-gpt4o.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

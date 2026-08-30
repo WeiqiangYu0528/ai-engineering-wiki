@@ -2,8 +2,6 @@
 title: "Reading path: Evaluation & Safety"
 ---
 
-# Reading path: Evaluation & Safety
-
 > 7 pages in order, about 47 minutes of reading · content as of 2026-08-26
 
 Each entry assumes the ones above it, which is the only claim this page makes — it is a route in, not a table of contents. The [Evaluation & Safety map](/eval-safety/) has the full list.

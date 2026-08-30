@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">The May 2024 FAIR at Meta paper (arXiv 2405.09818, CS224n Week 9 Tue – Multimodality, Luke Zettlemoyer) presents Chameleon, a family of early-fusion, fully token-based mixed-modal foundation models (7B and 34B) that…</p>
 <p class="kb-provenance">Chameleon Team, FAIR at Meta, 2024-05-16. <a href="https://arxiv.org/abs/2405.09818">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

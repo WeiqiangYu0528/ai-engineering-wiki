@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">CM3Leon (pronounced Chameleon, FAIR Sep 2023, arXiv 2309.02591, 7B/760M/350M, 2.4T tokens) is the retrieval-augmented, token-based decoder-only multi-modal LM that proved autoregressive image generation can beat…</p>
 <p class="kb-provenance">Lili Yu, Bowen Shi, Ramakanth Pasunuru et al. (FAIR, YerevaNN), 2023-09-05. <a href="https://arxiv.org/abs/2309.02591">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

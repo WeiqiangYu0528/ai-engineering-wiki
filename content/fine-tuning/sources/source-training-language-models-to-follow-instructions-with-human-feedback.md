@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The foundational 2022 research paper by OpenAI introducing InstructGPT, the direct technological predecessor to ChatGPT.</p>
 <p class="kb-provenance">Long Ouyang, Jeff Wu, et al. (OpenAI), 2022-03-04. <a href="https://arxiv.org/abs/2203.02155">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

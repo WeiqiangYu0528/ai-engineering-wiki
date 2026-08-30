@@ -26,6 +26,7 @@ aliases:
 <p class="kb-summary">Sebastian Ruder's August 2021 survey (16-min read, ACL 2021 + Benchmarking Past/Present/Future workshop synthesis) argues that superhuman scores on GLUE/SuperGLUE/SQuAD within ~1 year do not signal NLP solved, but…</p>
 <p class="kb-provenance">Sebastian Ruder, 2021-08-23. <a href="https://www.ruder.io/nlp-benchmarking/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

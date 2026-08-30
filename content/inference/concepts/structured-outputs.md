@@ -33,6 +33,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/agents/concepts/function-calling">Function Calling</a></li><li><a href="/inference/concepts/decoding-strategies">Decoding Strategies</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/agents/concepts/model-context-protocol">Model Context Protocol</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/agents/sources/source-structured-outputs">Structured model outputs — OpenAI Developers</a></li><li><a href="/agents/sources/source-openai-tools-and-agent-capabilities">OpenAI Tools &amp; Agent Capabilities Guide Suite</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

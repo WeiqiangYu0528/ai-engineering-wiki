@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The December 19, 2024 Anthropic Engineering post (Erik S. &amp; Barry Zhang) that synthesizes lessons from dozens of customer agent deployments into a practical hierarchy: augmented LLM → workflows (prompt chaining…</p>
 <p class="kb-provenance">Erik S. and Barry Zhang (Anthropic), 2024-12-19. <a href="https://www.anthropic.com/engineering/building-effective-agents">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

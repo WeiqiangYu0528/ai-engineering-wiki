@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Guide to OpenAI Deep Research — an agentic reasoning system for multi-step internet research powered by a proprietary o3 variant (RL-trained to browse, plan, backtrack, adapt) with tools Python + web browsing…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2025-05-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/guides/deep-research.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

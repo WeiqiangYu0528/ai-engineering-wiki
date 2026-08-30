@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Dubois et al. (Stanford, arXiv 2305.14387v4, Jan 2024, NeurIPS 2023) introduce AlpacaFarm — a low-cost sandbox for studying methods that learn from pairwise human feedback (LPF).</p>
 <p class="kb-provenance">Yann Dubois, Xuechen Li, Rohan Taori, Tianyi Zhang, Ishaan Gulrajani, Jimmy Ba, Carlos Guestrin, Percy Liang, Tatsunori B. Hashimoto (Stanford), 2024-01-08. <a href="https://arxiv.org/abs/2305.14387">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">An open-source interactive visualization system and companion research paper published at IEEE VIS 2024 by the Polo Club of Data Science at Georgia Tech.</p>
 <p class="kb-provenance">Aeree Cho, Grace C. Kim, Alexander Chao, Chao Zhang, Seongmin Lee, Minsuk Kahng, Duen Horng Chau (Georgia Tech Polo Club), 2024-08-08. <a href="https://poloclub.github.io/transformer-explainer/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

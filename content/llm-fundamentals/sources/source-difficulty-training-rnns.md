@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The 2013 ICML paper (arXiv:1211.5063v2, 16 Feb 2013) by Pascanu, Mikolov &amp; Bengio — the canonical Week 2 RNN companion to Bengio 1994 in CS224n 2026 — revisits the vanishing and exploding gradient problems with an…</p>
 <p class="kb-provenance">Razvan Pascanu, Tomas Mikolov, Yoshua Bengio, 2013-02-16. <a href="https://arxiv.org/abs/1211.5063">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

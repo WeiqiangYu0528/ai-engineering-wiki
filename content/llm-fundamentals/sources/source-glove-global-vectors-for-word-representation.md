@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Pennington, Socher &amp; Manning (Stanford NLP, EMNLP 2014, http://nlp.stanford.edu/pubs/glove.pdf) analyze why vector arithmetic regularities (e.g., king - queen ≈ man - woman) emerge and make the conditions explicit.</p>
 <p class="kb-provenance">Jeffrey Pennington, Richard Socher, Christopher D. Manning, 2014-10-01. <a href="http://nlp.stanford.edu/pubs/glove.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

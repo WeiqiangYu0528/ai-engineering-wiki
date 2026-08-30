@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Concept of the Prompt Function — treating a GPT chat session like a programmable shell where an encapsulated prompt becomes a named, reusable function functionname(input) → output.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-05-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/applications/pf.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

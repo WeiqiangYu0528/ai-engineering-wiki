@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The complete 13-part documentation suite from OpenAI covering tools, function calling, and agent capabilities in the Responses API and OpenAI Agents SDK.</p>
 <p class="kb-provenance">OpenAI Developer Platform Team, 2026-08-22. <a href="https://developers.openai.com/api/docs/guides/tools">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

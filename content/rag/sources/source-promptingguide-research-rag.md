@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Concise synthesis of Gao et al. (2023) survey "Retrieval-Augmented Generation for Large Language Models: A Survey" as curated by the Prompt Engineering Guide research section.</p>
 <p class="kb-provenance">Gao et al. (2023) via DAIR.AI Prompt Engineering Guide, 2024-01-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/rag.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

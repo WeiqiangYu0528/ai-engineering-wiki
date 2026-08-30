@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Schnabel et al. (Cornell, EMNLP 2015) critique the dominant practice of evaluating unsupervised word embeddings via indirect intrinsic tasks (word-similarity ratings, analogies) whose correlation with downstream task…</p>
 <p class="kb-provenance">Tobias Schnabel, Igor Labutov, David Mimno, Thorsten Joachims, 2015-09-01. <a href="https://aclanthology.org/D15-1036/">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

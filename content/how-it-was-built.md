@@ -2,8 +2,6 @@
 title: How this was built
 ---
 
-# How this was built
-
 Generated 2026-08-30.
 
 This is a personal knowledge base about AI engineering, built on the [LLM Wiki pattern](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f): a human curates sources, a language model reads them and maintains an interlinked wiki on top, and a schema file teaches any coding agent how to do that maintenance consistently.

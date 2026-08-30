@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The May 2023 OpenAI paper (Lightman et al., arXiv 2305.20050) conducts the first large-scale comparison of outcome supervision (ORM: feedback only on final answer correctness) vs process supervision (PRM: feedback on…</p>
 <p class="kb-provenance">Hunter Lightman, Vineet Kosaraju, Yura Burda, Harri Edwards, Bowen Baker, Teddy Lee, Jan Leike, John Schulman, Ilya Sutskever, Karl Cobbe (OpenAI), 2023-05-31. <a href="https://arxiv.org/abs/2305.20050">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

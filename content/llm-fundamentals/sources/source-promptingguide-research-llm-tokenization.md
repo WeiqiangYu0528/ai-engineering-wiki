@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Pointer to Andrej Karpathy's lecture on LLM tokenization (https://youtu.be/zduSFxRajkE), covering BPE tokenizer training, GPT tokenizer from-scratch implementation, and how many LLM quirks trace to tokenization.</p>
 <p class="kb-provenance">Andrej Karpathy via DAIR.AI, 2024-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/llm-tokenization.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

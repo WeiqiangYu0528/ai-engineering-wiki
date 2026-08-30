@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The landmark March 2022 DeepMind paper by Hoffmann et al. that revised the Scaling Laws for large language models by training over 400 models (70M–16B parameters, 5B–500B tokens) and demonstrating that prior Kaplan…</p>
 <p class="kb-provenance">Jordan Hoffmann, Sebastian Borgeaud, Arthur Mensch, et al. (DeepMind), 2022-03-29. <a href="https://arxiv.org/abs/2203.15556">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

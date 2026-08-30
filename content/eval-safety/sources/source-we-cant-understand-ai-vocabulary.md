@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The Feb 2025 position paper by Hewitt, Geirhos, and Kim (Google DeepMind, arXiv 2502.07586, CS224n Week 8 Tue — Been Kim required) argues interpretability is a communication problem between humans and machines who…</p>
 <p class="kb-provenance">John Hewitt, Robert Geirhos, Been Kim, 2025-02-11. <a href="https://arxiv.org/abs/2502.07586">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

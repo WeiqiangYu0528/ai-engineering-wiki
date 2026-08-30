@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Authoritative, essay-length definition of context engineering as the evolved, broader successor to prompt engineering — architecting full context window (instructions, dynamic elements, tools, RAG/memory, structured…</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-06-15. <a href="https://www.promptingguide.ai/guides/context-engineering-guide">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The April 2021 / November 2023 v5 paper (Su et al., arXiv 2104.09864, Zhuiyi Technology) proposes Rotary Position Embedding (RoPE) — a multiplicative position encoding that rotates query/key vectors by…</p>
 <p class="kb-provenance">Jianlin Su, Yu Lu, Shengfeng Pan, Ahmed Murtadha, Bo Wen, Yunfeng Liu (Zhuiyi Technology), 2021-04-20. <a href="https://arxiv.org/abs/2104.09864">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

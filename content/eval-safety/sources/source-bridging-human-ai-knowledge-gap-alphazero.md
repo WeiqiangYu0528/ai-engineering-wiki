@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The PNAS 2025 paper (Schut et al., preprint arXiv 2310.16410 Oct 2023; CS224n Week 8 Tue — Been Kim recommended reading) is the first end-to-end demonstration that superhuman AI harbors learnable, machine-unique…</p>
 <p class="kb-provenance">Lisa Schut, Nenad Tomašev, Tom McGrath, Demis Hassabis, Ulrich Paquet, Been Kim, 2025-03-26. <a href="https://www.pnas.org/doi/10.1073/pnas.2406675122">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

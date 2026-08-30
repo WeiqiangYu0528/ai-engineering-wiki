@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The 10-page March 1994 IEEE Transactions on Neural Networks (Vol. 5, No. 2, pp. 157–166) paper by Bengio, Simard &amp; Frasconi — the seminal diagnosis of the vanishing gradient problem assigned as Week 2 RNN required…</p>
 <p class="kb-provenance">Yoshua Bengio, Patrice Simard, Paolo Frasconi, 1994-03-01. <a href="https://ieeexplore.ieee.org/document/279181">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Chung et al. (Google, arXiv 2210.11416v5, Dec 2022) present FLAN-T5 / FLAN-PaLM — the definitive scaling study of instruction finetuning.</p>
 <p class="kb-provenance">Hyung Won Chung, Le Hou, Shayne Longpre, Barret Zoph et al. (Google), 2022-12-06. <a href="https://arxiv.org/abs/2210.11416">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

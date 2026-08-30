@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Case-study-driven introduction to context engineering via a minimal deep-research agent (web search → report).</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-05-20. <a href="https://www.promptingguide.ai/agents/context-engineering">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

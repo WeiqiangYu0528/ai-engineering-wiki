@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Model brief on Meta Llama 3 (8B + 70B pre-trained &amp; instruction-tuned; 400B preview).</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.) / Meta AI, 2024-04-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/models/llama-3.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

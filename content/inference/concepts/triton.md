@@ -33,6 +33,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/mlops/concepts/parallelism">Parallelism for LLM Training and Inference</a></li><li><a href="/llm-fundamentals/concepts/transformer">Transformer</a></li><li><a href="/llm-fundamentals/concepts/self-attention">Self-Attention Mechanism</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/inference/sources/source-cs336-lecture06-kernels-triton">CS336 Lecture 06 — Kernels, Triton</a></li><li><a href="/mlops/sources/source-cs336-lecture07-parallelism">CS336 Lecture 07 — Parallelism</a></li><li><a href="/mlops/sources/source-cs336-lecture08-parallelism">CS336 Lecture 08 — Parallelism Basics</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

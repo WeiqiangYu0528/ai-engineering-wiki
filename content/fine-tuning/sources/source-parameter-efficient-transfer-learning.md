@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The canonical adapter-tuning paper (Google Research).</p>
 <p class="kb-provenance">Neil Houlsby, Andrei Giurgiu, Stanisław Jastrzȩbski, Bruna Morrone, Quentin de Laroussilhe, Andrea Gesmundo, Mona Attariyan, Sylvain Gelly, 2019-02-02. <a href="https://arxiv.org/abs/1902.00751">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

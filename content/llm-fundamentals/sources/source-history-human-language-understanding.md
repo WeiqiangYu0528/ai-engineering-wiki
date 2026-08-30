@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Christopher D. Manning's Dædalus (Spring 2022, American Academy of Arts &amp; Sciences, AI &amp; Society issue) invited essay — the designated Week 1 History reading for CS224n 2026 — condenses 70 years of NLP into four eras…</p>
 <p class="kb-provenance">Christopher D. Manning, 2022-04-01. <a href="https://www.amacad.org/publication/daedalus/human-language-understanding-reasoning">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">The seminal 2023 paper from Stanford University introducing Direct Preference Optimization (DPO).</p>
 <p class="kb-provenance">Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning, Chelsea Finn (Stanford University), 2023-05-29. <a href="https://arxiv.org/abs/2305.18290">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

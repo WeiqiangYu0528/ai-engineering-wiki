@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Lecture 13 opens the CS336 data block (the "what data should we train on?" half after mechanics/systems/scaling) with a systematic inventory of where LLM data comes from and what legally/technically constrains it.</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336, Spring 2026), 2026-05-11. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_13">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

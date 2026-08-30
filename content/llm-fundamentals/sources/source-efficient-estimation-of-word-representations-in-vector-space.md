@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Mikolov et al. (Google, arXiv:1301.3781v3, ICLR 2013 workshop) introduce Word2Vec — two log-linear architectures, Continuous Bag-of-Words (CBOW) and Continuous Skip-gram, that learn high-quality distributed word vectors…</p>
 <p class="kb-provenance">Tomas Mikolov, Kai Chen, Greg Corrado, Jeffrey Dean, 2013-01-16. <a href="https://arxiv.org/abs/1301.3781">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

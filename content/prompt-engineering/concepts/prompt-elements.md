@@ -32,6 +32,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/prompt-engineering/concepts/in-context-learning">In-Context Learning</a></li><li><a href="/prompt-engineering/concepts/prompt-design-tips">Prompt Design Tips</a></li><li><a href="/prompt-engineering/concepts/role-prompting">Role Prompting</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-promptingguide-introduction-elements">Prompt Engineering Guide — Elements of a Prompt</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-introduction-basics">Prompt Engineering Guide — Basics of Prompting</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-introduction-examples">Prompt Engineering Guide — Examples of Prompts</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

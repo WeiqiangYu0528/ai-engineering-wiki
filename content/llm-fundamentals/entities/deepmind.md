@@ -25,6 +25,7 @@ aliases:
 <p class="kb-summary">DeepMind (now part of Google DeepMind) is the London-based AI research lab known for AlphaGo, AlphaFold, and foundational large language model scaling research.</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/entities/chinchilla">Chinchilla</a></li><li><a href="/llm-fundamentals/entities/gopher">Gopher</a></li><li><a href="/llm-fundamentals/concepts/scaling-laws">Scaling Laws</a></li><li><a href="/llm-fundamentals/entities/google-research">Google Research</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">This chapter introduces Tree of Thoughts (ToT) (Yao et al. 2023 https://arxiv.org/abs/2305.10601; Long 2023 https://arxiv.org/abs/2305.08291) as the generalization of Chain-of-Thought Prompting that maintains a tree of…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/tot.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

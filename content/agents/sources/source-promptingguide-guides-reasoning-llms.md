@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Comprehensive guide to large reasoning models (LRMs) — Gemini 2.5 Pro, Claude 3.7 Sonnet, o3, DeepSeek-R1 — covering definition (native chain-of-thought training), benchmark tracking (Chatbot Arena, General Reasoning…</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-05-15. <a href="https://www.promptingguide.ai/guides/reasoning-llms">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

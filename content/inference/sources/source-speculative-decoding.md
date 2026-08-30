@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The November 2022 Google paper (Leviathan et al. 2211.17192; expanded Chen et al. 2302.01318, May 2023) introduces speculative decoding — a lossless acceleration for autoregressive Transformers.</p>
 <p class="kb-provenance">Charlie Chen, Sebastian Borgeaud, Geoffrey Irving, Jean-Baptiste Lespiau, Laurent Sifre, John Jumper (Google / DeepMind) — Leviathan, Kalman, Matias (Google Research), 2022-11-30. <a href="https://arxiv.org/abs/2211.17192">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

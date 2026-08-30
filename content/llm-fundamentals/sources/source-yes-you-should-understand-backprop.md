@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Andrej Karpathy's December 2016 Medium essay is the opinionated companion to any first course on Backpropagation (CS224n Week 2 additional reading): even with autograd's "leaky abstraction" doing the calculus…</p>
 <p class="kb-provenance">Andrej Karpathy, 2016-12-19. <a href="https://medium.com/@karpathy/yes-you-should-understand-backprop-e2f06eab496b">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Draft Note 1 (John Hewitt, Manning &amp; Hewitt, Winter 2023, 13 pages, cs224nwinter2023lecture1notesdraft.pdf) is the course's narrative introduction to NLP and to the "fundamental, beautiful idea" of representing words as…</p>
 <p class="kb-provenance">John Hewitt (Christopher Manning, John Hewitt instructors), 2023-01-01. <a href="https://web.stanford.edu/class/cs224n/readings/cs224n_winter2023_lecture1_notes_draft.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

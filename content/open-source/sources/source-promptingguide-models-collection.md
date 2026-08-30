@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Encyclopedic catalog of ~50+ notable/foundational LLMs (Sep 2023 cutoff) with release date, size (B), checkpoints (HF links), and description.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-10-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/models/collection.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

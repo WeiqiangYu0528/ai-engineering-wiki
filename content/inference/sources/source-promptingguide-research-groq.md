@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Overview of Groq's LPU™ Inference Engine and Language Processing Units (LPUs) as a fast LLM inference solution (claimed 18× faster than top cloud providers on Anyscale LLMPerf Leaderboard at publication).</p>
 <p class="kb-provenance">DAIR.AI Prompt Engineering Guide, 2024-02-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/groq.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">Manifesto-style overview of the emerging “Deep Agents” era replacing shallow single-context agents for long, multi-step problems (deep research, agentic coding).</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-07-10. <a href="https://www.promptingguide.ai/agents/deep-agents">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

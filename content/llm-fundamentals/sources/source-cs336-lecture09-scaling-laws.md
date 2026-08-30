@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The Spring 2026 CS336 Lecture 09 (Tatsu, Apr 27, 57 pages, lecture09.pdf) is the first of two scaling-law lectures — the systems-oriented foundation for sizing frontier LMs.</p>
 <p class="kb-provenance">Tatsu Hashimoto (Stanford CS336), 2026-04-27. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_09.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The NIPS 2013 follow-up to Efficient Estimation of Word Representations in Vector Space introduces the two innovations that define modern Word2Vec practice: Negative Sampling (NEG) — a simplified variant of Noise…</p>
 <p class="kb-provenance">Tomas Mikolov, Ilya Sutskever, Kai Chen, Greg Corrado, Jeffrey Dean, 2013-10-16. <a href="https://arxiv.org/abs/1310.4546">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

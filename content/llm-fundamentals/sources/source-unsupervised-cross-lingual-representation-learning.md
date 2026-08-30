@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The April 2020 Facebook AI paper that introduced XLM-R (XLM-RoBERTa), a Transformer-based multilingual masked language model trained on 100 languages using 2.5 TB of filtered CommonCrawl (CC-100).</p>
 <p class="kb-provenance">Alexis Conneau, Kartikay Khandelwal, Naman Goyal, Vishrav Chaudhary, Guillaume Wenzek, Francisco Guzmán, Edouard Grave, Myle Ott, Luke Zettlemoyer, Veselin Stoyanov (Facebook AI), 2019-11-05. <a href="https://arxiv.org/abs/1911.02116">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary
@@ -51,7 +52,7 @@ The April 2020 Facebook AI paper that introduced **XLM-R (XLM-RoBERTa)**, a Tran
 - **Training:** 1.5M updates, 500×32GB V100, batch 8192, RoBERTa-style longer training (found Lample & Conneau under-tuned when stopping by perplexity plateau — downstream keeps improving).
 
 ### Analysis Figures (Section 5.1)
-- **Figure 2 Transfer-dilution:** XNLI vs #languages (7,15,30,100) fixed capacity.
+- **Figure 2 Transfer-dilution:** XNLI vs &#35;languages (7,15,30,100) fixed capacity.
 - **Figure 3 CC vs Wiki:** XLM-7 significantly better on CC, especially low-resource.
 - **Figure 4 Capacity scaling:** Wider transformer alleviates curse up to 30 languages, insufficient for 100.
 - **Figure 5 α sampling trade-off:** high-resource vs low-resource crossover.
@@ -59,7 +60,7 @@ The April 2020 Facebook AI paper that introduced **XLM-R (XLM-RoBERTa)**, a Tran
 - **Figure 7 Large-scale training & SPM simplification:** Longer training + larger batches + raw SPM no loss.
 
 ### Evaluation Details
-- **XNLI:** 15 languages ground-truth dev/test, English train MT to 14 others. Compare translate-test, translate-train per-language, translate-train-all. Note #M (number of models for selection) — N per-language models 71.3 vs 1 joint 70.7 (0.6 drop), community should use single.
+- **XNLI:** 15 languages ground-truth dev/test, English train MT to 14 others. Compare translate-test, translate-train per-language, translate-train-all. Note &#35;M (number of models for selection) — N per-language models 71.3 vs 1 joint 70.7 (0.6 drop), community should use single.
 - **NER:** CoNLL-2002/2003 EN, NL, ES, DE; settings (1) English only (2) each (3) all. Without CRF still beats Flair (Akbik et al. 2018) on Dutch by 2.09.
 - **MLQA:** Extend SQuAD to ES,DE,AR,HI,VI,ZH; fine-tune on English SQuAD, eval 7 languages.
 - **GLUE:** MNLI-m/mm, QNLI, QQP, SST, MRPC, STS-B.

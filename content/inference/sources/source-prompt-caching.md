@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The canonical Claude Platform API documentation for Prompt Caching — Anthropic's mechanism to cache prompt prefixes with cachecontrol to cut cost and latency by reusing KV and prefix state.</p>
 <p class="kb-provenance">Anthropic, 2025-08-24. <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-caching">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

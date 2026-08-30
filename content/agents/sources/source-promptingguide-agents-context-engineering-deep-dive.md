@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Deep implementation walkthrough of context engineering for a deep-research agent, contrasting a failing monolithic design (single agent handling task management, memory, search, reporting) with an improved orchestrator…</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-06-01. <a href="https://www.promptingguide.ai/agents/context-engineering-deep-dive">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

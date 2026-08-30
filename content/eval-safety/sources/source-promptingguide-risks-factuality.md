@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Brief guide framing LLM factuality failures (coherent but made-up responses) and three prompt-level mitigations: provide ground truth in context (e.g., Wikipedia paragraph), lower diversity via probability parameters +…</p>
 <p class="kb-provenance">DAIR.AI, 2023-02-01. <a href="https://www.promptingguide.ai/risks/factuality">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">LMFusion (arXiv 2412.15188v4, Feb 2025; CS224n Week 9 optional reading) flips the Week-9 question from "how to pretrain a mixed-modal model from scratch" to "how to adapt an existing text-only LLM (Llama-3 8B) into a…</p>
 <p class="kb-provenance">Weijia Shi, Xiaochuang Han, Chunting Zhou, Weixin Liang, Xi Victoria Lin, Luke Zettlemoyer, Lili Yu (UW/Stanford/FAIR Meta), 2024-12-19. <a href="https://arxiv.org/abs/2412.15188">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

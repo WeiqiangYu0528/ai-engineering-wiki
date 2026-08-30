@@ -3,8 +3,6 @@ title: Attribution and sources
 unlisted: true
 ---
 
-# NOTICE — sources and attribution
-
 Generated 2026-08-30. This wiki summarizes and analyses third-party work. Rights in each source remain with its authors.
 
 Original text in this wiki (summaries, concept pages, analysis) is licensed CC BY-SA 4.0. Quoted excerpts belong to the authors listed below and are reproduced briefly for commentary and criticism.

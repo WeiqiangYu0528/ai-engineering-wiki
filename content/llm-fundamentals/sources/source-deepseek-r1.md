@@ -34,6 +34,7 @@ aliases:
 <p class="kb-summary">The January 2025 DeepSeek-AI paper (arXiv 2501.12948) demonstrates that pure reinforcement learning (RL) without supervised fine-tuning (SFT) can incentivize emergent reasoning in LLMs.</p>
 <p class="kb-provenance">DeepSeek-AI, 2025-01-22. <a href="https://arxiv.org/abs/2501.12948">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -33,6 +33,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/agents/concepts/context-engineering">Context Engineering</a></li><li><a href="/inference/concepts/context-caching">Context Caching</a></li><li><a href="/agents/concepts/claude-code">Claude Code</a></li><li><a href="/llm-fundamentals/entities/anthropic">Anthropic</a></li><li><a href="/agents/concepts/context-engineering-thesis">Context Engineering: One Constraint Seen From Three Layers</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/inference/sources/source-prompt-caching">Prompt caching — Anthropic Claude Platform</a></li><li><a href="/agents/sources/source-effective-context-engineering-for-ai-agents">Effective Context Engineering for AI Agents</a></li><li><a href="/agents/sources/source-context-engineering-for-agents-langchain">Context Engineering for Agents</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">This chapter surveys the API-level inference parameters that modulate LLM output alongside the prompt itself: Temperature, Top P (nucleus), Max Length, Stop Sequences, Frequency Penalty, and Presence Penalty.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/introduction/settings.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

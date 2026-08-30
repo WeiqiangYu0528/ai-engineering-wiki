@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Introductory guide defining AI agents as LLM-powered systems that autonomously take actions via planning, tool access, and memory.</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-03-01. <a href="https://www.promptingguide.ai/agents/introduction">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">This short chapter of the DAIR.AI Prompt Engineering Guide summarizes Zhou et al. (2022) Large Language Models Are Human-Level Prompt Engineers (APE).</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.) — based on Zhou et al. (2022), 2022-11-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/ape.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

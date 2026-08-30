@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Summary of a ServiceNow paper (2024) on deploying efficient RAG for structured-output tasks — specifically translating natural language requirements into workflow JSON.</p>
 <p class="kb-provenance">ServiceNow Research via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/rag_hallucinations.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

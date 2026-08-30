@@ -37,6 +37,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/prompt-engineering/concepts/prompt-engineering">Prompt Engineering</a></li><li><a href="/prompt-engineering/concepts/system-prompt">System Prompt</a></li><li><a href="/agents/concepts/context-engineering">Context Engineering</a></li><li><a href="/inference/concepts/prompt-caching">Prompt Caching</a></li><li><a href="/llm-fundamentals/entities/anthropic">Anthropic</a></li><li><a href="/eval-safety/concepts/adversarial-prompting">Adversarial Prompting</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-maximizing-the-value-of-your-claude-code-sessions">Maximizing the value of your Claude Code sessions</a></li><li><a href="/agents/sources/source-effective-context-engineering-for-ai-agents">Effective Context Engineering for AI Agents</a></li><li><a href="/inference/sources/source-prompt-caching">Prompt caching — Anthropic Claude Platform</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview
@@ -61,7 +62,7 @@ related:
 
 ## How It Works
 ```
-Every inference — Claude Code Prompt.txt lineage (System Prompts — Anthropic (Claude Sonnet 4.5 + Claude Code) — x1xhlol/system-prompts-and-models-of-ai-tools)
+Every inference — Claude Code Prompt.txt lineage ([[source-system-prompts-anthropic]])
 ┌─ Tools (16 schemas: Read, Edit, Bash, TodoWrite, Task, WebFetch...)
 ├─ System Prompt (13 KB, cached prefix)
 │   ├─ Role: "interactive CLI tool … defensive security only, never guess URLs"

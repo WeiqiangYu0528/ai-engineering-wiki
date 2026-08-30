@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">FAIR's Jan 2023 paper (arXiv 2301.03728, CS224n Week 9 optional) is the first systematic mixed-modal scaling law study, running &gt;250 experiments across 7 modalities (Text, Image, Image-Text, Speech, Speech-Text, Code…</p>
 <p class="kb-provenance">Armen Aghajanyan, Lili Yu, Alexis Conneau, Wei-Ning Hsu, Karen Hambardzumyan, Susan Zhang, Stephen Roller, Naman Goyal, Omer Levy, Luke Zettlemoyer (FAIR, UW, YerevaNN), 2023-01-10. <a href="https://arxiv.org/abs/2301.03728">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

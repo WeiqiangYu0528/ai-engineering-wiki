@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Lecture 16 ascends from RLHF (~GPT-3.5) to reasoning-model RL (~o1/R1) via Reinforcement Learning from Verifiable Rewards (RLVR) — optimizing exactly what can be checked.</p>
 <p class="kb-provenance">Tatsu Hashimoto (Stanford CS336, Spring 2026), 2026-05-20. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_16.pdf">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Lewis et al. (FAIR, NeurIPS 2020, arXiv 2005.11401v4) introduce the general-purpose fine-tuning recipe for Retrieval-Augmented Generation (RAG) — a probabilistic hybrid that pairs a pre-trained seq2seq parametric memory…</p>
 <p class="kb-provenance">Patrick Lewis, Ethan Perez, Aleksandra Piktus, Fabio Petroni, Vladimir Karpukhin, Naman Goyal, Heinrich Küttler, Mike Lewis, Wen-tau Yih, Tim Rocktäschel, Sebastian Riedel, Douwe Kiela (Facebook AI Research; UCL; NYU), 2021-04-12. <a href="https://arxiv.org/abs/2005.11401">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

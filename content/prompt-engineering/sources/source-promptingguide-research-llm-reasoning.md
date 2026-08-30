@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Overview of LLM reasoning research curated by the Prompt Engineering Guide.</p>
 <p class="kb-provenance">DAIR.AI via Sun et al. (2023), Qiao et al. (2023), Huang et al. (2023), Kambhampati (2024), 2024-03-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/llm-reasoning.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

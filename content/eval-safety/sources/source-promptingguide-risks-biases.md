@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Focused factuality-adjacent guide demonstrating how few-shot exemplar distribution and order can bias LLM sentiment predictions.</p>
 <p class="kb-provenance">DAIR.AI, 2023-02-20. <a href="https://www.promptingguide.ai/risks/biases">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

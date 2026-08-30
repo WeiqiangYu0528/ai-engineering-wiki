@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Model guide to ChatGPT / gpt-3.5-turbo chat completion prompting.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-02-15. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/models/chatgpt.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

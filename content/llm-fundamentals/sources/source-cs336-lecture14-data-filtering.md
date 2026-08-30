@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Lecture 14 operationalizes Lecture 13's pipeline into implementable algorithms for transformation, filtering, deduplication, data mixing, and post-training synthetic generation — the implementation-heavy core of CS336's…</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336, Spring 2026), 2026-05-13. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_14">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

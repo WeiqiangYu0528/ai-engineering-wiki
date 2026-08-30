@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The September 2020 / January 2021 MMLU paper (Hendrycks et al., UC Berkeley, arXiv 2009.03300) introduces the Massive Multitask Language Understanding benchmark: 15,908 multiple-choice questions across 57 subjects…</p>
 <p class="kb-provenance">Dan Hendrycks, Collin Burns, Steven Basart, Andy Zou, Mantas Mazeika, Dawn Song, Jacob Steinhardt, 2021-01-12. <a href="https://arxiv.org/abs/2009.03300">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -32,6 +32,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/automatic-reasoning-and-tool-use">Automatic Reasoning and Tool-use (ART)</a></li><li><a href="/rag/concepts/retrieval-augmented-generation">Retrieval Augmented Generation (RAG)</a></li><li><a href="/prompt-engineering/concepts/chain-of-thought">Chain-of-Thought Prompting</a></li><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/prompt-engineering/concepts/tree-of-thoughts">Tree of Thoughts (ToT)</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-prompt-chaining">Prompt Engineering Guide — Prompt Chaining</a></li><li><a href="/rag/sources/source-promptingguide-techniques-rag">Prompt Engineering Guide — Retrieval Augmented Generation (RAG)</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-knowledge">Prompt Engineering Guide — Generated Knowledge Prompting</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

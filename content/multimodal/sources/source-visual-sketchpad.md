@@ -26,6 +26,7 @@ aliases:
 <p class="kb-summary">Hu, Shi, et al. (UW/AI2/UPenn, NeurIPS 2024) give multimodal LMs a visual sketchpad: a ReAct-style loop where the model's intermediate reasoning steps are drawings it generates via code — auxiliary lines in geometry…</p>
 <p class="kb-provenance">Yushi Hu, Weijia Shi, Xingyu Fu, Dan Roth, Mari Ostendorf, Luke Zettlemoyer, Noah A. Smith, Ranjay Krishna, 2024-06-13. <a href="https://arxiv.org/abs/2406.09403">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

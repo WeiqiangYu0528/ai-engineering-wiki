@@ -33,6 +33,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/prompt-engineering/concepts/self-consistency">Self-Consistency</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/chain-of-thought">Chain-of-Thought Prompting</a></li><li><a href="/prompt-engineering/concepts/self-consistency">Self-Consistency</a></li><li><a href="/llm-fundamentals/concepts/thinking-models">Thinking Models</a></li><li><a href="/prompt-engineering/concepts/prompt-chaining">Prompt Chaining</a></li><li><a href="/agents/concepts/automatic-reasoning-and-tool-use">Automatic Reasoning and Tool-use (ART)</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-tot">Prompt Engineering Guide — Tree of Thoughts (ToT)</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-cot">Prompt Engineering Guide — Chain-of-Thought Prompting</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-consistency">Prompt Engineering Guide — Self-Consistency</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

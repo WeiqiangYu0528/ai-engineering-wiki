@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Lecture 15 ("After Pretraining") completes the GPT-3 → InstructGPT/GPT-3.5 arc: pretraining alone yields a document simulator, not an assistant.</p>
 <p class="kb-provenance">Tatsu Hashimoto (Stanford CS336, Spring 2026), 2026-05-18. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_15.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -27,6 +27,7 @@ aliases:
 <p class="kb-summary">Chinchilla (70B parameters, 1.4T tokens) is the compute-optimal large language model introduced by DeepMind in Hoffmann et al. (March 2022) in Training Compute-Optimal Large Language Models (Chinchilla).</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/concepts/scaling-laws">Scaling Laws</a></li><li><a href="/llm-fundamentals/concepts/pretraining">Pretraining</a></li><li><a href="/llm-fundamentals/entities/gopher">Gopher</a></li><li><a href="/llm-fundamentals/entities/deepmind">DeepMind</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/llm-fundamentals/concepts/scaling-laws-revisions">Scaling Laws: Kaplan, Chinchilla, and What the Disagreement Was Really About</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

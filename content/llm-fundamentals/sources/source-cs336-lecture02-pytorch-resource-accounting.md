@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Lecture 02 (lecture02.py, 856 lines, April 1) gives the resource-accounting mental model for LLM systems: everything is operations on tensors (parameters, gradients, activations, optimizer states, data).</p>
 <p class="kb-provenance">Percy Liang, 2026-04-01. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_02">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

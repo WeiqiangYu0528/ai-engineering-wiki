@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Lecture 04 (60-page PDF, Tatsu) tackles the $O(n^2 d)$ attention wall at long context and the MoE scale-out.</p>
 <p class="kb-provenance">Tatsu Hashimoto, 2026-04-08. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_04.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

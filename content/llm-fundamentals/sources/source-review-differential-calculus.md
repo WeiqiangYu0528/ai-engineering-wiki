@@ -23,6 +23,7 @@ aliases:
 <p class="kb-summary">The CS224n prerequisite math handout reviewing single- and multi-variable differential calculus: derivatives and partial derivatives, the chain rule, gradients of vector-valued functions, and Jacobians.</p>
 <p class="kb-provenance">Stanford CS224n course staff, 2025-01-01. <a href="https://web.stanford.edu/class/cs224n/readings/review-differential-calculus.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The September 29, 2025 Anthropic Engineering blog (Applied AI team) that establishes context engineering as the successor discipline to Prompt Engineering for building steerable, long-horizon AI Agents.</p>
 <p class="kb-provenance">Prithvi Rajasekaran, Ethan Dixon, Carly Ryan, Jeremy Hadfield (Anthropic Applied AI) — with Rafi Ayub, Hannah Moran, Cal Rueb, Connor Jennings, 2025-09-29. <a href="https://www.anthropic.com/engineering/effective-context-engineering-for-ai-agents">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

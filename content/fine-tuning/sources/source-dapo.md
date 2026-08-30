@@ -33,6 +33,7 @@ aliases:
 <p class="kb-summary">The March 2025 ByteDance Seed paper (Yu et al., arXiv 2503.14476, v2 May 2025) open-sources a state-of-the-art large-scale LLM RL system that reaches 50 points on AIME 2024 with Qwen2.5-32B base, surpassing…</p>
 <p class="kb-provenance">Qiying Yu, Zheng Zhang, Ruofei Zhu, Yufeng Yuan et al. (ByteDance Seed, Tsinghua AIR), 2025-03-17. <a href="https://arxiv.org/abs/2503.14476">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

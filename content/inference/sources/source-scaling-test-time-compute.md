@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">The August 2024 UC Berkeley / Google DeepMind paper (Snell et al., arXiv 2408.03314) systematically studies scaling test-time (inference-time) compute as an alternative to scaling pretraining parameters.</p>
 <p class="kb-provenance">Charlie Snell, Jaehoon Lee, Kelvin Xu, Aviral Kumar (UC Berkeley, Google DeepMind), 2024-08-06. <a href="https://arxiv.org/abs/2408.03314">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

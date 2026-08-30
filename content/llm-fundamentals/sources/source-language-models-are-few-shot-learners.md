@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">The landmark 2020 research paper by OpenAI introducing GPT-3 (175 Billion parameters).</p>
 <p class="kb-provenance">Tom B. Brown et al. (OpenAI), 2020-05-28. <a href="https://arxiv.org/abs/2005.14165">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

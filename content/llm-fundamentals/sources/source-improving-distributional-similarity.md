@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Levy, Goldberg &amp; Dagan (TACL 2015, vol. 3:211–225) systematically dissect why neural word embeddings (Word2Vec SGNS, GloVe) appear to beat traditional count-based distributional models on similarity and analogy…</p>
 <p class="kb-provenance">Omer Levy, Yoav Goldberg, Ido Dagan, 2015-01-01. <a href="https://aclanthology.org/Q15-1016/">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

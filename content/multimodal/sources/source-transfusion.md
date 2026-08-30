@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">The Aug 2024 Meta paper (arXiv 2408.11039, CS224n Week 9 – Multimodality, Luke Zettlemoyer) introduces Transfusion, a recipe for training a single transformer over mixed sequences of discrete text tokens (next-token…</p>
 <p class="kb-provenance">Chunting Zhou, Lili Yu, Arun Babu, Kushal Tirumala, Michihiro Yasunaga, Leonid Shamis, Jacob Kahn, Xuezhe Ma, Luke Zettlemoyer, Omer Levy (Meta, Waymo, USC), 2024-08-20. <a href="https://arxiv.org/abs/2408.11039">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

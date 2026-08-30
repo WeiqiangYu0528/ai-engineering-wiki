@@ -32,6 +32,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/prompt-engineering/concepts/zero-shot-prompting">Zero-Shot Prompting</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/prompt-engineering/concepts/zero-shot-prompting">Zero-Shot Prompting</a></li><li><a href="/prompt-engineering/concepts/in-context-learning">In-Context Learning</a></li><li><a href="/prompt-engineering/concepts/chain-of-thought">Chain-of-Thought Prompting</a></li><li><a href="/prompt-engineering/concepts/self-consistency">Self-Consistency</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-fewshot">Prompt Engineering Guide — Few-Shot Prompting</a></li><li><a href="/prompt-engineering/sources/source-promptingguide-techniques-zeroshot">Prompt Engineering Guide — Zero-Shot Prompting</a></li><li><a href="/llm-fundamentals/sources/source-language-models-are-few-shot-learners">Language Models are Few-Shot Learners</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

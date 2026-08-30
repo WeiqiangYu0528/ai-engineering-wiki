@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Practical explainer of function calling (tool calling) as the bridge between LLM reasoning and real-world action.</p>
 <p class="kb-provenance">Elvis Saravia / DAIR.AI, 2025-05-10. <a href="https://www.promptingguide.ai/agents/function-calling">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

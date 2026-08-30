@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Summary of Chi et al. (2024) presenting THOUGHTSCULPT, a graph-based reasoning framework that interweaves thoughts via iterative self-revision and Monte Carlo Tree Search (MCTS).</p>
 <p class="kb-provenance">Chi et al. (2024) via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/thoughtsculpt.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

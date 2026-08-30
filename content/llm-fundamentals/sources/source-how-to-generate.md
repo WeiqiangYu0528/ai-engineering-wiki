@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Practical March 2020 Hugging Face blog by Patrick von Platen (updated July 2023) that is the canonical hands-on reference for auto-regressive text decoding with the transformers library.</p>
 <p class="kb-provenance">Patrick von Platen (Hugging Face), 2020-03-01. <a href="https://huggingface.co/blog/how-to-generate">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

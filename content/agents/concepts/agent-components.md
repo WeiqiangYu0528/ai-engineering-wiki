@@ -35,6 +35,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/agents/concepts/ai-agents">AI Agents</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/ai-agents">AI Agents</a></li><li><a href="/agents/concepts/ai-workflows">AI Workflows</a></li><li><a href="/agents/concepts/deep-agents">Deep Agents</a></li><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/agents/concepts/function-calling">Function Calling</a></li><li><a href="/agents/concepts/context-engineering">Context Engineering</a></li><li><a href="/llm-fundamentals/concepts/thinking-models">Thinking Models</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/agents/sources/source-promptingguide-agents-components">Agent Components — Prompt Engineering Guide (DAIR.AI)</a></li><li><a href="/agents/sources/source-promptingguide-agents-introduction">Introduction to AI Agents — Prompt Engineering Guide (DAIR.AI)</a></li><li><a href="/agents/sources/source-promptingguide-agents-ai-workflows-vs-ai-agents">AI Workflows vs. AI Agents — Prompt Engineering Guide (DAIR.AI)</a></li><li><a href="/agents/sources/source-promptingguide-agents-context-engineering-deep-dive">Context Engineering Deep Dive: Building a Deep Research Agent — Prompt Engineering Guide</a></li><li><a href="/agents/sources/source-promptingguide-agents-function-calling">Function Calling in AI Agents — Prompt Engineering Guide (DAIR.AI)</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

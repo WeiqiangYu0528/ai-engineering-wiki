@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">Llama 3 / Llama 3.1 is Meta's 2024 open-weight herd of dense decoder-only Transformer language models at 8B, 70B, and 405B parameters, the flagship 405B (126 layers × 16,384 dim × 128 heads, GQA-8, 128K vocab, RoPE…</p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/concepts/pretraining">Pretraining</a></li><li><a href="/llm-fundamentals/concepts/transformer">Transformer</a></li><li><a href="/llm-fundamentals/concepts/scaling-laws">Scaling Laws</a></li><li><a href="/llm-fundamentals/concepts/tokenization">Tokenization</a></li><li><a href="/fine-tuning/concepts/supervised-fine-tuning">Supervised Fine-Tuning</a></li><li><a href="/fine-tuning/concepts/direct-preference-optimization">Direct Preference Optimization</a></li><li><a href="/llm-fundamentals/concepts/bert">BERT</a></li><li><a href="/llm-fundamentals/entities/meta">Meta</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

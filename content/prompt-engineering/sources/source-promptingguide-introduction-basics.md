@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">This opening chapter of the DAIR.AI Prompt Engineering Guide defines prompting and demonstrates how minimal changes in instruction phrasing dramatically alter LLM behavior.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/introduction/basics.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -2,8 +2,6 @@
 title: "Reading path: AI Agents & Tool Use"
 ---
 
-# Reading path: AI Agents & Tool Use
-
 > 9 pages in order, about 39 minutes of reading · content as of 2026-08-27
 
 Each entry assumes the ones above it, which is the only claim this page makes — it is a route in, not a table of contents. The [AI Agents & Tool Use map](/agents/) has the full list.

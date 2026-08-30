@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">The Spring 2026 CS336 Lecture 11 (Tatsu, May 4, 58 pages, lecture11.pdf) is the sequel to Lecture 09 — a case-study laboratory for how frontier labs actually fit and use scaling laws in 2024–2026.</p>
 <p class="kb-provenance">Tatsu Hashimoto (Stanford CS336), 2026-05-04. <a href="https://raw.githubusercontent.com/stanford-cs336/lectures/main/lecture_11.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

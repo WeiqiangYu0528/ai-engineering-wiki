@@ -2,8 +2,6 @@
 title: What has been checked
 ---
 
-# How much of this can you trust?
-
 > Generated 2026-08-27 by `tools/build_trust.py`. Do not edit by hand.
 
 Every page here was written by a language model reading sources that a human chose. That is a useful way to build a knowledge base and a terrible way to establish facts, so each page carries a status describing how thoroughly its claims have been checked against the source it cites.

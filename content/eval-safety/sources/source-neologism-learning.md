@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The Oct 2025 paper by Hewitt, Tafjord, Geirhos &amp; Kim (Google DeepMind, arXiv 2510.08506, CS224n Week 8 Tue — Interpretability remaining) provides the first in-depth empirical evaluation of neologism learning (the Feb…</p>
 <p class="kb-provenance">John Hewitt, Oyvind Tafjord, Robert Geirhos, Been Kim, 2025-10-09. <a href="https://arxiv.org/abs/2510.08506">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

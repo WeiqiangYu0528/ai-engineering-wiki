@@ -10,8 +10,6 @@ created: 2026-08-29
 updated: 2026-08-29
 ---
 
-# Start here
-
 A working knowledge base on AI engineering, kept the way an engineer keeps notes: one idea
 per page, claims traced back to a stored source, and a label on every page saying how far
 that page has actually been checked. 279 pages are published, across ten

@@ -32,6 +32,7 @@ related:
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/llm-fundamentals/concepts/transformer">Transformer</a></li><li><a href="/llm-fundamentals/concepts/self-attention">Self-Attention Mechanism</a></li><li><a href="/inference/concepts/inference">LLM Inference</a></li><li><a href="/llm-fundamentals/concepts/pretraining">Pretraining</a></li><li><a href="/llm-fundamentals/concepts/scaling-laws">Scaling Laws</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/llm-fundamentals/sources/source-cs336-lecture04-attention-moe">CS336 Lecture 04 — Attention Alternatives and Mixture of Experts</a></li><li><a href="/llm-fundamentals/sources/source-cs336-lecture03-architectures">CS336 Lecture 03 — Architectures, Hyperparameters</a></li><li><a href="/mlops/sources/source-cs336-lecture05-gpus-tpus">CS336 Lecture 05 — GPUs, TPUs</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

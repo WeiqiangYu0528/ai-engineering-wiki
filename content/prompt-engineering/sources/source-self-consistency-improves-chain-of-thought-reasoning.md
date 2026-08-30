@@ -34,6 +34,7 @@ aliases:
 <p class="kb-summary">The March 2022 (v4 Mar 2023) Google Research Brain paper by Wang et al. that proposes Self-Consistency — a drop-in replacement for greedy decoding in Chain-of-Thought Prompting prompting.</p>
 <p class="kb-provenance">Xuezhi Wang, Jason Wei, Dale Schuurmans, Quoc Le, Ed H. Chi, Sharan Narang, Aakanksha Chowdhery, Denny Zhou (Google Research, Brain Team), 2022-03-21. <a href="https://arxiv.org/abs/2203.11171">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

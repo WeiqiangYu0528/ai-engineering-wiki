@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The official specification and developer documentation for the Model Context Protocol (MCP), an open-standard communication protocol initiated by Anthropic to connect AI applications (clients/hosts) with external tools…</p>
 <p class="kb-provenance">Anthropic &amp; The MCP Open Source Community, 2026-07-28. <a href="https://modelcontextprotocol.io/">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

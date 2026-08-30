@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">The seminal 2017 research paper from Google Research that introduced the Transformer architecture.</p>
 <p class="kb-provenance">Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin, 2017-06-12. <a href="https://arxiv.org/abs/1706.03762">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

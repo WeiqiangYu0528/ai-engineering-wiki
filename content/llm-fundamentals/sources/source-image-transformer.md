@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">The June 2018 Google Brain paper (Parmar et al., arXiv 1802.05751, ICML 2018) generalizes the Transformer from language to autoregressive image generation with tractable likelihood.</p>
 <p class="kb-provenance">Niki Parmar, Ashish Vaswani, Jakob Uszkoreit, Łukasz Kaiser, Noam Shazeer, Alexander Ku, Dustin Tran (Google Brain), 2018-06-15. <a href="https://arxiv.org/abs/1802.05751">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

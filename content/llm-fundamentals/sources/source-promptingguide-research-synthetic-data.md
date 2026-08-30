@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Overview of DeepMind-led paper (arXiv 2404.07503) on synthetic data for language models — applications, challenges, and future directions.</p>
 <p class="kb-provenance">Google DeepMind et al. via DAIR.AI, 2024-04-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/research/synthetic_data.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

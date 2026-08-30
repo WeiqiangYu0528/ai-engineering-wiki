@@ -24,6 +24,7 @@ aliases:
 <p class="kb-summary">CS231n's worked-derivation handout bridging scalar calculus to production-ready vectorized gradients.</p>
 <p class="kb-provenance">Stanford CS231n teaching staff, 2017-01-01. <a href="http://cs231n.stanford.edu/handouts/derivatives.pdf">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

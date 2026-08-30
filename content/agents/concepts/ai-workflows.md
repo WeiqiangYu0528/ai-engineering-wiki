@@ -36,6 +36,7 @@ related:
 <p class="kb-prerequisite">Read first: <a href="/agents/concepts/model-context-protocol">Model Context Protocol</a></p>
 <nav class="kb-related" aria-label="Related concepts"><ul><li><a href="/agents/concepts/ai-agents">AI Agents</a></li><li><a href="/agents/concepts/agent-components">Agent Components</a></li><li><a href="/agents/concepts/deep-agents">Deep Agents</a></li><li><a href="/agents/concepts/context-engineering">Context Engineering</a></li><li><a href="/agents/concepts/tool-use">Tool Use</a></li><li><a href="/inference/concepts/prompt-caching">Prompt Caching</a></li></ul></nav>
 <nav class="kb-sources" aria-label="Sources cited"><ul><li><a href="/agents/sources/source-building-effective-agents">Building effective agents</a></li><li><a href="/agents/sources/source-promptingguide-agents-ai-workflows-vs-ai-agents">AI Workflows vs. AI Agents — Prompt Engineering Guide (DAIR.AI)</a></li><li><a href="/agents/sources/source-promptingguide-agents-context-engineering">Why Context Engineering? — Prompt Engineering Guide (DAIR.AI)</a></li><li><a href="/agents/sources/source-effective-context-engineering-for-ai-agents">Effective Context Engineering for AI Agents</a></li></ul></nav>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Overview

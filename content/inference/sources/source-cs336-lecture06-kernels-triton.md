@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Stanford CS336 Lecture 06 (Percy Liang, April 15 2026) is the single-GPU systems lecture.</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336), 2026-04-15. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_06">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

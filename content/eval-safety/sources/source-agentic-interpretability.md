@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">The June 2025 position paper by Been Kim et al. (Google DeepMind, arXiv 2506.12152, CS224n Week 8 Tue – Interpretability, Been Kim) argues that the LLM era unlocks a new interpretability paradigm: agentic…</p>
 <p class="kb-provenance">Been Kim, John Hewitt, Neel Nanda, Noah Fiedel, Oyvind Tafjord (Google DeepMind), 2025-06-13. <a href="https://arxiv.org/abs/2506.12152">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

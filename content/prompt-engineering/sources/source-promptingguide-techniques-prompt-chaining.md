@@ -31,6 +31,7 @@ aliases:
 <p class="kb-summary">This chapter defines Prompt Chaining — decomposing a complex task into subtasks where each LLM prompt's output feeds the next prompt — to improve reliability, transparency, controllability, and debuggability over…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/prompt_chaining.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

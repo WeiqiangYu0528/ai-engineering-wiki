@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Lecture 01 (lecture01.py, 762 lines, Percy Liang) frames CS336 Spring 2026 Language Modeling from Scratch around one question — how to train the best model given fixed resources (data + hardware).</p>
 <p class="kb-provenance">Percy Liang, 2026-03-30. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_01">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

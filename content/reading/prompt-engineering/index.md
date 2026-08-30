@@ -2,8 +2,6 @@
 title: "Reading path: Prompt Engineering"
 ---
 
-# Reading path: Prompt Engineering
-
 > 9 pages in order, about 45 minutes of reading · content as of 2026-08-24
 
 Each entry assumes the ones above it, which is the only claim this page makes — it is a route in, not a table of contents. The [Prompt Engineering map](/prompt-engineering/) has the full list.

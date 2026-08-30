@@ -29,6 +29,7 @@ aliases:
 <p class="kb-summary">Lecture 07 (Percy Liang, April 20 2026) scales from single-GPU kernels (L06) to multi-GPU/multi-node training over a unified theme: compute is far from data at every level of the hierarchy (L1/shared → HBM →…</p>
 <p class="kb-provenance">Percy Liang (Stanford CS336), 2026-04-20. <a href="https://cs336.stanford.edu/lectures/?trace=lecture_07">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

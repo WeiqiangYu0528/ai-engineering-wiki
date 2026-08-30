@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">This flagship techniques chapter introduces Chain-of-Thought (CoT) prompting (Wei et al. 2022) as the method to unlock complex reasoning by forcing the model to emit intermediate steps before the final answer, then…</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-01-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/techniques/cot.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -30,6 +30,7 @@ aliases:
 <p class="kb-summary">Hu et al. (Microsoft, arXiv 2106.09685v2, ICLR 2022) introduce Low-Rank Adaptation (LoRA) — a parameter-efficient fine-tuning method that freezes pre-trained weights $W0$ and injects trainable low-rank decomposition…</p>
 <p class="kb-provenance">Edward J. Hu, Yelong Shen, Phillip Wallis, Zeyuan Allen-Zhu, Yuanzhi Li, Shean Wang, Lu Wang, Weizhu Chen (Microsoft Corporation), 2021-10-16. <a href="https://arxiv.org/abs/2106.09685">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

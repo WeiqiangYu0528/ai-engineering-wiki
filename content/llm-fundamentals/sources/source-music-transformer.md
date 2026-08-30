@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The September 2018 Google Magenta paper (Huang et al., arXiv 1809.04281, ICLR 2019) demonstrates the first successful Transformer for minute-long symbolic music generation with coherent long-term structure.</p>
 <p class="kb-provenance">Cheng-Zhi Anna Huang, Ashish Vaswani, Jakob Uszkoreit, Noam Shazeer, Ian Simon, Curtis Hawthorne, Andrew M. Dai, Matthew D. Hoffman, Monica Dinculescu, Douglas Eck (Google Magenta / Brain), 2018-09-12. <a href="https://arxiv.org/abs/1809.04281">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

@@ -32,6 +32,7 @@ aliases:
 <p class="kb-summary">The November 2022 Stanford CRFM paper (Liang et al., arXiv 2211.09110) proposes HELM — Holistic Evaluation of Language Models — a living, standardized benchmark that moves beyond single-metric accuracy.</p>
 <p class="kb-provenance">Percy Liang, Rishi Bommasani, Tony Lee, Dimitris Tsipras et al. (Stanford CRFM, 100+ authors), 2022-11-16. <a href="https://arxiv.org/abs/2211.09110">Original source</a></p>
 <p class="kb-trust kb-status-draft"><a href="/trust">Draft - written, claims not checked against the source</a></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary

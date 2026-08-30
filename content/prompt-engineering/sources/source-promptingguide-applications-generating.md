@@ -28,6 +28,7 @@ aliases:
 <p class="kb-summary">Micro-chapter showing how prompt strategies steer LLMs to produce coherent, consistent, factual text and to generate synthetic evaluation/training data on demand.</p>
 <p class="kb-provenance">DAIR.AI (Elvis Saravia et al.), 2023-08-01. <a href="https://raw.githubusercontent.com/dair-ai/Prompt-Engineering-Guide/main/pages/applications/generating.en.mdx">Original source</a></p>
 <p class="kb-trust kb-status-verified"><a href="/trust">Verified by agent - every figure checked against the stored source</a> <span>checked by an automated agent on 2026-08-27</span></p>
+<p class="kb-nav"><a href="/catalog">All pages</a></p>
 </aside>
 
 ## Summary
