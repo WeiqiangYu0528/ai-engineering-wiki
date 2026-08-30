@@ -1717,6 +1717,75 @@ function tokens(text) {
 
 CHECKS.push(
   {
+    id: "figures-resolve",
+    requirements: "12.7",
+    title: "every <img> resolves to a served file and carries alt text",
+    // A real gate, not a `report`. Both halves fail a run, and each is a defect a
+    // static scan is uniquely placed to catch:
+    //
+    //   * an <img> whose src does not resolve renders as a broken-image glyph, and
+    //     the publish gate cannot see it because the corruption happens in Quartz's
+    //     href resolution AFTER the markdown is written. Three of the four ways to
+    //     reference a figure produce exactly this, and they all look correct in the
+    //     markdown. That is what makes this check the one that would notice.
+    //   * an <img> with no alt text is unreadable to a screen reader and leaves
+    //     nothing behind when the image fails to load. The vault linter enforces alt
+    //     text on the authored embed (`DG002`), and this confirms it survived into
+    //     the attribute a browser actually reads, which is a different claim.
+    //
+    // An empty `alt=""` is the correct markup for a decorative image and is NOT
+    // failed here, but it is counted and printed: this site has no decorative
+    // images, so a non-zero count is worth seeing even though it is legal.
+    run: ({ contentPages, siteRoot, exists }) => {
+      const findings = [];
+      let images = 0;
+      let decorative = 0;
+      const seen = new Set();
+      for (const page of contentPages) {
+        for (const tag of page.html.match(/<img\b[^>]*>/gi) ?? []) {
+          images += 1;
+          const src = attrValue(tag, "src");
+          const alt = attrValue(tag, "alt");
+          if (alt === null) {
+            findings.push(`${page.rel}: <img src=${JSON.stringify(src ?? "")}> has no alt attribute at all`);
+          } else if (alt.trim() === "") {
+            decorative += 1;
+          }
+          if (src === null || src.trim() === "") {
+            findings.push(`${page.rel}: <img> has no src`);
+            continue;
+          }
+          if (EXTERNAL_SCHEME.test(src) || src.startsWith("//") || src.startsWith("data:")) continue;
+          const result = resolveHref(siteRoot, dirname(page.path), src, exists);
+          if (result.status === "ok") {
+            seen.add(relative(siteRoot, result.target).split(sep).join("/"));
+            continue;
+          }
+          if (result.status === "skipped") continue;
+          findings.push(
+            `${page.rel}: <img src=${JSON.stringify(src)}> ${result.status === "escapes" ? "escapes the site root" : "resolves to nothing"} — the figure would render as a broken image`
+          );
+        }
+      }
+      const measured = { pages: contentPages.length, images, decorative, distinctFiles: seen.size, broken: findings.length };
+      if (images === 0) {
+        return pass("0 <img> elements in the build, so nothing to resolve", measured);
+      }
+      if (findings.length > 0) {
+        return fail(
+          `measured ${findings.length} of ${images} <img> elements broken or undescribed, budget 0`,
+          findings,
+          measured
+        );
+      }
+      const note = decorative > 0 ? `, ${decorative} with an intentionally empty alt` : "";
+      return pass(
+        `${images} <img> element(s) across ${contentPages.length} pages resolve to ${seen.size} served file(s) and all carry alt text${note}`,
+        measured
+      );
+    },
+  },
+  {
     id: "search-excludes-log",
     requirements: "9.2, 9.3",
     title: "a term appearing only in the activity log returns no search result",
