@@ -14,7 +14,7 @@ tags:
   - fine-tuning
   - eval-safety
 created: 2026-08-23
-updated: 2026-08-26
+updated: 2026-08-30
 status: draft
 sources:
   - "[[source-training-language-models-to-follow-instructions-with-human-feedback]]"
@@ -68,27 +68,32 @@ related:
 - **Side-Effects — Overoptimization & Mode Collapse:** Optimizing RM beyond threshold degrades true preference (curves diverge for human vs noisy LM vs noiseless LM pref); RLHF also reduces entropy/calibration — model is no longer a calibrated probabilistic model. Length effects are a major RLHF artifact [[source-cs336-lecture15-sft-rlhf]] [[source-cs336-lecture16-rlvr]].
 
 ## How It Works
+
+SFT is the trunk and the three RL variants are branches off it, not successive generations.
+What distinguishes them is drawn on the left: **where the training signal comes from**. PPO
+and DPO both consume the same human rankings and differ only in whether those rankings are
+compiled into a reward model; GRPO replaces the human entirely with a program.
+
+```mermaid
+flowchart TB
+  BASE["pretrained base model"] --> SFT["Stage 1, SFT<br/>human-written demonstrations<br/>yields the initial policy pi_SFT<br/>R1 uses 600k reasoning + 200k non-reasoning"]
+  RANK["human pairwise rankings<br/>y_w preferred over y_l"] --> PPO
+  RANK --> DPO
+  VER["deterministic verifier<br/>unit tests, boxed answer, format tags"] --> GRPO
+  SFT --> PPO["online RLHF with PPO<br/>explicit reward model, live rollouts<br/>clip at 0.2, per-token KL, GAE<br/>four models in memory"]
+  SFT --> DPO["DPO<br/>no reward model, no rollouts<br/>implied reward beta log pi over pi_ref<br/>cross-entropy on the pair, two models"]
+  SFT --> GRPO["GRPO for RLVR<br/>no value network at all<br/>advantage is the group z-score<br/>mean and stdev per prompt"]
+  PPO --> OUT["aligned or reasoning policy"]
+  DPO --> OUT
+  GRPO --> OUT
+  OUT -. "R1 runs SFT again after RL,<br/>then a second RLHF pass" .-> SFT
 ```
-Pretrained Base Model 
-         │
-         ▼
-[ Step 1: SFT ] ───► SFT Model π^SFT  (incl. midtraining two-phase trick;
-                                      600K reasoning + 200K non-reasoning in R1)
-                        │
-         ┌──────────────┬──────────────┐
-         ▼              ▼              ▼
-[ Online RLHF (PPO) ]  [ DPO ]    [ GRPO (RLVR) ]
-- Train explicit RM    - Implicit - No value/critic
-- Sample rollouts      r=β logπ/π_ref - Group z-score adv
-- PPO clip 0.2,        - BCE on (y_w,y_l) - mean/std per prompt
-  per-token KL, GAE    - SimPO/length variants - KL only
-         │              │              │
-         └──────────────┴──────┬───────┘
-                              ▼
-                   Aligned / Reasoning Policy
-          (R1: SFT → GRPO → SFT/RLHF; Kimi: DPO²+squared loss;
-           Qwen3: GRPO on 3995 ex → SFT/RLHF)
-```
+
+The dotted edge is the part the linear telling of this story gets wrong. DeepSeek-R1's actual
+order is SFT → GRPO → SFT → RLHF: the supervised stage is revisited *after* reinforcement
+learning, to fold RL-discovered reasoning behaviour back into a well-behaved assistant. Kimi
+and Qwen 3 do the same shape. See [[post-training-lineage]] for why that makes the stages a
+composition rather than a succession.
 
 ## Practical Implications
 - **Alignment Beats Parameter Scale:** A 1.3B parameter aligned InstructGPT model is preferred by human evaluators over a 175B base GPT-3 model (100x parameter reduction).

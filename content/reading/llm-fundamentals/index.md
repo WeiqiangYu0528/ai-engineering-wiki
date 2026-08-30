@@ -2,7 +2,7 @@
 title: "Reading path: LLM Fundamentals"
 ---
 
-> 9 pages in order, about 74 minutes of reading · content as of 2026-08-27
+> 9 pages in order, about 77 minutes of reading · content as of 2026-08-30
 
 Each entry assumes the ones above it, which is the only claim this page makes — it is a route in, not a table of contents. The [LLM Fundamentals map](/llm-fundamentals/) has the full list.
 

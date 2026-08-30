@@ -6,8 +6,8 @@ visibility: public
 status: draft
 tags:
   - llm-fundamentals
-created: 2026-08-27
-updated: 2026-08-27
+created: 2026-08-30
+updated: 2026-08-30
 generated: true
 aliases:
   - wiki/moc-llm-fundamentals
@@ -107,7 +107,7 @@ Map of the LLM Fundamentals domain: 48 concept pages, 13 entities, 106 sources.
 - [[source-promptingguide-models-chatgpt]] — Model guide to ChatGPT / gpt-3.5-turbo chat completion prompting. · `verified`
 - [[source-promptingguide-models-claude-3]] — Snapshot of Anthropic Claude 3 family (Haiku / Sonnet / Opus, Mar 2024). · `verified`
 - [[source-contextual-word-representations-a-contextual-introduction]] — Noah Smith's (UW/AllenAI) invited Communications of the ACM (June 2020) introductory essay — intentionally non-mathematical, non-algorithmic — tracing how NLP moved from discrete word integers to static distributional… · `verified`
-- [[source-cs224n-gradient-notes]] — The 202 KB CS224n supplemental note (readings/gradient-notes.pdf, Last-Modified 2025-09-05, (source held privately)) is the hands-on companion to Lecture 03 for mastering Backpropagation by hand before PyTorch… · `draft`
+- [[source-cs224n-gradient-notes]] — The 202 KB CS224n supplemental note (readings/gradient-notes.pdf, Last-Modified 2025-09-05, source held privately) is the hands-on companion to Lecture 03 for mastering Backpropagation by hand before PyTorch… · `draft`
 - [[source-cs224n-word-vectors-ii-glove-evaluation]] — Winter 2019 Lecture Notes Part II (Mundra et al., Manning/Socher, 13 pages, cs224n-2019-notes02-wordvecs2.pdf) is the companion to Note 1 that finishes the word-vector story. · `draft`
 - [[source-cs224n-winter2023-lecture1-notes-introduction-word2vec]] — Draft Note 1 (John Hewitt, Manning & Hewitt, Winter 2023, 13 pages, cs224nwinter2023lecture1notesdraft.pdf) is the course's narrative introduction to NLP and to the "fundamental, beautiful idea" of representing words as… · `draft`
 - [[source-cs231n-neural-networks-notes]] — Two companion chapters of Stanford's CS231n course notes, assigned as CS224n Week 2 background. · `draft`

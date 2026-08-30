@@ -50,7 +50,7 @@ related:
 ### 1. Corpus scope — 9 tools, 2-wave coverage
 - **Wave 1 (IDE/coding):** Cursor 38.8K, Windsurf 32.8K, Trae 18.5K, VSCode Copilot 21–25K (4 tools, code-optimization focus).
 - **Wave 2 (this ingest):** Lovable 20.3K + 27.9K tools (web app builder, design-system heavy), Replit 8.1K + 25K tools (online IDE, proposal-protocol minimal), Perplexity 9.6K no tools (RAG synthesis, 2-system pipeline), Manus 10.2K + 18.5K tools sanitized (computer-use breadth 30+ tools), NotionAI 32K + 34.9K tools (workspace ontology, 16 property types) — detailed in System Prompts and Models of AI Tools — Lovable (Agent Prompt & Tools) [x1xhlol] through System Prompts and Models of AI Tools — NotionAI (Prompt & Tools) [x1xhlol].
-- Combined snapshot saved to (source held privately){tool}-{file}.md` (9 raw files, ~230 KB, fetched 2026-08-24 via GitHub raw CDN).
+- Combined snapshot saved to a private directory (9 raw files, ~230 KB, fetched 2026-08-24 via GitHub raw CDN).
 
 ### 2. Comparative matrix — no single archetype
 
@@ -94,7 +94,7 @@ x1xhlol repo
         │
    GitHub API discovery → raw.githubusercontent.com fetch (2 per dir)
         │
-   Snapshot to (source held privately){tool}-{file}.md (+ header)
+   Snapshot to a private directory (+ header)
         │
    Source summaries (5) → Concept updates (system-prompt, prompt-injection)
         │

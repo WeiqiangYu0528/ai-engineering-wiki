@@ -12,7 +12,7 @@ tags:
   - llm-fundamentals
   - prompt-engineering
 created: 2026-08-24
-updated: 2026-08-25
+updated: 2026-08-30
 status: draft
 sources:
   - "[[source-retrieval-augmented-generation-rag]]"
@@ -61,21 +61,34 @@ related:
 
 ## How It Works
 
+The dividing line that matters is **offline versus online**, because that is what makes the
+hot-swap result possible: only the left box has to be rebuilt to change what the system knows,
+and no gradient step is involved.
+
+```mermaid
+flowchart TB
+  subgraph offline["Offline, once per corpus version"]
+    direction TB
+    CORPUS["corpus<br/>21M Wikipedia chunks of 100 words"] --> DENC["document encoder BERT_d<br/>frozen, so the index never needs rebuilding<br/>mid-training"]
+    DENC --> INDEX["FAISS HNSW vector index"]
+  end
+  subgraph online["Online, per query"]
+    direction TB
+    QRY["query x"] --> QENC["query encoder BERT_q<br/>fine-tuned jointly with the generator"]
+    QENC --> MIPS["maximum inner product search<br/>score is exp of d of z dotted with q of x<br/>top k, usually 5 or 10"]
+    MIPS --> DOCS["top-k latent documents z"]
+    DOCS --> MARG["marginalise over z<br/>RAG-Sequence: one z for the whole output<br/>RAG-Token: a different z per token<br/>production stacks approximate this<br/>by plain concatenation"]
+    MARG --> GEN["generator BART-large<br/>conditioned on x concatenated with z"]
+    GEN --> ANS["grounded answer, provenance is the doc list"]
+  end
+  INDEX --> MIPS
+  ANS -. "reindex to update knowledge,<br/>no LM retraining" .-> CORPUS
 ```
-User prompt: "What prompting techniques handle reasoning?"
-        │
-        ▼
-[Neural Retriever DPR: q(x)=BERT_q(x)] ─► FAISS HNSW over 21M Wikipedia chunks (d(z)=BERT_d(z))
-        │   p_η(z|x) ∝ exp(d(z)^T q(x)), top-K MIPS
-        ▼
-Top-k docs: ["Chain-of-thought (CoT) prompting...", "Self-consistency …"]
-        │
-        ▼
-[Marginalization]  RAG-Seq: Σ_z p_η(z|x) p_θ(y|x,z)  │  RAG-Tok: ∏_i Σ_z p_η(z|x) p_θ(y_i|x,z,…)
-        │   or guide's concatenation-as-context approximation: prompt = instruction + docs + query
-        ▼
-[Generator BART-large] ─► grounded answer (more factual/specific/diverse, provenance via docs)
-```
+
+The dotted return edge is the claim the ablations actually measure. Swapping the index from a
+2016 snapshot to a 2018 one, with the model untouched, moved accuracy on 82 changed world
+leaders from **12% to 70%** — knowledge editing as a data-pipeline operation rather than a
+training one.
 
 1. Offline: corpus chunked (100-word), embedded via document encoder, indexed as vectors (FAISS).
 2. Online: query embedded via query encoder; MIPS retrieves $k\in\{5,10\}$ relevant chunks (modern stacks add hybrid sparse + reranker beyond guide/Lewis).

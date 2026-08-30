@@ -11,7 +11,7 @@ aliases:
 tags:
   - llm-fundamentals
 created: 2026-08-23
-updated: 2026-08-26
+updated: 2026-08-30
 status: draft
 sources:
   - "[[source-attention-is-all-you-need]]"
@@ -95,23 +95,35 @@ The current SLP3 draft (Aug 2026; Transformer content in Ch 7 after renumbering 
 - **Common thread:** Both prove self-attention's domain generality beyond NLP by pairing it with **structure-aware position/locality** (2D coordinates for images, relative distance for periodic music) — the same insight RoPE later generalizes parameter-free for text, and both inform long-sequence handling needed by [[thinking-models]] (32K–65K reasoning traces).
 
 ## How It Works (Original 2017 vs. Modern Decoder-Only)
+
+Placed side by side, the difference is not that the modern stack added machinery — it is that
+**half the 2017 diagram was deleted**. The encoder and the cross-attention that connected it
+to the decoder are both gone; what survives is one causal stack, with every normalisation
+moved from after the residual add to before it.
+
+```mermaid
+flowchart TB
+  subgraph orig["Original 2017 encoder-decoder"]
+    direction TB
+    S1["source tokens<br/>37k joint BPE vocabulary"] --> E1["encoder stack, N = 6<br/>bidirectional self-attention<br/>post-norm, sinusoidal position added"]
+    T1["shifted target tokens"] --> D1["decoder stack, N = 6<br/>causal self-attention<br/>plus cross-attention"]
+    E1 -- "keys and values" --> D1
+    D1 --> O1["linear then softmax over vocabulary"]
+  end
+  subgraph modern["Modern decoder-only, 2024 onward"]
+    direction TB
+    S2["tokens<br/>32k to 250k vocabulary"] --> E2["token embeddings<br/>the residual stream starts here"]
+    E2 --> B2["block 1 through block L, L = 12 to 96 or more<br/>RMSNorm, then causal MHA or GQA, residual add<br/>RMSNorm, then SwiGLU MLP, residual add<br/>RoPE rotates Q and K at every layer"]
+    B2 --> O2["unembedding matrix U then softmax<br/>the language modeling head"]
+  end
 ```
-Original Encoder-Decoder (2017)                Modern Decoder-Only LLM (2024+)
-───────────────────────────────────            ────────────────────────────────
-Input Tokens ──► Encoder Stack (N=6)           Input Tokens ──► Token Embeddings
-                      │                                               │
-                      ▼ (Cross-Attention)                             ▼
-Target Tokens ─► Decoder Stack (N=6)           RoPE Position ─► Transformer Block 1..N
-                      │                                         - RMSNorm (pre-norm)
-                      ▼                                         - Causal Multi-Head / GQA
-                 Output Softmax                                 - Residual Connection
-                                                                - RMSNorm (pre-norm)
-                                                                - SwiGLU MLP
-                                                                - Residual Connection
-                                                                      │
-                                                                      ▼
-                                                                 Output LM Head
-```
+
+Three substitutions are worth naming because each is a systems decision rather than a
+modelling one, per [[source-cs336-lecture03-architectures]]: **RMSNorm** over LayerNorm moves
+fewer bytes for near-identical FLOPs, **no bias terms** anywhere, and **RoPE** buys relative
+position with zero parameters and no learned length bound. Position also migrated *into* the
+stack: the 2017 model adds a position vector once, before the first layer, while RoPE rotates
+queries and keys inside every attention operation.
 
 ### Layer Normalization in Detail (from [[source-layer-normalization]])
 - **Formula (Ba et al. 2016):** For layer $l$ with $H$ units and summed inputs $a_i^l$, $\mu^l = \frac1H\sum_{i=1}^H a_i^l$, $\sigma^l = \sqrt{\frac1H\sum_i (a_i^l-\mu^l)^2}$ (Eq. 3), then $\text{LN}(a_i^l)=\frac{g_i}{\sigma^l}(a_i^l-\mu^l)+b_i$ with learned gain $g$ and bias $b$ per neuron before non-linearity. Unlike BatchNorm ($E_{x\sim P(x)}[a_i]$ over mini-batch), LN shares $\mu,\sigma$ across all units in a layer but per example — identical at train/test, no batch-size constraint, works online (batch 1).

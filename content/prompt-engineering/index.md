@@ -6,8 +6,8 @@ visibility: public
 status: draft
 tags:
   - prompt-engineering
-created: 2026-08-26
-updated: 2026-08-26
+created: 2026-08-30
+updated: 2026-08-30
 generated: true
 aliases:
   - wiki/moc-prompt-engineering

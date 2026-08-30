@@ -89,7 +89,7 @@ One was correctly refused: a scanned 1986 PDF with no text layer.
 
 **Status:** accepted 2026-08-27, deviates from the original plan
 
-**Problem.** The plan called for moving unrecoverable sources to (source held privately).
+**Problem.** The plan called for moving unrecoverable sources to a private directory.
 
 **Decision.** They stay where they are. The 8 remaining are not corrupt — they are thin
 because the upstream source is thin: two promptingguide pages that really are two
@@ -386,3 +386,123 @@ is re-derived when it fails, a reference figure just goes stale, so the numbers 
 to 10.4 should be read as "what the site measured on 2026-08-30" and not as a target. And the status
 vocabulary grew to five, so anything that parses this script's output has one more value to know
 about — `pages.yml` does not, having been checked, but the next consumer will have to be.
+
+## ADR-015 — A public `diagrams/` directory, SVG only, referenced-and-attributed or it fails
+
+**Status:** accepted 2026-08-30. Adds a directory to the layout, five finding codes
+(`DG001`–`DG005`), and criterion 12.7 to Requirement 12 of the wiki-site-experience spec. Does
+**not** amend hard rule 2: the private layer are untouched and the allowlist that excludes
+them is unchanged.
+
+**Problem.** Nothing on the published site was visual. Every explanation of a mechanism —
+attention, the Transformer stack, the RLHF branches, the RAG pipeline — was prose plus, in four
+cases, ASCII art inside a code fence. The blocker was not authoring effort. It was that the only
+place the schema had for an image was the private layer, which is private third-party material behind a
+Git LFS filter and is never published, so a figure stored the way the conventions said to store
+it could not reach a Reader. Publishing a figure needed a second path that the allowlist copies
+through, which is a schema change.
+
+**Decision.** Four parts.
+
+**1. A new root-level `diagrams/` directory, and the private layer keeps its meaning.** The line between
+them is provenance, not file type: `diagrams/` is work authored here for publication, the private layer
+is somebody else's material held for reference. Nothing may be moved from one to the other. This
+is why the answer was a new directory rather than a "public" subdirectory inside the private layer — a
+rule of the form "the public ones inside the private directory" is not one a reviewer can check
+by looking, and the whole value of an allowlist is that it is a list.
+
+Root-level rather than `wiki/diagrams/`, because `NM001` holds `wiki/` flat.
+
+The name was chosen against a real collision. `BARE_DIR_RE` is `\b(?:raw|assets)/`, and `\b`
+matches at a `-`-to-letter boundary, so **`public-the private layer and `wiki-the private layer are both matched
+and would have been silently redacted out of every page that named them**. Tested before
+choosing: `diagrams/`, `figures/`, `media/` and `images/` are all clean.
+
+**2. SVG only.** Three reasons, in order of how much they cost to ignore:
+
+- **`.gitattributes` LFS-filters `*.png`, `*.jpg`, `*.jpeg`, `*.gif` and `*.webp` repo-wide, and
+  not `*.svg`.** GitHub Pages serves committed bytes and does not resolve LFS pointers, so a PNG
+  committed under the current filters publishes as a ~130-byte text pointer and renders as a
+  broken image. That failure is invisible locally and only appears on the deployed site.
+- **SVG is text**, so it travels on the existing `OutputFile(path, text)` carrier and through
+  `write_output` unchanged. A binary format needs a second carrier threaded through every stage,
+  and the pipeline's twelve named stages are load-bearing — three of them document an ordering
+  constraint. Adding a thirteenth to move bytes would be the largest structural change in this
+  work, in service of the least interesting part of it.
+- **SVG diffs**, so a change to a figure is reviewable the way a change to prose is.
+
+**3. The reference form was measured, not chosen.** Four spellings are plausible and three are
+broken, all three silently. Against a real Quartz build:
+
+| Authored | Emitted | Verdict |
+| --- | --- | --- |
+| `![alt](/diagrams/x.svg)` | `<img src="../../diagrams/x.svg" alt="alt">` | correct |
+| `![[x.svg\|alt]]` | `<object data="x.svg" aria-label="alt">` | 404 at depth |
+| `![[diagrams/x.svg\|alt]]` | `<object data="diagrams/x.svg" …>` | 404 at depth |
+| `![alt](../../diagrams/x.svg)` | `src="../.././../diagrams/x.svg"` | Property 18 |
+
+Only the root-absolute markdown form survives, for the reason `rewrite_root_links` already
+records: Quartz re-resolves a root-absolute href correctly from any depth and corrupts a relative
+one. So pages author `![[x.svg|alt]]`, which previews natively in Obsidian, and the gate rewrites
+it to the form that works. That rewrite must run **before** `rewrite_excluded_links` — the first
+attempt had it after, the link flattener ate the embed because `x.svg` is not a published page
+key, and every figure then failed `DG003` for being unreferenced, which was a correct report of a
+state the transform had itself caused.
+
+**4. Two rules, both fail-closed, plus alt text as a real gate.**
+
+- `DG003` — a figure no **published** page embeds fails the build. Referenced-only is the whole
+  guarantee: a file lands in the public tree because a page asked for it, never because it was in
+  the directory. A file copied to a public site for no stated reason is how a private layer leaks
+  one commit at a time.
+- `DG004`/`DG005` — every figure needs an entry in `diagrams/README.md` stating **both** an
+  origin and a licence. Two fields rather than one free-text note, because "where did this come
+  from" and "what may a Reader do with it" are different questions and one note reliably answers
+  only the first. "It is probably ours" is not a licence.
+- `DG001`/`DG002` — a missing figure, or an embed with no alt text, fails. Alt text is a gate and
+  not a warning: it is the figure's entire content for a screen reader and everything a failed
+  image load leaves behind, and a figure carrying an argument only sighted Readers can follow is
+  a figure that does not carry it. Enforced twice on purpose — `tools/validate.py` checks the
+  authored embed, and `check-built-site.mjs`'s new `figures-resolve` check confirms it survived
+  into the `alt` attribute a browser reads, which is a different claim.
+
+All five are fatal rather than page-withholding. None of them withholds a page — a page whose
+figure is missing is still publishable prose — so reporting one under WITHHELD would state
+something false about what happened, and every repair is a filename fix or a one-line register
+entry rather than a choice between two bad options.
+
+**Mermaid, and why it is preferred to both directories.** Structure — a flow, a pipeline, a
+decision tree, a sequence — is better expressed as a ```mermaid fence than as any file: no
+attribution, no register entry, no second artifact to keep in sync, and it diffs. `mermaid: true`
+is already the default in the Obsidian-flavored-markdown plugin's options, so no configuration
+changed. An authored SVG is for what Mermaid cannot express, which in practice means anything
+whose content is position or scale: a matrix, a plot, a heatmap. Both figures shipped here are of
+that kind — a causal-mask grid and two log-log slopes.
+
+Two costs, accepted and recorded.
+
+**Mermaid renders from a CDN.** Quartz lazily imports
+`cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs` at runtime on pages that have
+a diagram, so those pages do not render their figures with JavaScript disabled or the CDN blocked
+— they degrade to a code block showing the Mermaid source, which is less readable than the ASCII
+art it replaced. This is **not** a new class of dependency, and an earlier draft of this ADR said
+it was: `check-console.mjs` reports the hosts actually contacted, and the site already reaches
+`cdn.jsdelivr.net` (KaTeX fonts, pixi.js), `fonts.googleapis.com` and `fonts.gstatic.com`. It is
+a fourth third-party host on a site that had three. `cdnjs.cloudflare.com` is not in the
+`ANALYTICS_HOSTS` list `no-analytics` scans for, correctly — it serves a rendering library, not
+telemetry — and that check still reports 0 references across the build.
+
+**The figures paint their own light background.** Each SVG draws an opaque light panel with dark
+ink rather than inheriting the page's colours, so it reads identically on the light and dark site
+themes. The elegant alternative is a `prefers-color-scheme` media query inside the SVG, which
+does work for an `<img>`-referenced document — but it follows the **operating system** setting,
+not the site's theme toggle, so a Reader on a light OS who switches the site to dark would get a
+light figure on a dark page. A figure that is always a figure was judged better than one that is
+usually right.
+
+**Cost.** The register is hand-kept, so it can go stale in one direction: an entry naming a file
+that no longer exists is deliberately not a finding, because failing a build over a stale line
+would punish deleting a figure. Nothing catches that. `DG003` is also strict enough to be a
+nuisance in the small: a figure cannot be committed one change ahead of the page that uses it.
+That is the intended trade — the alternative is a directory of files nobody can account for — but
+it means "add the figure and the reference together" is now a rule rather than a preference.

@@ -8,7 +8,7 @@ tags:
   - fine-tuning
   - eval-safety
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-08-30
 sources:
   - "[[source-training-language-models-to-follow-instructions-with-human-feedback]]"
   - "[[source-direct-preference-optimization]]"
@@ -100,7 +100,26 @@ supplies the sharper version: process supervision beats outcome supervision (78.
 72.4% on that page's comparison), because checking each step is a stronger verifier than
 checking the final answer.
 
-This gives a practical rule that the chronological story cannot:
+This gives a practical rule that the chronological story cannot. Note what the first question
+is *not*: it is not "which technique is newest", and it is not "how much compute do you have".
+
+```mermaid
+flowchart TB
+  START["you have a base model<br/>and want it to behave"] --> Q1{"can a program check<br/>whether an answer is right?"}
+  Q1 -- "yes" --> RLVR["build the verifier, run RLVR<br/>signal is near free once built<br/>ceiling is whatever is mechanically checkable"]
+  Q1 -- "no" --> Q2{"do you have rankings<br/>over pairs of outputs?"}
+  Q2 -- "no" --> IMIT["you are still in imitation<br/>fix the SFT data before the algorithm"]
+  Q2 -- "yes" --> Q3{"can you afford live rollouts<br/>and a reward model?"}
+  Q3 -- "yes" --> PPO["RLHF with PPO<br/>can discover behaviour by exploration<br/>ceiling is the reward model's fidelity"]
+  Q3 -- "no" --> DPO["DPO<br/>ceiling is the fixed preference dataset<br/>cannot explore"]
+  RLVR --> AGAIN["then SFT again on the RL output,<br/>then a general RLHF pass<br/>this is R1's real order, not a detour"]
+  AGAIN --> DONE["deployed policy"]
+  PPO --> DONE
+  DPO --> DONE
+  IMIT --> DONE
+```
+
+In prose:
 
 - **Verifiable domain** (maths, code, formal tasks) → build the verifier, use RLVR. The
   signal is cheap and the ceiling is high.
@@ -108,6 +127,10 @@ This gives a practical rule that the chronological story cannot:
   preference. Use rankings, via [[rlhf]] if you can afford exploration, [[direct-preference-optimization]] if you cannot.
 - **Neither** → you are still in imitation. Improve the data before touching the
   algorithm, which is what [[source-how-far-can-camels-go]] measured.
+
+The `AGAIN` box is the part that distinguishes this from a technique-selection chart. Reaching
+RLVR does not end the pipeline; it produces a policy that then needs another supervised pass to
+be usable, which is exactly the evidence that the stages compose.
 
 ## What follows for reading this wiki
 

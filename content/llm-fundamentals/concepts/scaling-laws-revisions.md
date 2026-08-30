@@ -8,7 +8,7 @@ tags:
   - llm-fundamentals
   - mlops
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-08-30
 sources:
   - "[[source-scaling-laws-for-neural-language-models]]"
   - "[[source-training-compute-optimal-large-language-models]]"
@@ -61,6 +61,16 @@ The empirical demonstration is [[chinchilla]] at 70B parameters and 1.4T tokens 
 data, on the same compute budget. [[source-training-compute-optimal-large-language-models]]
 established this with three independent estimation methods that agreed, which is why it
 displaced the earlier advice rather than merely disputing it.
+
+Two exponents in a table understate how consequential the difference is, because a power law
+is a straight line on log-log axes and two different exponents are two different *slopes*:
+
+![Optimal parameter count against training compute on log-log axes with decade gridlines and no absolute values. Two straight lines leave a shared anchor at low compute: Kaplan 2020 with slope 0.73, labelled "grow the model", and Chinchilla 2022 with slope 0.50, labelled "grow both, about 20 tokens per parameter". Because the exponents differ, the lines diverge as compute grows; at one budget the vertical gap is bracketed and labelled 4x, the measured Gopher versus Chinchilla case. The figure is schematic: the slopes are the published exponents but the axes are not calibrated.](/diagrams/scaling-law-exponents.svg)
+
+Two lines from one origin is the right mental picture. The prescriptions **agree** at the
+compute scales where both were fitted and diverge without limit above them, which is why the
+disagreement was invisible until somebody trained at a budget far enough to the right to make
+it cost 210B parameters.
 
 ## Why they diverged
 

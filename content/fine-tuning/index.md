@@ -6,8 +6,8 @@ visibility: public
 status: draft
 tags:
   - fine-tuning
-created: 2026-08-27
-updated: 2026-08-27
+created: 2026-08-30
+updated: 2026-08-30
 generated: true
 aliases:
   - wiki/moc-fine-tuning

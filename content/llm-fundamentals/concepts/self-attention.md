@@ -12,7 +12,7 @@ aliases:
 tags:
   - llm-fundamentals
 created: 2026-08-23
-updated: 2026-08-23
+updated: 2026-08-30
 status: draft
 sources:
   - "[[source-attention-is-all-you-need]]"
@@ -52,34 +52,43 @@ related:
 - **Causal Masking:** In decoder-only models, an upper-triangular mask of $-\infty$ is added before the softmax operation to ensure position $i$ cannot attend to future positions $j > i$.
 
 ## How It Works
+
+The shape of the computation is the point: **Q and K meet to decide *where* to look, and V
+bypasses that entirely to supply *what* is read**. Three projections of the same input play
+different roles, and the mask is inserted before the softmax rather than after, so the
+normalisation itself never sees the future.
+
+```mermaid
+flowchart TB
+  X["input embeddings X<br/>n tokens by d_model"]
+  X --> Q["Q = X W_Q<br/>what this position is looking for"]
+  X --> K["K = X W_K<br/>what this position offers as a match"]
+  X --> V["V = X W_V<br/>what this position contributes"]
+  Q --> S["scores = Q K^T / sqrt of d_k<br/>every position against every position"]
+  K --> S
+  S --> M["add causal mask M<br/>future positions set to minus infinity"]
+  M --> A["softmax over the key axis<br/>the attention map, rows sum to 1"]
+  A --> C["weighted sum A V<br/>one context vector per position"]
+  V --> C
+  C --> O["concatenate h heads, project by W_O"]
 ```
-Input Tokens X
-      │
-      ├──────────────────────┬──────────────────────┐
-      ▼                      ▼                      ▼
-Query Matrix Q          Key Matrix K           Value Matrix V
-(X * W_Q)              (X * W_K)              (X * W_V)
-      │                      │                      │
-      └───────────┬──────────┘                      │
-                  ▼                                 │
-         Scaled Dot Product                         │
-           (Q * K^T) / √d_k                         │
-                  │                                 │
-                  ▼                                 │
-         Apply Causal Mask                          │
-                  │                                 │
-                  ▼                                 │
-               Softmax                              │
-           (Attention Map)                          │
-                  │                                 │
-                  └────────────────┬────────────────┘
-                                   ▼
-                            Weighted Sum
-                             (Map * V)
-                                   │
-                                   ▼
-                       Output Projection (W_O)
-```
+
+Two things the equation hides. The mask is *added*, not applied afterwards, which is why
+$-\infty$ rather than zero: it has to survive the exponential. And $V$ never touches the
+score path, which is what makes attention a **soft lookup** rather than a similarity
+measure — the weights come from one pair of projections, the content from a third.
+
+### What the mask actually looks like
+
+The causal mask $M$ is usually described as "upper-triangular $-\infty$", which is accurate
+and tells you nothing about what it does to a sentence. Drawn as a matrix it does:
+
+![A 6 by 6 grid for the sentence "The cat sat on the mat". Rows are query positions, columns are key positions. Cells on and below the diagonal are filled, marking positions the query may read; cells above it are empty and set to minus infinity before the softmax. The first row has one readable cell, so its softmax weight is 1.0; the last row has all six.](/diagrams/attention-causal-mask.svg)
+
+The consequence worth noticing is the first row. Position 1 has exactly one readable cell —
+itself — so after normalisation its attention weight is $1.0$ no matter what the model
+learned. The first token of a sequence cannot attend to anything, which is part of why
+attention-sink and BOS-token effects show up at position 0 in practice.
 
 ## Practical Implications
 - **Maximum Path Length $O(1)$:** Enables massive parallelization during pretraining compared to sequential recurrence ($O(N)$).
